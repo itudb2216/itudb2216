@@ -3,6 +3,7 @@ import psycopg2 as dbapi2
 from tables.club import Club
 from tables.game import Game
 from tables.appearance import Appearance
+from tables.player import Player
 
 class Database:
     def __init__(self, dbfile):
@@ -58,3 +59,12 @@ class Database:
             apperance_values = list(cursor.fetchone())
         appearance_ = Appearance(*apperance_values)
         return appearance_
+    
+    def get_player(self, player_id):
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM PLAYERS WHERE (players_id = ?)"
+            cursor.execute(query, (player_id,))
+            attributes = list(cursor.fetchone())
+        player_ = Player(*attributes)
+        return player_
