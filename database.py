@@ -4,6 +4,7 @@ from tables.club import Club
 from tables.game import Game
 from tables.appearance import Appearance
 from tables.player import Player
+from tables.player_valuation import PlayerValuation
 
 class Database:
     def __init__(self, dbfile):
@@ -51,11 +52,11 @@ class Database:
         game_ = Game(*attributes)
         return game_
 
-    def get_appearance(self, appearance_key):
+    def get_appearance(self, appearance_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM APPEARANCE WHERE (appearance_id = ?)"
-            cursor.execute(query, (appearance_key,))
+            cursor.execute(query, (appearance_id,))
             apperance_values = list(cursor.fetchone())
         appearance_ = Appearance(*apperance_values)
         return appearance_
@@ -68,3 +69,12 @@ class Database:
             attributes = list(cursor.fetchone())
         player_ = Player(*attributes)
         return player_
+
+    def get_player_valuation(self, player_valuation_id):
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM PLAYERVALUATION WHERE (PLAYER_VALUATION_ID = ?)"
+            cursor.execute(query, (player_valuation_id,))
+            player_valuation_values = list(cursor.fetchone())
+        player_valuation_ = PlayerValuation(*player_valuation_values)
+        return player_valuation_ 
