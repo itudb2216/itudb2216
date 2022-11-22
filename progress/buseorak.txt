@@ -1,0 +1,4 @@
+22.11.2022
+- The file club.py is added that contains the Club class including the necessary functions to 
+  add to, update, and delete from the CLUBS table.
+- The get_game function is added to the database.py file to get the game tuple whose id is passed in.
