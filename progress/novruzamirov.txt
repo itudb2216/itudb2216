@@ -1,1 +1,2 @@
-2
+22.11.2022
+player_valuation.py file has been added and get method for that table has been added to database.py file.
