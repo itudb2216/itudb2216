@@ -1,3 +1,6 @@
 22.11.2022
 Added Appearance class and add, update, delete function in appearance.py
 Added get function in database.py
+
+30.11.2022
+Added html files for each table
