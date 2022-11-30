@@ -1,2 +1,5 @@
 22.11.2022
 Added club.py and database.py
+
+30.11.2022
+Added competition.py and get_tables functions in database.py
