@@ -1,0 +1,12 @@
+.navigation ul {
+    display: flex;
+    color: #fd7d4c;
+  }
+  .navigation ul li {
+    list-style: none;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .navigation ul li:hover {
+    color: rgba(0, 0, 0, 0.733);
+  }
