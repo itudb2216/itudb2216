@@ -1,5 +1,5 @@
 class Club:
-	def __init__(self, club_id, name, pretty_name, domestic_competition_id, squad_size, foreigners_number, national_team_players, stadium_name, stadium_seats, net_transfer_record, coach_name, url, average_age = None, total_market_value = None, foreigners_percentage = None):
+	def __init__(self, club_id, name, pretty_name, domestic_competition_id, total_market_value = None, squad_size = None, average_age = None, foreigners_number = None, foreigners_percentage = None, national_team_players = None, stadium_name = None, stadium_seats = None, net_transfer_record = None, coach_name = None, url = None):
 		self.club_id = club_id
 		self.name = name
 		self.pretty_name = pretty_name
