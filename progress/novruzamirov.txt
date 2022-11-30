@@ -1,2 +1,8 @@
 22.11.2022
 player_valuation.py file has been added and get method for that table has been added to database.py file.
+
+30.11.2022
+Added home.html, navigation.css, views.py, settings.py, server.py. 
+Navigation Bar has been created on home.html
+Styling for Navigation Bar has been created on navigation.css
+Using Flask in views.py, and rendering html file of each table.
