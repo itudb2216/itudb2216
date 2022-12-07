@@ -136,7 +136,7 @@ class Database:
             query = "SELECT * FROM PLAYERVALUATIONS ORDER BY PLAYER_VALUATION_ID"
             cursor.execute(query)
             for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
-                player_valuations.append(PlayerValuation(player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id))
+                player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
         return player_valuations
 
     def get_competitions(self):

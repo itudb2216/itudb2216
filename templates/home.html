@@ -15,8 +15,15 @@
           <li id="navigation__table">Clubs</li>
           <li id="navigation__table">Competitions</li>
           <li id="navigation__table">Games</li>
-          <li id="navigation__table">Player Valuations</li>
+          <li id="navigation__table">
+            <a href="{{ url_for('player_valuation_page') }}"
+              >Player Valuations</a
+            >
+          </li>
           <li id="navigation__table">Players</li>
+          <li id="navigation__table">
+            <a href="{{ url_for('home_page') }}">Home Page</a>
+          </li>
         </ul>
       </div>
     </div>

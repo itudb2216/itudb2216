@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,10 +9,33 @@
     <title>Player Valuations</title>
   </head>
   <body>
+    <div class="heading">
+      <div class="navigation">
+        <ul class="navigation__sections">
+          <li id="navigation__table">Appearances</li>
+          <li id="navigation__table">Clubs</li>
+          <li id="navigation__table">Competitions</li>
+          <li id="navigation__table">Games</li>
+          <li id="navigation__table">
+            <a href="{{ url_for('player_valuation_page') }}"
+              >Player Valuations</a
+            >
+          </li>
+          <li id="navigation__table">Players</li>
+          <li id="navigation__table">
+            <a href="{{ url_for('home_page') }}">Home Page</a>
+          </li>
+        </ul>
+      </div>
     <table class="player_valuation">
+      {% for player_valuation_id , player_valuation in valuations %}
       <tr>
-        <td></td>
+        <td>{{player_valuation_id}}</td>
+        <td>{{player_valuation.datetime}}</td>
+        <td>{{player_valuation.market_value}}</td>
       </tr>
+      {% endfor %}
     </table>
   </body>
 </html>
+{%endblock%}

@@ -16,7 +16,11 @@ def game_page():
     return render_template("game.html")
 
 def player_valuation_page():
-    return render_template("player_valuation.html")
+    myDB = current_app.config["db"]
+    playerValuations = myDB.get_player_valuations()
+    return render_template("player_valuation.html", valuations = playerValuations)
 
 def player_page():
-    return render_template("player.html")
+    myDB = current_app.config["db"]
+    players = myDB.get_players()
+    return render_template("player.html", players = players)
