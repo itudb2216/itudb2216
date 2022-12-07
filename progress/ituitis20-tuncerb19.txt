@@ -4,3 +4,7 @@ Player.py added.(Includes class of Player table)
 [Nov 30, 2022]
 server.py added and designed using flask.
 player.py changed, some unnecessary columns removed.
+
+[Dec 7,2022]
+Create table queries designed.
+Player table linked to the player page.

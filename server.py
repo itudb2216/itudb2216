@@ -6,14 +6,19 @@ import views
 import os
 import sqlite3 as dbapi2
 from tables.player_valuation import PlayerValuation
+from tables.club import Club
+from tables.competition import Competition
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
     app.add_url_rule("/", view_func=views.home_page)
     app.add_url_rule("/valuation", view_func=views.player_valuation_page)
-    app.add_url_rule("/bilal", view_func=views.player_page)
+    app.add_url_rule("/player", view_func=views.player_page)
+    app.add_url_rule("/games", view_func = views.game_page)
     app.add_url_rule("/appearance", view_func=views.appearance_page)
+    app.add_url_rule("/club", view_func = views.club_page)
+    app.add_url_rule("/competition", view_func = views.competition_page)
 
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
@@ -71,7 +76,9 @@ def create_app():
     db = Database(os.path.join(dir, "transfermarkt.db"))
 
     db.add(PlayerValuation("24.02.04", "1.2.3", 2, 3, 100, "NA2"))
-
+    db.add(Competition("CompetitionID", "World cup", "WC", "WC GROUP A", 18, "SPAIN", 120.53, -54.32, "POOR", "WORLD CUP", "CONF", "abv.com"))
+    db.add(Club(12, "FCB", "Barcelona", "CompetitionId", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI", "asdf.com"))
+    
     app.config["db"] = db
 
     return app

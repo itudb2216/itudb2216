@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Competitions</title>
-  </head>
-  <body>
-    <table class="competition">
-        <tr>
-            <td>
-                
-            </td>
-        </tr>
-    </table>
-    </body>
-</html>
+{% extends "navigation.html" %}
+{% block title %} COMPETITIONS {% endblock&}
+{% block content %}
+<table class="club">
+  {% for competition in competitions %}
+  <tr>
+    <td>{{competition.competition_id}}</td>
+    <td>{{competition.pretty_name}}</td>
+    <td>{{competition.type_}}</td>
+    <td>{{competition.sub_type}}</td>
+    <td>{{competition.country_id}}</td>
+    <td>{{competition.country_name}}</td>
+    <td>{{competition.country_latitude}}</td>
+    <td>{{competition.country_longitude}}</td>
+    <td>{{competition.domestic_league_code}}</td>
+    <td>{{competition.name}}</td>
+    <td>{{competition.confederation}}</td>
+    <td>{{competition.url}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
