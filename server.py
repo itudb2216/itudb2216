@@ -14,7 +14,11 @@ def create_app():
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
         con.execute(
-            "CREATE TABLE PLAYERS ( player_id INTEGER PRIMARY KEY)")
+            "CREATE TABLE PLAYERS ( player_id INTEGER PRIMARY KEY, pretty_name TEXT NOT NULL,club_id INTEGER NOT NULL,\
+            club_pretty_name TEXT NOT NULL,current_club_id INTEGER NOT NULL,country_of_citizenship TEXT NOT NULL,date_of_birth TEXT,\
+            position TEXT,foot TEXT,height_in_cm INTEGER,market_value_in_gbp REAL,highest_market_value_in_gbp REAL)\
+            FOREIGN KEY(club_id) REFERENCES CLUBS(CLUB_ID),\
+            FOREIGN KEY(current_club_id) REFERENCES CLUBS(CLUB_ID)")
         con.execute(
             "CREATE TABLE APPEARANCES (appearance_id TEXT PRIMARY KEY, game_id INTEGER, player_id INTEGER, player_club_id INTEGER, date DATE, player_pretty_name TEXT, competition_id TEXT, yellow_cards INTEGER, red_cards INTEGER, goals INTEGER, assists INTEGER, minutes_played INTEGER, FOREIGN KEY(game_id) REFERENCES GAMES(game_id), FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
@@ -28,12 +32,14 @@ def create_app():
             "CREATE TABLE CLUB ()"
         )
         con.execute(
-            "CREATE TABLE PLAYERVALUATION ()"
+            "CREATE TABLE PLAYERVALUATION (player_valuation_id INTEGER PRIMARY KEY AUTOINCREMENT, datetime TEXT NOT NULL, dateweek TEXT NOT NULL, player_id INTEGER NOT NULL, current_club_id INTEGER NOT NULL, market_value INTEGER NOT NULL, player_club_domestic_competition_id TEXT NOT NULL, FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
 
-        dir = os.getcwd()
-        db = Database(os.path.join(dir, "transfermarkt.db"))
-        app.config["db"] = db
+        con.close()
+
+    dir = os.getcwd()
+    db = Database(os.path.join(dir, "transfermarkt.db"))
+    app.config["db"] = db
 
     return app
 

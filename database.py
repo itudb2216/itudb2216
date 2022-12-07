@@ -74,7 +74,7 @@ class Database:
     def get_player_valuation(self, player_valuation_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYERVALUATION WHERE (PLAYER_VALUATION_ID = ?)"
+            query = "SELECT * FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
             cursor.execute(query, (player_valuation_id,))
             player_valuation_values = list(cursor.fetchone())
         player_valuation_ = PlayerValuation(*player_valuation_values)
@@ -123,7 +123,7 @@ class Database:
         players = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYER ORDER BY PLAYER_ID"
+            query = "SELECT * FROM PLAYERS ORDER BY PLAYER_ID"
             cursor.execute(query)
             for player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp in cursor:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
@@ -133,7 +133,7 @@ class Database:
         player_valuations = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYERVALUATION ORDER BY PLAYER_VALUATION_ID"
+            query = "SELECT * FROM PLAYERVALUATIONS ORDER BY PLAYER_VALUATION_ID"
             cursor.execute(query)
             for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
                 player_valuations.append(PlayerValuation(player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id))

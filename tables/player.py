@@ -17,12 +17,12 @@ class Player:
  
 
     def add(self):
-        query = "INSERT INTO PLAYERS VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        query = "INSERT INTO PLAYERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         v = (self.player_id,self.pretty_name,self.club_id,self.club_pretty_name,self.current_club_id,self.country_of_citizenship,self.date_of_birth,self.position,self.foot,self.height_in_cm,self.market_value_in_gbp,self.highest_market_value_in_gbp)
         return query, v
 
     def update(self):
-        query = "UPDATE PLAYERS SET pretty_name = ?,club_id = ?,club_pretty_name = ?,current_club_id = ?,country_of_citizenship = ?,date_of_birth = ?,position = ?,foot,height_in_cm = ?,market_value_in_gbp = ?,highest_market_value_in_gbp = ? WHERE (player_id = ?)"
+        query = "UPDATE PLAYERS SET pretty_name = ?,club_id = ?,club_pretty_name = ?,current_club_id = ?,country_of_citizenship = ?,date_of_birth = ?,position = ?,foot = ?,height_in_cm = ?,market_value_in_gbp = ?,highest_market_value_in_gbp = ? WHERE (player_id = ?)"
         v = (self.pretty_name,self.club_id,self.club_pretty_name,self.current_club_id,self.country_of_citizenship,self.date_of_birth,self.position,self.foot,self.height_in_cm,self.market_value_in_gbp,self.highest_market_value_in_gbp,self.player_id)
         return query, v
     
