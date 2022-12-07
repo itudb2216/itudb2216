@@ -123,7 +123,7 @@ class Database:
         players = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYER ORDER BY PLAYER_ID"
+            query = "SELECT * FROM PLAYERS ORDER BY PLAYER_ID"
             cursor.execute(query)
             for player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp in cursor:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
