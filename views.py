@@ -13,7 +13,9 @@ def competition_page():
     return render_template("competition.html")
 
 def game_page():
-    return render_template("game.html")
+    myDB = current_app.config["db"]
+    games = myDB.get_games()
+    return render_template("game.html", games=games)
 
 def player_valuation_page():
     myDB = current_app.config["db"]

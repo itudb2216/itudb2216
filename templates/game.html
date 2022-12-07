@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Games</title>
-  </head>
-  <body>
-    <table class="game">
-        <tr>
-            <td>
-                
-            </td>
-        </tr>
-    </table>
-    </body>
-</html>
+{% extends "navigation.html" %}
+
+{% title %}
+Games
+{% endblock %}
+
+{% block content %}
+<table class="games">
+  {% for game in games %}
+  <tr>
+    <td>{{game.competition_id}}</td>
+    <td>{{game.competition_type}}</td>
+    <td>{{game.season}}</td>
+    <td>{{game.round}}</td>
+    <td>{{game.date}}</td>
+    <td>{{game.home_club_goals}}</td>
+    <td>{{game.away_club_goals}}</td>
+    <td>{{game.club_home_pretty_name}}</td>
+    <td>{{game.club_away_pretty_name}}</td>
+    <td>{{game.stadium}}</td>
+  </tr>
+</table>
+{% endblock %}
