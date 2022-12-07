@@ -6,3 +6,5 @@
 - The file club.py is updated by adding the fields present in the newly-chosen version of the dataset.
 07.12.2022
 - The file server.py is updated by adding the necessary query for the creation of the clubs table.
+- The file game.html is updated to show the needed fields of the games table.
+- The file views.py is updated by writing the game_page function.
