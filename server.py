@@ -13,6 +13,7 @@ def create_app():
     app.add_url_rule("/", view_func=views.home_page)
     app.add_url_rule("/valuation", view_func=views.player_valuation_page)
     app.add_url_rule("/bilal", view_func=views.player_page)
+    app.add_url_rule("/appearance", view_func=views.appearance_page)
 
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
