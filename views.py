@@ -24,3 +24,8 @@ def player_page():
     myDB = current_app.config["db"]
     players = myDB.get_players()
     return render_template("player.html", players = players)
+
+def appearance_page():
+    myDB = current_app.config["db"]
+    appearances = myDB.get_appearances()
+    return render_template("appearance.html", appearances = appearances)

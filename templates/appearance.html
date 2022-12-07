@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Appearances</title>
-  </head>
-  <body>
-    <table class="appearance">
-        <tr>
-            <td>
-                
-            </td>
-        </tr>
-    </table>
-    </body>
-</html>
+{% extends "navigation.html"}
+{% block title %}APPEARANCES{% end block%}
+{% block content %}
+  <table class="appearance">
+    {% for appearance in appearances %}
+    <tr>
+      <td>{{appearance.appearance_id}}</td>
+      <td>{{appearance.game_id}}</td>
+      <td>{{appearance.player_id}}</td>
+      <td>{{appearance.player_club_id}}</td>
+      <td>{{appearance.date}}</td>
+      <td>{{appearance.player_pretty_name}}</td>
+      <td>{{appearance.competition_id}}</td>
+      <td>{{appearance.yellow_cards}}</td>
+      <td>{{appearance.red_cards}}</td>
+      <td>{{appearance.goals}}</td>
+      <td>{{appearance.assists}}</td>
+      <td>{{appearance.minutes_played}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{%endblock%}
