@@ -14,13 +14,11 @@ def create_app():
     app.config.from_object("settings")
     app.add_url_rule("/", view_func=views.home_page)
     app.add_url_rule("/valuation", view_func=views.player_valuation_page)
-    app.add_url_rule("/bilal", view_func=views.player_page)
-<<<<<<< Updated upstream
+    app.add_url_rule("/player", view_func=views.player_page)
+    app.add_url_rule("/games", view_func = views.game_page)
     app.add_url_rule("/appearance", view_func=views.appearance_page)
-=======
     app.add_url_rule("/club", view_func = views.club_page)
     app.add_url_rule("/competition", view_func = views.competition_page)
->>>>>>> Stashed changes
 
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
