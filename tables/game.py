@@ -24,7 +24,6 @@ class Game:
         self.attendance = attendance
         self.referee = referee
         self.url = url
-        
 
 
     def add(self):
@@ -39,9 +38,9 @@ class Game:
     def update(self):
         query = "UPDATE GAMES SET COMPETITION_ID = ?, COMPETITION_TYPE = ?, SEASON = ?, ROUND = ?, DATE = ?,\
             HOME_CLUB_ID = ?, AWAY_CLUB_ID = ?, HOME_CLUB_GOALS = ?, AWAY_CLUB_GOALS = ?, AGGREGATE = ?,\
-                HOME_CLUB_POSITION = ?, AWAY_CLUB_POSITION = ?, CLUB_HOME_PRETTY_NAME = ?, CLUB_AWAY_PRETTY_NAME = ?\
-                    HOME_CLUB_MANAGER_NAME = ?, AWAY_CLUB_MANAGER_NAME = ?, STADIUM = ?, ATTENDANCE = ?, REFEREE = ?,\
-                        URL = ? WHERE (GAME_ID = ?)"
+            HOME_CLUB_POSITION = ?, AWAY_CLUB_POSITION = ?, CLUB_HOME_PRETTY_NAME = ?, CLUB_AWAY_PRETTY_NAME = ?\
+            HOME_CLUB_MANAGER_NAME = ?, AWAY_CLUB_MANAGER_NAME = ?, STADIUM = ?, ATTENDANCE = ?, REFEREE = ?,\
+            URL = ? WHERE (GAME_ID = ?)"
         vars = (self.competition_id, self.competition_type, self.season, self.round, self.date, self.home_club_id,
             self.away_club_id, self.home_club_goals, self.away_club_goals, self.aggregate, self.home_club_position,
             self.away_club_position, self.club_home_pretty_name, self.club_away_pretty_name, self.home_club_manager_name,
@@ -50,5 +49,5 @@ class Game:
     
 
     def delete(self):
-        query = "DELETE FROM MOVIE WHERE (GAME_ID = ?)"
+        query = "DELETE FROM GAMES WHERE (GAME_ID = ?)"
         return query, (self.game_id,)
