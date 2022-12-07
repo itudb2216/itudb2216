@@ -3,3 +3,6 @@ Added club.py and database.py
 
 30.11.2022
 Added competition.py and get_tables functions in database.py
+
+07.12.2022
+Added "CREATE TABLE CLUBS" and "CREATE TABLE COMPETITIONS" to server.py and changed some errors in other files

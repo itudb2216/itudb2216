@@ -38,7 +38,7 @@ class Database:
     def get_club(self, club_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM CLUB WHERE (CLUB_ID = ?)"
+            query = "SELECT * FROM CLUBS WHERE (CLUB_ID = ?)"
             cursor.execute(query, (club_id,))
             club_values = list(cursor.fetchone())
         club_ = Club(*club_values)
@@ -83,7 +83,7 @@ class Database:
     def get_competition(self, competition_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM COMPETITION WHERE (COMPETITOIN_ID = ?)"
+            query = "SELECT * FROM COMPETITIONS WHERE (COMPETITOIN_ID = ?)"
             cursor.execute(query, (competition_id,))
             competition_values = list(cursor.fetchone())
         competition_ = Competition(*competition_values)
@@ -93,7 +93,7 @@ class Database:
         clubs = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM MOVIE ORDER BY CLUB_ID"
+            query = "SELECT * FROM CLUBS ORDER BY CLUB_ID"
             cursor.execute(query)
             for club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name , url in cursor:
                 clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name , url))
@@ -103,7 +103,7 @@ class Database:
         games = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM GAME ORDER BY GAME_ID"
+            query = "SELECT * FROM GAMES ORDER BY GAME_ID"
             cursor.execute(query)
             for game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, aggregate, home_club_position, away_club_position, club_home_pretty_name, club_away_pretty_name, home_club_manager_name, away_club_manager_name, stadium, attendance, referee, url in cursor:
                 games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, aggregate, home_club_position, away_club_position, club_home_pretty_name, club_away_pretty_name, home_club_manager_name, away_club_manager_name, stadium, attendance, referee, url))
@@ -143,7 +143,7 @@ class Database:
         competitions = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM COMPETITION ORDER BY COMPETITION_ID"
+            query = "SELECT * FROM COMPETITIONS ORDER BY COMPETITION_ID"
             cursor.execute(query)
             for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
                 competitions.append(Player(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url))
