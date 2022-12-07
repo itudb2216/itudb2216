@@ -17,15 +17,15 @@ class Club:
 		self.url = url
 
 	def add(self):
-		query = "INSERT INTO CLUB (CLUB_ID, NAME, PRETTY_NAME, DOMESTIC_COMPETITION_ID, TOTAL_MARKET_VALUE, SQUAD_SIZE, AVERAGE_AGE, FOREIGNERS_NUMBER, FOREIGNERS_PERCENTAGE, NATIONAL_TEAM_PLAYERS, STADIUM_NAME, STADIUM_SEATS, NET_TRANSFER_RECORD, COACH_NAME, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		query = "INSERT INTO CLUBS (CLUB_ID, NAME, PRETTY_NAME, DOMESTIC_COMPETITION_ID, TOTAL_MARKET_VALUE, SQUAD_SIZE, AVERAGE_AGE, FOREIGNERS_NUMBER, FOREIGNERS_PERCENTAGE, NATIONAL_TEAM_PLAYERS, STADIUM_NAME, STADIUM_SEATS, NET_TRANSFER_RECORD, COACH_NAME, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		tupel = (self.club_id, self.name, self.pretty_name, self.domestic_competition_id, self.total_market_value, self.squad_size, self.average_age, self.foreigners_number, self.foreigners_percentage, self.national_team_players, self.stadium_name, self.stadium_seats, self.net_transfer_record, self.coach_name, self.url)
 		return query, tupel
 	
 	def update(self):
-		query = "UPDATE CLUB SET NAME = ?, PRETTY_NAME = ?, DOMESTIC_COMPETITION_ID = ?, TOTAL_MARKET_VALUE = ?, SQUAD_SIZE = ?, AVERAGE_AGE = ?, FOREIGNERS_NUMBER = ?, FOREIGNERS_PERCENTAGE = ?, NATIONAL_TEAM_PLAYERS = ?, STADIUM_NAME = ?, STADIUM_SEATS = ?, NET_TRANSFER_RECORD = ?, COACH_NAME = ?, URL = ? WHERE (CLUB_ID = ?)"
+		query = "UPDATE CLUBS SET NAME = ?, PRETTY_NAME = ?, DOMESTIC_COMPETITION_ID = ?, TOTAL_MARKET_VALUE = ?, SQUAD_SIZE = ?, AVERAGE_AGE = ?, FOREIGNERS_NUMBER = ?, FOREIGNERS_PERCENTAGE = ?, NATIONAL_TEAM_PLAYERS = ?, STADIUM_NAME = ?, STADIUM_SEATS = ?, NET_TRANSFER_RECORD = ?, COACH_NAME = ?, URL = ? WHERE (CLUB_ID = ?)"
 		tupel = (self.name, self.pretty_name, self.domestic_competition_id, self.total_market_value, self.squad_size, self.average_age, self.foreigners_number, self.foreigners_percentage, self.national_team_players, self.stadium_name, self.stadium_seats, self.net_transfer_record, self.coach_name, self.url, self.club_id)
 		return query, tupel
 	
 	def delete(self):
-		query = "DELETE FROM CLUB WHERE (CLUB_ID = ?)"
+		query = "DELETE FROM CLUBS WHERE (CLUB_ID = ?)"
 		return query, (self.club_id,)
