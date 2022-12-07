@@ -28,7 +28,7 @@ def create_app():
             "CREATE TABLE CLUB ()"
         )
         con.execute(
-            "CREATE TABLE PLAYERVALUATION ()"
+            "CREATE TABLE PLAYERVALUATION (player_valuation_id INTEGER PRIMARY KEY AUTOINCREMENT, datetime TEXT NOT NULL, dateweek TEXT NOT NULL, player_id INTEGER NOT NULL, current_club_id INTEGER NOT NULL, market_value INTEGER NOT NULL, player_club_domestic_competition_id TEXT NOT NULL, FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
 
         dir = os.getcwd()
