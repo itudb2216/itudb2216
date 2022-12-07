@@ -1,6 +1,5 @@
-{% extends "navigation.html" %}
-{% block title %} CLUBS {% endblock&}
-{% block content %}
+{% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} {% block
+content %}
 <table class="club">
   {% for club in clubs %}
   <tr>
@@ -15,7 +14,8 @@
     <td>{{club.foreigners_percentage}}</td>
     <td>{{club.national_team_players}}</td>
     <td>{{club.stadium_name}}</td>
-    <td>{{club.stadium_seats}}<td>
+    <td>{{club.stadium_seats}}</td>
+    <td></td>
     <td>{{club.net_transfer_record}}</td>
     <td>{{club.coach_name}}</td>
     <td>{{club.url}}</td>

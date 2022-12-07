@@ -2,11 +2,20 @@
     display: flex;
     color: #fd7d4c;
   }
-  .navigation ul li {
+  .navigation ul li{
     list-style: none;
     margin-right: 20px;
     cursor: pointer;
   }
   .navigation ul li:hover {
+    color: rgba(0, 0, 0, 0.733);
+  }
+
+  a{
+    text-decoration: none;
+    color: #fd7d4c;
+  }
+
+  a:hover {
     color: rgba(0, 0, 0, 0.733);
   }

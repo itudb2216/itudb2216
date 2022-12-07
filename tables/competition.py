@@ -14,15 +14,15 @@ class Competition:
 		self.url = url
 
 	def add(self):
-		query = "INSERT INTO COMPETITION (COMPETITION_ID, PRETTY_NAME, TYPE_, SUB_TYPE, COUNTRY_ID, COUNTRY_NAME, COUNTRY_LATITUDE, COUNTRY_LONGITUDE, DOMESTIC_LEAGUE_CODE, NAME, CONFEDERATION, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		query = "INSERT INTO COMPETITIONS (COMPETITION_ID, PRETTY_NAME, TYPE_, SUB_TYPE, COUNTRY_ID, COUNTRY_NAME, COUNTRY_LATITUDE, COUNTRY_LONGITUDE, DOMESTIC_LEAGUE_CODE, NAME, CONFEDERATION, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		tupel = (self.competition_id, self.pretty_name, self.type_, self.sub_type, self.country_id, self.country_name, self.country_latitude, self.country_longitude, self.domestic_league_code, self.name, self.confederation, self.url)
 		return query, tupel
 	
 	def update(self):
-		query = "UPDATE COMPETITION SET PRETTY_NAME = ?, TYPE_ = ?, SUB_TYPE = ?, COUNTRY_ID = ?, COUNTRY_NAME = ?, COUNTRY_LATITUDE = ?, COUNTRY_LONGITUDE = ?, DOMESTIC_LEAGUE_CODE = ?, NAME = ?, CONFEDERATION = ?, URL = ? WHERE (COMPETITION_ID = ?)"
+		query = "UPDATE COMPETITIONS SET PRETTY_NAME = ?, TYPE_ = ?, SUB_TYPE = ?, COUNTRY_ID = ?, COUNTRY_NAME = ?, COUNTRY_LATITUDE = ?, COUNTRY_LONGITUDE = ?, DOMESTIC_LEAGUE_CODE = ?, NAME = ?, CONFEDERATION = ?, URL = ? WHERE (COMPETITION_ID = ?)"
 		tupel = (self.pretty_name, self.type_, self.sub_type, self.country_id, self.country_name, self.country_latitude, self.country_longitude, self.domestic_league_code, self.name, self.confederation, self.url, self.competition_id)
 		return query, tupel
 	
 	def delete(self):
-		query = "DELETE FROM COMPETITION WHERE (COMPETITION_ID = ?)"
+		query = "DELETE FROM COMPETITIONS WHERE (COMPETITION_ID = ?)"
 		return query, (self.competition_id,)

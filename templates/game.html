@@ -1,10 +1,5 @@
-{% extends "navigation.html" %}
-
-{% title %}
-Games
-{% endblock %}
-
-{% block content %}
+{% extends "navigation.html" %} {% block title %} Games {% endblock %} {% block
+content %}
 <table class="games">
   {% for game in games %}
   <tr>
@@ -19,5 +14,6 @@ Games
     <td>{{game.club_away_pretty_name}}</td>
     <td>{{game.stadium}}</td>
   </tr>
+  {% endfor %}
 </table>
 {% endblock %}

@@ -1,20 +1,19 @@
-{% extends "navigation.html" %}
-{% block title %}PLAYERS{% endblock%}
-{% block content %}
-  <table class="PLAYERS">
-    {% for player in players %}
-    <tr>
-      <td>{{player.player_id}}</td>
-      <td>{{player.pretty_name}}</td>
-      <td>{{player.club_pretty_name}}</td>
-      <td>{{player.country_of_citizenship}}</td>
-      <td>{{player.date_of_birth}}</td>
-      <td>{{player.position}}</td>
-      <td>{{player.foot}}</td>
-      <td>{{player.height_in_cm}}</td>
-      <td>{{player.market_value_in_gbp}}</td>
-      <td>{{player.highest_market_value_in_gbp}}</td>
-    </tr>
-    {% endfor %}
-  </table>
+{% extends "navigation.html" %} {% block title %}PLAYERS{% endblock%} {% block
+content %}
+<table class="PLAYERS">
+  {% for player in players %}
+  <tr>
+    <td>{{player.player_id}}</td>
+    <td>{{player.pretty_name}}</td>
+    <td>{{player.club_pretty_name}}</td>
+    <td>{{player.country_of_citizenship}}</td>
+    <td>{{player.date_of_birth}}</td>
+    <td>{{player.position}}</td>
+    <td>{{player.foot}}</td>
+    <td>{{player.height_in_cm}}</td>
+    <td>{{player.market_value_in_gbp}}</td>
+    <td>{{player.highest_market_value_in_gbp}}</td>
+  </tr>
+  {% endfor %}
+</table>
 {%endblock%}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/navigation.css" />
+    <title>Our Tables - {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <div class="navigation">
+      <ul class="navigation__sections">
+        <li id="navigation__table">
+          <a href="{{ url_for('appearance_page') }}">Appearances</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('game_page') }}">Games</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('club_page') }}">Clubs</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('competition_page') }}">Competitions</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('player_valuation_page') }}">Player Valuations</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('player_page') }}">Players</a>
+        </li>
+        <li id="navigation__table">
+          <a href="{{ url_for('home_page') }}">Home</a>
+        </li>
+      </ul>
+    </div>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

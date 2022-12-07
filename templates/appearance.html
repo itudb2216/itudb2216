@@ -1,22 +1,21 @@
-{% extends "navigation.html"}
-{% block title %}APPEARANCES{% end block%}
-{% block content %}
-  <table class="appearance">
-    {% for appearance in appearances %}
-    <tr>
-      <td>{{appearance.appearance_id}}</td>
-      <td>{{appearance.game_id}}</td>
-      <td>{{appearance.player_id}}</td>
-      <td>{{appearance.player_club_id}}</td>
-      <td>{{appearance.date}}</td>
-      <td>{{appearance.player_pretty_name}}</td>
-      <td>{{appearance.competition_id}}</td>
-      <td>{{appearance.yellow_cards}}</td>
-      <td>{{appearance.red_cards}}</td>
-      <td>{{appearance.goals}}</td>
-      <td>{{appearance.assists}}</td>
-      <td>{{appearance.minutes_played}}</td>
-    </tr>
-    {% endfor %}
-  </table>
+{% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
+block content %}
+<table class="appearance">
+  {% for appearance in appearances %}
+  <tr>
+    <td>{{appearance.appearance_id}}</td>
+    <td>{{appearance.game_id}}</td>
+    <td>{{appearance.player_id}}</td>
+    <td>{{appearance.player_club_id}}</td>
+    <td>{{appearance.date}}</td>
+    <td>{{appearance.player_pretty_name}}</td>
+    <td>{{appearance.competition_id}}</td>
+    <td>{{appearance.yellow_cards}}</td>
+    <td>{{appearance.red_cards}}</td>
+    <td>{{appearance.goals}}</td>
+    <td>{{appearance.assists}}</td>
+    <td>{{appearance.minutes_played}}</td>
+  </tr>
+  {% endfor %}
+</table>
 {%endblock%}

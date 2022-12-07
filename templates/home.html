@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="heading">
-      <div class="navigation">
-        <ul class="navigation__sections">
-          <li id="navigation__table">Appearances</li>
-          <li id="navigation__table">Clubs</li>
-          <li id="navigation__table">Competitions</li>
-          <li id="navigation__table">Games</li>
-          <li id="navigation__table">
-            <a href="{{ url_for('player_valuation_page') }}"
-              >Player Valuations</a
-            >
-          </li>
-          <li id="navigation__table">Players</li>
-          <li id="navigation__table">
-            <a href="{{ url_for('home_page') }}">Home Page</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+{% extends "navigation.html" %} {% block title %}Home{% endblock %} {% block
+content %}
+<h1>Welcome to our Youtube Channel, guys :)</h1>
+<p>Have a nice day!</p>
+
+{% endblock %}

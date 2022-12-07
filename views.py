@@ -1,5 +1,9 @@
 from flask import current_app, render_template
 
+
+def navigation_page():
+    return render_template("navigation.html")
+    
 def home_page():
     return render_template("home.html")
 

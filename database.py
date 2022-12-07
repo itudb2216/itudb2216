@@ -146,5 +146,5 @@ class Database:
             query = "SELECT * FROM COMPETITIONS ORDER BY COMPETITION_ID"
             cursor.execute(query)
             for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
-                competitions.append(Player(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url))
+                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url))
         return competitions
