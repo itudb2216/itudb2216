@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Clubs</title>
-  </head>
-  <body>
-    <table class="club">
-        <tr>
-            <td>
-                
-            </td>
-        </tr>
-    </table>
-    </body>
-</html>
+{% block title %} Clubs {% endblock&}
+{% block content %}
+<table class="club">
+  {% for club in clubs %}
+  <tr>
+    <td>{{club.club_id}}</td>
+    <td>{{club.name}}</td>
+    <td>{{club.pretty_name}}</td>
+    <td>{{club.domestic_competition_id}}</td>
+    <td>{{club.total_market_value}}</td>
+    <td>{{club.squad_size}}</td>
+    <td>{{club.average_age}}</td>
+    <td>{{club.foreigners_number}}</td>
+    <td>{{club.foreigners_percentage}}</td>
+    <td>{{club.national_team_players}}</td>
+    <td>{{club.stadium_name}}</td>
+    <td>{{club.stadium_seats}}<td>
+    <td>{{club.net_transfer_record}}</td>
+    <td>{{club.coach_name}}</td>
+    <td>{{club.url}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
