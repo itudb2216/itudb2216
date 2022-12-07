@@ -3,14 +3,15 @@ from flask import current_app, render_template
 def home_page():
     return render_template("home.html")
 
-def appearance_page():
-    return render_template("appearance.html")
-
 def club_page():
-    return render_template("club.html")
+    myDB = current_app.config["db"]
+    clubs = myDB.get_clubs()
+    return render_template("club.html", clubs = clubs)
 
 def competition_page():
-    return render_template("competition.html")
+    myDB = current_app.config["db"]
+    competitions = myDB.get_competitions()
+    return render_template("competition.html", competitions = competitions)
 
 def game_page():
     myDB = current_app.config["db"]
