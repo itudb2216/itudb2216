@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/navigation.css" />
-    <title>Players</title>
-  </head>
-  <body>
-    <table class="player">
-        <tr>
-            <td>
-                
-            </td>
-        </tr>
-    </table>
-    </body>
-</html>
+{% extends "navigation.html" %}
+{% block title %}PLAYERS{% endblock%}
+{% block content %}
+  <table class="PLAYERS">
+    {% for player in players %}
+    <tr>
+      <td>{{player.player_id}}</td>
+      <td>{{player.pretty_name}}</td>
+      <td>{{player.club_pretty_name}}</td>
+      <td>{{player.country_of_citizenship}}</td>
+      <td>{{player.date_of_birth}}</td>
+      <td>{{player.position}}</td>
+      <td>{{player.foot}}</td>
+      <td>{{player.height_in_cm}}</td>
+      <td>{{player.market_value_in_gbp}}</td>
+      <td>{{player.highest_market_value_in_gbp}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{%endblock%}
