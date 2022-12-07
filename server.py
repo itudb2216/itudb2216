@@ -16,7 +16,7 @@ def create_app():
         con.execute(
             "CREATE TABLE PLAYERS ( player_id INTEGER PRIMARY KEY)")
         con.execute(
-            "CREATE TABLE APPEARANCE ()"
+            "CREATE TABLE APPEARANCES (appearance_id TEXT PRIMARY KEY, game_id INTEGER, player_id INTEGER, player_club_id INTEGER, date DATE, player_pretty_name TEXT, competition_id TEXT, yellow_cards INTEGER, red_cards INTEGER, goals INTEGER, assists INTEGER, minutes_played INTEGER, FOREIGN KEY(game_id) REFERENCES GAMES(game_id), FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
         con.execute(
             "CREATE TABLE GAMES ()"

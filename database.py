@@ -56,7 +56,7 @@ class Database:
     def get_appearance(self, appearance_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM APPEARANCE WHERE (appearance_id = ?)"
+            query = "SELECT * FROM APPEARANCES WHERE (appearance_id = ?)"
             cursor.execute(query, (appearance_id,))
             apperance_values = list(cursor.fetchone())
         appearance_ = Appearance(*apperance_values)
@@ -113,7 +113,7 @@ class Database:
         appearances = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM APPEARANCE ORDER BY APPEARANCE_ID"
+            query = "SELECT * FROM APPEARANCES ORDER BY APPEARANCE_ID"
             cursor.execute(query)
             for appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played in cursor:
                 appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
