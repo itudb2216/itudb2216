@@ -6,3 +6,9 @@ Added home.html, navigation.css, views.py, settings.py, server.py.
 Navigation Bar has been created on home.html
 Styling for Navigation Bar has been created on navigation.css
 Using Flask in views.py, and rendering html file of each table.
+
+07.12.2022
+player_valuation.html file has been added.
+Some additions to server.py and views.py file
+Some errors have been fixed in other files
+Modifications on front-end part of web page
