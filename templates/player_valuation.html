@@ -1,11 +1,24 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
 {% block content %}
 <table class="player_valuation">
+  <tr>
+    <th>ID</th>
+    <th>Date Time</th>
+    <th>Market Value</th>
+    <th>Date Week</th>
+    <th>Player ID</th>
+    <th>Current Club ID</th>
+    <th>Player Club Domestic Competition ID</th>
+  </tr>
   {% for player_valuation_id, player_valuation in valuations %}
   <tr>
     <td>{{player_valuation_id}}</td>
     <td>{{player_valuation.datetime}}</td>
     <td>{{player_valuation.market_value}}</td>
+    <td>{{player_valuation.dateweek}}</td>
+    <td>{{player_valuation.player_id}}</td>
+    <td>{{player_valuation.current_club_id}}</td>
+    <td>{{player_valuation.player_club_domestic_competition_id}}</td>
   </tr>
   {% endfor %}
 </table>

@@ -1,4 +1,4 @@
-.navigation ul {
+  .navigation ul {
     display: flex;
     color: #fd7d4c;
   }
@@ -18,4 +18,21 @@
 
   a:hover {
     color: rgba(0, 0, 0, 0.733);
+  }
+  
+  table {
+    width: 100%;
+    border: 1px solid black;
+    margin-top: 30px;
+  }
+
+  table tr, table td, table th{
+  border: 1px solid black;
+  text-align: left;
+  padding: 5px 10px;
+  }
+
+  table th {
+  font-weight: bold;
+  color: green;
   }

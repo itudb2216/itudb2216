@@ -12,3 +12,7 @@ player_valuation.html file has been added.
 Some additions to server.py and views.py file
 Some errors have been fixed in other files
 Modifications on front-end part of web page
+
+08.12.2022
+navigation.css file has been updated
+Modifications on player_valuation.html file
