@@ -16,3 +16,11 @@ Modifications on front-end part of web page
 08.12.2022
 navigation.css file has been updated
 Modifications on player_valuation.html file
+
+10.12.2022
+navigation.css file has been updated
+Admins table has been created (admin.py file created and create table query has been added to server.py)
+Admin access to delete and update has been created (Delete and Update Buttons, which is noly available for admins, added to PlayerValuation table).
+Changes on urls in views.py file
+admins.html and login.html file has been created
+
