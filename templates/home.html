@@ -1,6 +1,11 @@
 {% extends "navigation.html" %} {% block title %}Home{% endblock %} {% block
-content %}
-<h1>Welcome to our Youtube Channel, guys :)</h1>
-<p>Have a nice day!</p>
-
-{% endblock %}
+content %} {% if login == "First" %}
+<h1 class="welcome_heading">Welcome to our Project WebSite, guys :)</h1>
+<p class="welcome_paragraph">Have a nice day!</p>
+{% endif %} {% if login == "True" %}
+<h2 class="access_granted">ACCESS GRANTED!</h2>
+{% endif %} {% if login == "False" %}
+<h2 class="access_denied">ACCESS DENIED</h2>
+{% endif %} {% if logout %}
+<h3 class="logout_alert">Successfully Logged Out!</h3>
+{% endif %} {% endblock %}

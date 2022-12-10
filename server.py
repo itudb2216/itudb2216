@@ -8,17 +8,24 @@ import sqlite3 as dbapi2
 from tables.player_valuation import PlayerValuation
 from tables.club import Club
 from tables.competition import Competition
+from tables.admin import Admin
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
+    
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/valuation", view_func=views.player_valuation_page)
-    app.add_url_rule("/player", view_func=views.player_page)
+    app.add_url_rule("/player-valuations", view_func=views.player_valuation_page)
+    app.add_url_rule("/players", view_func=views.player_page)
     app.add_url_rule("/games", view_func = views.game_page)
-    app.add_url_rule("/appearance", view_func=views.appearance_page)
-    app.add_url_rule("/club", view_func = views.club_page)
-    app.add_url_rule("/competition", view_func = views.competition_page)
+    app.add_url_rule("/appearances", view_func=views.appearance_page)
+    app.add_url_rule("/clubs", view_func = views.club_page)
+    app.add_url_rule("/competitions", view_func = views.competition_page)
+    app.add_url_rule("/login", view_func=views.login_page)
+    app.add_url_rule("/admins", view_func=views.admin_page)
+    app.add_url_rule("/admin", view_func=views.admin_check)
+    app.add_url_rule("/log-out", view_func=views.log_out)
+
 
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
@@ -69,6 +76,10 @@ def create_app():
             "CREATE TABLE PLAYERVALUATIONS (player_valuation_id INTEGER PRIMARY KEY AUTOINCREMENT, datetime TEXT NOT NULL, dateweek TEXT NOT NULL, player_id INTEGER NOT NULL, current_club_id INTEGER NOT NULL, market_value INTEGER NOT NULL, player_club_domestic_competition_id TEXT NOT NULL, FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
 
+        con.execute(
+            "CREATE TABLE ADMINS (student_id TEXT PRIMARY KEY, name TEXT NOT NULL, mail TEXT NOT NULL, password TEXT NOT NULL)"
+        )
+
         con.close()
 
 
@@ -79,6 +90,12 @@ def create_app():
     # db.add(Competition("CompetitionIDA", "World cup", "WC", "WC GROUP A", 18, "SPAIN", 120.53, -54.32, "POOR", "WORLD CUP", "CONF", "abv.com"))
     # db.add(Club(12, "FCB", "Barcelona", "CompetitionId", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI", "asdf.com"))
     
+    # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+    # db.add(Admin("150200915", "Adil Mahmudlu", "amirov20@itu.edu.tr", "novruz123"))
+    # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+    # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+    # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+
     app.config["db"] = db
 
     return app

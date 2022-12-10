@@ -9,6 +9,9 @@
     <th>Player ID</th>
     <th>Current Club ID</th>
     <th>Player Club Domestic Competition ID</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
   </tr>
   {% for player_valuation_id, player_valuation in valuations %}
   <tr>
@@ -19,6 +22,12 @@
     <td>{{player_valuation.player_id}}</td>
     <td>{{player_valuation.current_club_id}}</td>
     <td>{{player_valuation.player_club_domestic_competition_id}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">Delete</button>
+      <button class="button_update">Update</button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>

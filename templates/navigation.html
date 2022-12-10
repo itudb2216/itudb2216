@@ -32,6 +32,23 @@
           <a href="{{ url_for('home_page') }}">Home</a>
         </li>
       </ul>
+      {% if admin %}
+      <h4>Welcome, {{admin.name}}</h4>
+      <ul>
+        <li>
+          <a href="{{url_for('log_out')}}">Log Out</a>
+        </li>
+      </ul>
+      {% endif %} {% if not admin %}
+      <ul>
+        <li id="admin">
+          <a href="{{ url_for('admin_page') }}">Admins</a>
+        </li>
+        <li id="login">
+          <a href="{{ url_for('login_page') }}">Log In</a>
+        </li>
+      </ul>
+      {% endif %}
     </div>
 
     {% block content %}{% endblock %}

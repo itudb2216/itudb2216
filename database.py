@@ -6,6 +6,7 @@ from tables.appearance import Appearance
 from tables.player import Player
 from tables.player_valuation import PlayerValuation
 from tables.competition import Competition
+from tables.admin import Admin
 
 class Database:
     def __init__(self, dbfile):
@@ -80,6 +81,22 @@ class Database:
         player_valuation_ = PlayerValuation(*player_valuation_values)
         return player_valuation_ 
 
+    def get_admin(self, student_id):
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM ADMINS WHERE (STUDENT_ID = ?)"
+            cursor.execute(query, (student_id, ))
+            result = cursor.fetchone()
+            if(result == None):
+                return None
+            student_id = result[0]
+            name = result[1]
+            mail = result[2]
+            password = result[3]
+        admin_ = Admin(student_id = student_id, name = name, mail = mail, password = password)
+        return admin_
+
+
     def get_competition(self, competition_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -148,3 +165,13 @@ class Database:
             for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
                 competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url))
         return competitions
+
+    def get_admins(self):
+        admins = []
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM ADMINS ORDER BY STUDENT_ID"
+            cursor.execute(query)
+            for student_id, name, mail, password in cursor:
+                admins.append(Admin(student_id, name, mail, password))
+        return admins

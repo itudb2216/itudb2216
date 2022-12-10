@@ -1,0 +1,17 @@
+{% extends "navigation.html" %} {% block title %}ADMINS{% endblock%} {% block
+content %}
+<table class="admin">
+  <tr>
+    <th>STUDENT ID</th>
+    <th>NAME</th>
+    <th>MAIL</th>
+  </tr>
+  {% for admin in admins %}
+  <tr>
+    <td>{{admin.student_id}}</td>
+    <td>{{admin.name}}</td>
+    <td>{{admin.mail}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{%endblock%}
