@@ -115,15 +115,63 @@
 
   .button_delete{
     background-color: red;
+  }
+
+  .button_delete a{
     color: yellow;
   }
 
   .button_update{
     background-color: blue;
+  }
+
+  .button_update a{
     color: white;
   }
 
   .operations{
     display: flex;
     justify-content: space-between;
+  }
+
+  .input_label p{
+    margin:  0 auto;
+  }
+
+  .update_form label p{
+    margin:  0 auto;
+  }
+
+  .update_form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .update_form div{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .update_form input{
+    width: 50%;
+    text-align: center;
+    height: 30px;
+  }
+
+  .update_form label{
+    height: 30px;
+    width: 50%;
+  }
+
+  .update_form button{
+    background-color: blue;
+    border-radius: 20px;
+  }
+
+  .update_form button p{
+    margin: 0 auto;
+    color: white;
   }

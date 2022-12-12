@@ -2,10 +2,10 @@
 content %}
 <h3 class="login-warning">If you are not an admin, you can not delete or update the tables</h3>
 <form  id="login-form" action="{{ url_for('admin_check') }}" method="GET">
-    <label class="input_label" for="student_id">Student ID: </label>
-    <input type="text" id="login-mail" name="student_id" placeholder="enter the student id">
-    <label for="pass">Password: </label>
-    <input type="password" id="login-password" name="pass" placeholder="enter the password">
+    <label class="input_label" for="student_id"><p>Student ID:</p>  </label>
+    <input type="text" id="login-mail" name="student_id" placeholder="enter the student id" required>
+    <label class="input_label" for="pass"><p>Password:</p>  </label>
+    <input type="password" id="login-password" name="pass" placeholder="enter the password" required>
     <button type="submit" id="login-button">
       <p>LOGIN</p></button>
   </form>

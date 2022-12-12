@@ -16,6 +16,7 @@ class Database:
         string, tupel = object.add()
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
+            cursor.execute("PRAGMA foreign_keys=ON;")
             query = string
             cursor.execute(query, tupel)
             connection.commit()
@@ -78,8 +79,10 @@ class Database:
             query = "SELECT * FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
             cursor.execute(query, (player_valuation_id,))
             player_valuation_values = list(cursor.fetchone())
-        player_valuation_ = PlayerValuation(*player_valuation_values)
-        return player_valuation_ 
+        print("PLAYER_VAL: ", player_valuation_values)
+        return player_valuation_values
+        # player_valuation_ = PlayerValuation(*player_valuation_values)
+        # return player_valuation_ 
 
     def get_admin(self, student_id):
         with dbapi2.connect(self.dbfile) as connection:
@@ -175,3 +178,22 @@ class Database:
             for student_id, name, mail, password in cursor:
                 admins.append(Admin(student_id, name, mail, password))
         return admins
+
+    def delete_player_valuation(self, player_valuation_id):
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "DELETE FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
+            cursor.execute(query, (player_valuation_id,))
+            connection.commit()
+
+    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week):
+         with dbapi2.connect(self.dbfile) as connection:
+            try:
+                cursor = connection.cursor()
+                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?  WHERE (PLAYER_VALUATION_ID = ?)"
+                cursor.execute(query, (new_player_valuation_id,date_time, market_value, date_week, player_valuation_id))
+                connection.commit()
+            except:
+                connection.rollback()
+            finally:
+                cursor.close()

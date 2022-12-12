@@ -24,3 +24,15 @@ Admin access to delete and update has been created (Delete and Update Buttons, w
 Changes on urls in views.py file
 admins.html and login.html file has been created
 
+11.12.2022
+Changes for styling of login.html file in css file
+function for delete button in player valuation table row has been created on views.py
+function for deleting an item from player valuations table has been added to database.py
+url for deleting player valuation from table has been added to server.py
+
+12.12.2022
+Problems of log in and log out functions if more than 1 device uses the website at the same time have been fixed by using Flask Sessions (pip install Flask-Session)
+Some tiny Problems in creating tables and .py file of some tables have been fixed
+Form for update button in admin level table element, has been added for player_valuation table, and tested. It works.
+Styling has been updated. Some additions and modifications.
+Foreign key configuration special to sqlite has been added (cursor.execute("PRAGMA foreign_keys=ON;"))

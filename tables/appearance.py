@@ -16,7 +16,7 @@ class Appearance:
 
     def add(self):
         query = "INSERT INTO APPEARANCES (appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        tupel = (query, (self.appearance_id, self.game_id, self.player_id, self.player_club_id, self.date, self.player_pretty_name, self.competition_id, self.yellow_cards, self.red_cards, self.goals, self.assists, self.minutes_played))
+        tupel = (self.appearance_id, self.game_id, self.player_id, self.player_club_id, self.date, self.player_pretty_name, self.competition_id, self.yellow_cards, self.red_cards, self.goals, self.assists, self.minutes_played)
         return query, tupel
 
     def update(self):

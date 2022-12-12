@@ -17,7 +17,7 @@ class Player:
  
 
     def add(self):
-        query = "INSERT INTO PLAYERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        query = "INSERT INTO PLAYERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         v = (self.player_id,self.pretty_name,self.club_id,self.club_pretty_name,self.current_club_id,self.country_of_citizenship,self.date_of_birth,self.position,self.foot,self.height_in_cm,self.market_value_in_gbp,self.highest_market_value_in_gbp)
         return query, v
 

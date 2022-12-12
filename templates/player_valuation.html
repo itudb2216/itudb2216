@@ -24,11 +24,72 @@
     <td>{{player_valuation.player_club_domestic_competition_id}}</td>
     {% if admin %}
     <td class="operations">
-      <button class="button_delete">Delete</button>
-      <button class="button_update">Update</button>
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_player_valuation', player_valuation_id = player_valuation_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form',  player_valuation_id = player_valuation_id) }}"
+          >Update</a
+        >
+      </button>
     </td>
     {% endif %}
   </tr>
   {% endfor %}
 </table>
-{%endblock%}
+
+{% if update_form %}
+<form
+  action="{{ url_for('update_player_valuation', player_valuation_id = current_player_valuation[0] ) }}"
+  class="update_form"
+  method="GET"
+>
+  <div>
+    <label for="player_valuation_id"><p>Player Valuation ID</p></label>
+    <input
+      type="number"
+      name="player_valuation_id"
+      required
+      placeholder="Enter the Player Valuation ID"
+      value="{{current_player_valuation[0]}}"
+    />
+  </div>
+
+  <div>
+    <label for="date_time"><p>Date Time</p></label>
+    <input
+      type="text"
+      name="date_time"
+      placeholder="Enter the Date Time"
+      value="{{current_player_valuation[1]}}"
+    />
+  </div>
+
+  <div>
+    <label for="market_value"><p>Market Value</p></label>
+    <input
+      type="text"
+      name="market_value"
+      placeholder="Enter the Market Value"
+      value="{{current_player_valuation[5]}}"
+    />
+  </div>
+
+  <div>
+    <label for="date_week"><p>Date Week</p></label>
+    <input
+      type="text"
+      name="date_week"
+      placeholder="Enter the Date Week"
+      value="{{current_player_valuation[2]}}"
+    />
+  </div>
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+{% endif %} {%endblock%}
