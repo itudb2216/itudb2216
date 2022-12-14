@@ -1,6 +1,22 @@
-{% extends "navigation.html" %} {% block title %} COMPETITIONS {% endblock %} {%
-block content %}
-<table class="club">
+{% extends "navigation.html" %} {% block title %} COMPETITIONS {% endblock %} 
+{% block content %} {% if not update_form_competition %}
+<table class="competition">
+  <tr>
+    <th>ID</th>
+    <th>Pretty Name</th>
+    <th>Type</th>
+    <th>Subtype</th>
+    <th>Country ID</th>
+    <th>Country Name</th>
+    <th>Country Latitude</th>
+    <th>Country Longitude</th>
+    <th>Domestic League Code</th>
+    <th>Name</th>
+    <th>Confederation</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
   {% for competition in competitions %}
   <tr>
     <td>{{competition.competition_id}}</td>
@@ -14,8 +30,151 @@ block content %}
     <td>{{competition.domestic_league_code}}</td>
     <td>{{competition.name}}</td>
     <td>{{competition.confederation}}</td>
-    <td>{{competition.url}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_competition', competition_id = competition.competition_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_competition',  competition_id = competition.competition_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
-{% endblock %}
+{% endif %} {% if update_form_competition %}
+<form
+  action="{{ url_for('update_competition', competition_id = current_competition.competition_id) }}"
+  class="update_form"
+  method="GET"
+>
+  <div>
+    <label for="competition_id"><p>Competition ID</p></label>
+    <input
+      type="text"
+      name="competition_id"
+      required
+      placeholder="Enter the Competition ID"
+      value="{{current_competition.competition_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="pretty_name"><p>Pretty Name</p></label>
+    <input
+      type="text"
+      name="pretty_name"
+      placeholder="Enter the Pretty Name"
+      value="{{current_competition.pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="type_"><p>Type</p></label>
+    <input
+      type="text"
+      name="type_"
+      placeholder="Enter the Type"
+      value="{{current_competition.type_}}"
+    />
+  </div>
+
+  <div>
+    <label for="sub_type"><p>Subtype</p></label>
+    <input
+      type="text"
+      name="sub_type"
+      placeholder="Enter the Subtype"
+      value="{{current_competition.sub_type}}"
+    />
+  </div>
+
+  <div>
+    <label for="country_id"><p>Country ID</p></label>
+    <input
+      type="number"
+      name="country_id"
+      placeholder="Enter the Country ID"
+      value="{{current_competition.country_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="country_name"><p>Country Name</p></label>
+    <input
+      type="text"
+      name="country_name"
+      placeholder="Enter the Country Name"
+      value="{{current_competition.country_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="country_latitude"><p>Country Latitude</p></label>
+    <input
+      type="number"
+      name="country_latitude"
+      placeholder="Enter the Country Latitude"
+      value="{{current_competition.country_latitude}}"
+    />
+  </div>
+
+  <div>
+    <label for="country_longitude"><p>Country Longitude</p></label>
+    <input
+      type="number"
+      name="country_longitude"
+      placeholder="Enter the country_longitude"
+      value="{{current_competition.country_longitude}}"
+    />
+  </div>
+
+  <div>
+    <label for="domestic_league_code"><p>Domestic League Code</p></label>
+    <input
+      type="text"
+      name="domestic_league_code"
+      placeholder="Enter the Domestic League Code"
+      value="{{current_competition.domestic_league_code}}"
+    />
+  </div>
+
+  <div>
+    <label for="name"><p>Name</p></label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Enter the Name"
+      value="{{current_competition.name}}"
+    />
+  </div>
+
+  <div>
+    <label for="confederation"><p>Confederation</p></label>
+    <input
+      type="text"
+      name="confederation"
+      placeholder="Enter the Confederation"
+      value="{{current_competition.confederation}}"
+    />
+  </div>
+
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+<button class="button_cancel">
+  <a
+    href="{{ url_for('update_competition', competition_id = 'Close') }}"
+  >
+    <p>CANCEL</p>
+  </a>
+</button>
+{% endif %} {% endblock %}

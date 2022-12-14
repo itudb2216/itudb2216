@@ -1,6 +1,25 @@
-{% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} {% block
-content %}
+{% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} 
+{% block content %} {% if not update_form_club %}
 <table class="club">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Pretty Name</th>
+    <th>Domestic Competition ID</th>
+    <th>Total Market Value</th>
+    <th>Squad Size</th>
+    <th>Average Age</th>
+    <th>Number of Foreign Players</th>
+    <th>Percentage of Foreign Players</th>
+    <th>Number of National Team Players</th>
+    <th>Stadium Name</th>
+    <th>Stadium Seats</th>
+    <th>Net Transfer Record</th>
+    <th>Coach Name</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
   {% for club in clubs %}
   <tr>
     <td>{{club.club_id}}</td>
@@ -15,11 +34,183 @@ content %}
     <td>{{club.national_team_players}}</td>
     <td>{{club.stadium_name}}</td>
     <td>{{club.stadium_seats}}</td>
-    <td></td>
     <td>{{club.net_transfer_record}}</td>
     <td>{{club.coach_name}}</td>
-    <td>{{club.url}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_club', club_id = club.club_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_club',  club_id = club.club_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
-{% endblock %}
+{% endif %} {% if update_form_club %}
+<form
+  action="{{ url_for('update_club', club_id = current_club.club_id) }}"
+  class="update_form"
+  method="GET"
+>
+  <div>
+    <label for="club_id"><p>Club ID</p></label>
+    <input
+      type="number"
+      name="club_id"
+      required
+      placeholder="Enter the Club ID"
+      value="{{current_club.club_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="name"><p>Name</p></label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Enter the Name"
+      value="{{current_club.name}}"
+    />
+  </div>
+
+  <div>
+    <label for="pretty_name"><p>Pretty Name</p></label>
+    <input
+      type="text"
+      name="pretty_name"
+      placeholder="Enter the Pretty Name"
+      value="{{current_club.pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="domestic_competition_id"><p>Domestic Competition ID</p></label>
+    <input
+      type="text"
+      name="domestic_competition_id"
+      placeholder="Enter the Domestic Competition ID"
+      value="{{current_club.domestic_competition_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="total_market_value"><p>Total Market Value</p></label>
+    <input
+      type="number"
+      name="total_market_value"
+      placeholder="Enter the Total Market Value"
+      value="{{current_club.total_market_value}}"
+    />
+  </div>
+
+  <div>
+    <label for="squad_size"><p>Squad Size</p></label>
+    <input
+      type="number"
+      name="squad_size"
+      placeholder="Enter the Squad Size"
+      value="{{current_club.squad_size}}"
+    />
+  </div>
+
+  <div>
+    <label for="average_age"><p>Average Age</p></label>
+    <input
+      type="number"
+      name="average_age"
+      placeholder="Enter the Average Age"
+      value="{{current_club.average_age}}"
+    />
+  </div>
+
+  <div>
+    <label for="foreigners_number"><p>Number of Foreign Players</p></label>
+    <input
+      type="number"
+      name="foreigners_number"
+      placeholder="Enter the Number of Foreign Players"
+      value="{{current_club.foreigners_number}}"
+    />
+  </div>
+
+  <div>
+    <label for="foreigners_percentage"><p>Percentage of Foreign Players</p></label>
+    <input
+      type="number"
+      name="foreigners_percentage"
+      placeholder="Enter the Percentage of Foreign Players"
+      value="{{current_club.foreigners_percentage}}"
+    />
+  </div>
+
+  <div>
+    <label for="national_team_players"><p>Number of National Team Players</p></label>
+    <input
+      type="number"
+      name="national_team_players"
+      placeholder="Enter the Number of National Team Players"
+      value="{{current_club.national_team_players}}"
+    />
+  </div>
+
+  <div>
+    <label for="stadium_name"><p>Stadium Name</p></label>
+    <input
+      type="text"
+      name="stadium_name"
+      placeholder="Enter the Stadium Name"
+      value="{{current_club.stadium_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="stadium_seats"><p>Stadium Seats</p></label>
+    <input
+      type="number"
+      name="stadium_seats"
+      placeholder="Enter the Stadium Seats"
+      value="{{current_club.stadium_seats}}"
+    />
+  </div>
+
+  <div>
+    <label for="net_transfer_record"><p>Net Transfer Record</p></label>
+    <input
+      type="text"
+      name="net_transfer_record"
+      placeholder="Enter the Net Transfer Record"
+      value="{{current_club.net_transfer_record}}"
+    />
+  </div>
+
+  <div>
+    <label for="coach_name"><p>Coach Name</p></label>
+    <input
+      type="text"
+      name="coach_name"
+      placeholder="Enter the Coach Name"
+      value="{{current_club.coach_name}}"
+    />
+  </div>
+
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+<button class="button_cancel">
+  <a
+    href="{{ url_for('update_club', club_id = 'Close') }}"
+  >
+    <p>CANCEL</p>
+  </a>
+</button>
+{% endif %} {% endblock %}

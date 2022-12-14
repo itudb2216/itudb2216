@@ -109,7 +109,7 @@ class Database:
     def get_competition(self, competition_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM COMPETITIONS WHERE (COMPETITOIN_ID = ?)"
+            query = "SELECT * FROM COMPETITIONS WHERE (COMPETITION_ID = ?)"
             cursor.execute(query, (competition_id,))
             competition_values = list(cursor.fetchone())
         competition_ = Competition(*competition_values)
@@ -121,8 +121,8 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT * FROM CLUBS ORDER BY CLUB_ID"
             cursor.execute(query)
-            for club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name , url in cursor:
-                clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name , url))
+            for club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name in cursor:
+                clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name))
         return clubs
 
     def get_games(self):
@@ -171,8 +171,8 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT * FROM COMPETITIONS ORDER BY COMPETITION_ID"
             cursor.execute(query)
-            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
-                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url))
+            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
+                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
         return competitions
 
     def get_admins(self):

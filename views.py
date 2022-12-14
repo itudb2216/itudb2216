@@ -1,4 +1,6 @@
 from flask import current_app, render_template, request, session
+from tables.club import Club
+from tables.competition import Competition
 from tables.appearance import Appearance
 def navigation_page():
     # return render_template("navigation.html", admin = admin)
@@ -68,17 +70,12 @@ def appearance_page():
     appearances = myDB.get_appearances()
     return render_template("appearance.html", appearances = appearances, admin = session.get("admin"))
 
+#PLAYER VALUATIONS
 def delete_player_valuation(player_valuation_id):
     myDB = current_app.config["db"]
     myDB.delete_player_valuation(player_valuation_id)
     player_valuations = myDB.get_player_valuations()
     return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
-
-def delete_appearance(appearance_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_appearance(appearance_id))
-    appearances = myDB.get_appearances()
-    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
 
 def update_form(player_valuation_id):
     myDB = current_app.config["db"]
@@ -105,12 +102,62 @@ def update_player_valuation(player_valuation_id):
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
 
 # We need to add try, except, and finally for each function we use cursor !!!
+
+#CLUBS
+
+def delete_club(club_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_club(club_id))
+    return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
+
+def update_form_club(club_id):
+    myDB =  current_app.config["db"]
+    return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = True, current_club = myDB.get_club(club_id))
+
+def update_club(club_id):
+    if (club_id == "Close"):
+        myDB = current_app.config["db"]
+        return render_template("club.html", clubs = myDB.get_clubs, admin = session.get("admin"), update_form_club = False, current_club = None)
+    
+    if (request.method == "GET"):
+        myDB = current_app.config["db"]
+        myDB.update(Club((request.args)['club_id'], (request.args)['name'], (request.args)['pretty_name'], 
+                         (request.args)['domestic_competition_id'], (request.args)['total_market_value'], (request.args)['squad_size'], 
+                         (request.args)['average_age'], (request.args)['foreigners_number'], (request.args)['foreigners_percentage'], 
+                         (request.args)['national_team_players'], (request.args)['stadium_name'], (request.args)['stadium_seats'], 
+                         (request.args)['net_transfer_record'], (request.args)['coach_name']))
+        return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
+    
+#COMPETITIONS
+    
+def delete_competition(competition_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_competition(competition_id))
+    return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
+
+def update_form_competition(competition_id):
+    myDB =  current_app.config["db"]
+    return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = True, current_competition = myDB.get_competition(competition_id))
+
+def update_competition(competition_id):
+    if (competition_id == "Close"):
+        myDB = current_app.config["db"]
+        return render_template("competition.html", competitions = myDB.get_competitions, admin = session.get("admin"), update_form_competition = False, current_competition = None)
+    
+    if (request.method == "GET"):
+        myDB = current_app.config["db"]
+        myDB.update(Competition((request.args)['competition_id'], (request.args)['pretty_name'], (request.args)['type_'],
+                         (request.args)['sub_type'], (request.args)['country_id'], (request.args)['country_name'], 
+                         (request.args)['country_latitude'], (request.args)['country_longitude'], (request.args)['domestic_league_code'], 
+                         (request.args)['name'], (request.args)['confederation']))
+        return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
 def update_form_appearance(appearance_id):
     myDB = current_app.config["db"]
     appearances = myDB.get_appearances()
     current_appearance = myDB.get_appearance(appearance_id)
     return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = True, current_appearance = current_appearance)
 
+#Appearances
 
 def update_appearance(appearance_id):
     if(appearance_id == "Close"):
