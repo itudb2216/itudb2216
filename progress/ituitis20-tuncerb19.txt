@@ -5,6 +5,11 @@ Player.py added.(Includes class of Player table)
 server.py added and designed using flask.
 player.py changed, some unnecessary columns removed.
 
-[Dec 7,2022]
+[Dec 7, 2022]
 Create table queries designed.
 Player table linked to the player page.
+
+[Dec 14, 2022]
+Csv files for tables are downloaded from kaggle.
+Created a reader file to insert all data to database file.
+Dataset except the incorrect elements(does not fit to foreignkey design) inserted to transfermarkt.db file.
