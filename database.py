@@ -40,7 +40,7 @@ class Database:
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
             query = string 
-            cursor.execute(query, (object_id,))
+            cursor.execute(query, object_id)
             connection.commit()
 
     def get_club(self, club_id):
@@ -198,6 +198,19 @@ class Database:
                 cursor = connection.cursor()
                 query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?  WHERE (PLAYER_VALUATION_ID = ?)"
                 cursor.execute(query, (new_player_valuation_id,date_time, market_value, date_week, player_valuation_id))
+                connection.commit()
+            except:
+                connection.rollback()
+            finally:
+                cursor.close()
+
+
+    def update_appearance(self, appearance_id, new_appearance_id, game_id, player_id, player_club_id, date):
+         with dbapi2.connect(self.dbfile) as connection:
+            try:
+                cursor = connection.cursor()
+                query = "UPDATE APPEARANCES SET appearance_id = ?, game_id = ?, player_id = ?, player_club_id = ?, date = ?  WHERE (appearance_id = ?)"
+                cursor.execute(query, (new_appearance_id,game_id, player_id, player_club_id, date, appearance_id))
                 connection.commit()
             except:
                 connection.rollback()

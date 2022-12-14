@@ -1,6 +1,23 @@
 {% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
-block content %}
+block content %} {% if not update_form %}
 <table class="appearance">
+  <tr>
+    <th>Appearance ID</th>
+    <th>Game ID</th>
+    <th>Player ID</th>
+    <th>Player Club ID</th>
+    <th>Date</th>
+    <th>Player Pretty Name</th>
+    <th>Competition ID</th>
+    <th>Yellow Cards</th>
+    <th>Red Cards</th>
+    <th>Goals</th>
+    <th>Assists</th>
+    <th>Minutes Played</th>
+    {% if admin%}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
   {% for appearance in appearances %}
   <tr>
     <td>{{appearance.appearance_id}}</td>
@@ -15,7 +32,160 @@ block content %}
     <td>{{appearance.goals}}</td>
     <td>{{appearance.assists}}</td>
     <td>{{appearance.minutes_played}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_appearance', appearance_id = appearance.appearance_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_appearance',  appearance_id = appearance.appearance_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
+
+{% endif %} {% if update_form %}
+<form
+  action="{{ url_for('update_appearance', appearance_id = current_appearance.appearance_id) }}"
+  class="update_form"
+  method="GET"
+>
+<div>
+  <label for="appearance_id"><p>Appearance ID</p></label>
+  <input
+    type="number"
+    name="appearance_id"
+    placeholder="Enter the Appearance ID"
+    value="{{current_appearance.appearance_id}}"
+  />
+</div>
+  <div>
+    <label for="game_id"><p>Game ID</p></label>
+    <input
+      type="number"
+      name="game_id"
+      placeholder="Enter the Game ID"
+      value="{{current_appearance.game_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="player_id"><p>Player ID</p></label>
+    <input
+      type="number"
+      name="player_id"
+      placeholder="Enter the Player ID"
+      value="{{current_appearance.player_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="player_club_id"><p>Player Club ID</p></label>
+    <input
+      type="number"
+      name="player_club_id"
+      placeholder="Enter the Player Club ID"
+      value="{{current_appearance.player_club_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="date"><p>Date</p></label>
+    <input
+      type="text"
+      name="date"
+      placeholder="Enter the Date"
+      value="{{current_appearance.date}}"
+    />
+  </div>
+
+  <div>
+    <label for="player_pretty_name"><p>Player Pretty Name</p></label>
+    <input
+      type="text"
+      name="player_pretty_name"
+      placeholder="Enter the Player Prettu Name"
+      value="{{current_appearance.player_pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="competition_id"><p>Competition ID</p></label>
+    <input
+      type="number"
+      name="competition_id"
+      placeholder="Enter the Competition ID"
+      value="{{current_appearance.competition_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="yellow_cards"><p>Yellow Cards</p></label>
+    <input
+      type="number"
+      name="yellow_cards"
+      placeholder="Enter the Yellow Cards"
+      value="{{current_appearance.yellow_cards}}"
+    />
+  </div>
+
+  <div>
+    <label for="red_cards"><p>Red Cards</p></label>
+    <input
+      type="number"
+      name="red_cards"
+      placeholder="Enter the Red Cards"
+      value="{{current_appearance.red_cards}}"
+    />
+  </div>
+
+  <div>
+    <label for="goals"><p>Goals</p></label>
+    <input
+      type="number"
+      name="goals"
+      placeholder="Enter the Goals"
+      value="{{current_appearance.goals}"
+    />
+  </div>
+
+  <div>
+    <label for="assists"><p>Assists</p></label>
+    <input
+      type="number"
+      name="assists"
+      placeholder="Enter the Assists"
+      value="{{current_appearance.assists}}"
+    />
+  </div>
+
+  <div>
+    <label for="minutes_played"><p>Minutes Played</p></label>
+    <input
+      type="number"
+      name="minutes_played"
+      placeholder="Enter the Minutes Played"
+      value="{{current_appearance.minutes_played}}"
+    />
+  </div>
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+<button class="button_cancel">
+  <a
+    href="{{ url_for('update_appearance', appearance_id = 'Close') }}"
+  >
+    <p>CANCEL</p>
+  </a>
+</button>
+{% endif %} 
 {%endblock%}

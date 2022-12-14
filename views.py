@@ -1,5 +1,5 @@
 from flask import current_app, render_template, request, session
-
+from tables.appearance import Appearance
 def navigation_page():
     # return render_template("navigation.html", admin = admin)
     return render_template("navigation.html", admin = session.get("admin"))
@@ -68,19 +68,23 @@ def appearance_page():
     appearances = myDB.get_appearances()
     return render_template("appearance.html", appearances = appearances, admin = session.get("admin"))
 
-
 def delete_player_valuation(player_valuation_id):
     myDB = current_app.config["db"]
     myDB.delete_player_valuation(player_valuation_id)
     player_valuations = myDB.get_player_valuations()
     return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
 
+def delete_appearance(appearance_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_appearance(appearance_id))
+    appearances = myDB.get_appearances()
+    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
+
 def update_form(player_valuation_id):
     myDB = current_app.config["db"]
     player_valuations = myDB.get_player_valuations()
     current_player_valuation = myDB.get_player_valuation(player_valuation_id)
     return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = True, current_player_valuation = current_player_valuation)
-
 
 def update_player_valuation(player_valuation_id):
     if(player_valuation_id == "Close"):
@@ -101,3 +105,29 @@ def update_player_valuation(player_valuation_id):
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
 
 # We need to add try, except, and finally for each function we use cursor !!!
+def update_form_appearance(appearance_id):
+    myDB = current_app.config["db"]
+    appearances = myDB.get_appearances()
+    current_appearance = myDB.get_appearance(appearance_id)
+    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = True, current_appearance = current_appearance)
+
+
+def update_appearance(appearance_id):
+    if(appearance_id == "Close"):
+        myDB = current_app.config["db"]
+        appearances = myDB.get_appearances()
+        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
+
+    if(request.method == "GET"):
+        myDB = current_app.config["db"]
+
+        new_appearance_id = (request.args)['appearance_id']
+        game_id = (request.args)['game_id']
+        player_id = (request.args)['player_id']
+        player_club_id = (request.args)['player_club_id']
+        date = (request.args)['date']
+        
+        myDB.update_appearance(appearance_id, new_appearance_id, game_id, player_id, player_club_id, date)
+
+        appearances = myDB.get_appearances()
+        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
