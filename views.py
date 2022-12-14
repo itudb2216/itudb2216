@@ -83,6 +83,11 @@ def update_form(player_valuation_id):
 
 
 def update_player_valuation(player_valuation_id):
+    if(player_valuation_id == "Close"):
+        myDB = current_app.config["db"]
+        player_valuations = myDB.get_player_valuations()
+        return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
+
     if(request.method == "GET"):
         myDB = current_app.config["db"]
         new_player_valuation_id = (request.args)['player_valuation_id']

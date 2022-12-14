@@ -1,5 +1,5 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
-{% block content %}
+{% block content %} {% if not update_form %}
 <table class="player_valuation">
   <tr>
     <th>ID</th>
@@ -9,7 +9,7 @@
     <th>Player ID</th>
     <th>Current Club ID</th>
     <th>Player Club Domestic Competition ID</th>
-    {% if admin %}
+    {% if admin%}
     <th>Operations</th>
     {% endif %}
   </tr>
@@ -32,7 +32,7 @@
       </button>
       <button class="button_update">
         <a
-          href="{{ url_for('update_form',  player_valuation_id = player_valuation_id) }}"
+          href="{{ url_for('update_form',  player_valuation_id = player_valuation_id, cancel = False) }}"
           >Update</a
         >
       </button>
@@ -42,9 +42,9 @@
   {% endfor %}
 </table>
 
-{% if update_form %}
+{% endif %} {% if update_form %}
 <form
-  action="{{ url_for('update_player_valuation', player_valuation_id = current_player_valuation[0] ) }}"
+  action="{{ url_for('update_player_valuation', player_valuation_id = current_player_valuation[0]) }}"
   class="update_form"
   method="GET"
 >
@@ -92,4 +92,11 @@
     <p>UPDATE</p>
   </button>
 </form>
+<button class="button_cancel">
+  <a
+    href="{{ url_for('update_player_valuation', player_valuation_id = 'Close') }}"
+  >
+    <p>CANCEL</p>
+  </a>
+</button>
 {% endif %} {%endblock%}

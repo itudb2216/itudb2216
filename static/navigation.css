@@ -117,12 +117,21 @@
     background-color: red;
   }
 
+
+  .button_delete:hover{
+    background-color: green;
+  }
+
   .button_delete a{
     color: yellow;
   }
 
   .button_update{
     background-color: blue;
+  }
+
+  .button_update:hover{
+    background-color: green;
   }
 
   .button_update a{
@@ -167,7 +176,13 @@
   }
 
   .update_form button{
+    cursor: pointer;
     background-color: blue;
+    border-radius: 20px;
+  }
+  
+  .update_form button:hover{
+    background-color: green;
     border-radius: 20px;
   }
 
@@ -175,3 +190,22 @@
     margin: 0 auto;
     color: white;
   }
+
+  .button_cancel{
+    background-color: red;
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 25%;
+    cursor: pointer;
+  }
+
+  .button_cancel p{
+    color: white;
+    margin: auto;
+  }
+
+  .button_cancel:hover {
+    background-color: green;
+  }
+
