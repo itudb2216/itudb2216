@@ -15,12 +15,18 @@ class Database:
     def add(self, object):
         string, tupel = object.add()
         with dbapi2.connect(self.dbfile) as connection:
-            cursor = connection.cursor()
-            cursor.execute("PRAGMA foreign_keys=ON;")
-            query = string
-            cursor.execute(query, tupel)
-            connection.commit()
-
+            try:
+                cursor = connection.cursor()
+                cursor.execute("PRAGMA foreign_keys=ON;")
+                query = string
+                cursor.execute(query, tupel)
+                connection.commit()
+            except:
+                print("error: ",tupel)
+                connection.rollback()
+            finally:
+                cursor.close()
+    
     def update(self, object):
         string, tupel = object.update()
         with dbapi2.connect(self.dbfile) as connection:

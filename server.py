@@ -34,9 +34,7 @@ def create_app():
     app.add_url_rule("/delete_player_valuation/<player_valuation_id>", view_func=views.delete_player_valuation)
     app.add_url_rule("/update_form_player_valuation/<player_valuation_id>", view_func=views.update_form)
     app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation)
-    app.add_url_rule("/delete_game/<game_id>", view_func=views.delete_game)
-    app.add_url_rule("/update_games_form/<game_id>", view_func=views.update_games_form)
-    app.add_url_rule("/updated/<game_id>", view_func=views.update_game)
+
 
 
     if not os.path.exists('./transfermarkt.db'):
