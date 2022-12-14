@@ -34,6 +34,9 @@ def create_app():
     app.add_url_rule("/delete_player_valuation/<player_valuation_id>", view_func=views.delete_player_valuation)
     app.add_url_rule("/update_form_player_valuation/<player_valuation_id>", view_func=views.update_form)
     app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation)
+    app.add_url_rule("/delete_game/<game_id>", view_func=views.delete_game)
+    app.add_url_rule("/update_games_form/<game_id>", view_func=views.update_games_form)
+    app.add_url_rule("/updated/<game_id>", view_func=views.update_game)
 
 
     if not os.path.exists('./transfermarkt.db'):
@@ -56,17 +59,9 @@ def create_app():
                 AWAY_CLUB_ID INTEGER NOT NULL,\
                 HOME_CLUB_GOALS INTEGER NOT NULL,\
                 AWAY_CLUB_GOALS INTEGER NOT NULL,\
-                AGGREGATE TEXT NOT NULL,\
-                HOME_CLUB_POSITION INTEGER NOT NULL,\
-                AWAY_CLUB_POSITION INTEGER NOT NULL,\
                 CLUB_HOME_PRETTY_NAME TEXT,\
                 CLUB_AWAY_PRETTY_NAME TEXT,\
-                HOME_CLUB_MANAGER_NAME TEXT,\
-                AWAY_CLUB_MANAGER_NAME TEXT,\
                 STADIUM TEXT,\
-                ATTENDANCE INTEGER NOT NULL,\
-                REFEREE TEXT,\
-                URL TEXT NOT NULL,\
                 FOREIGN KEY(COMPETITION_ID) REFERENCES COMPETITIONS(COMPETITION_ID),\
                 FOREIGN KEY(HOME_CLUB_ID) REFERENCES CLUBS(CLUB_ID),\
                 FOREIGN KEY(AWAY_CLUB_ID) REFERENCES CLUBS(CLUB_ID)\
