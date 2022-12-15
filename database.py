@@ -27,14 +27,20 @@ class Database:
             finally:
                 cursor.close()
     
-    def update(self, object):
-        string, tupel = object.update()
+    def update(self, object, old_object_id):
+        string, tupel = object.update(old_object_id)
         with dbapi2.connect(self.dbfile) as connection:
-            cursor = connection.cursor()
-            query = string
-            cursor.execute("PRAGMA foreign_keys=ON;")
-            cursor.execute(query, tupel)
-            connection.commit()
+            try:
+                cursor = connection.cursor()
+                query = string
+                cursor.execute("PRAGMA foreign_keys=ON;")
+                print("QUERY: ", query)
+                cursor.execute(query, tupel)
+                connection.commit()
+            except:
+                connection.rollback()
+            finally:
+                cursor.close()
 
     def delete(self, object):
         string, object_id = object.delete()

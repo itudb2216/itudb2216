@@ -205,26 +205,22 @@ def update_appearance(appearance_id):
 def delete_player(player_id):
     myDB = current_app.config["db"]
     myDB.delete(myDB.get_player(player_id))
-    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_club = False, current_player = None)
+    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
     
 def update_form_player(player_id):
     myDB =  current_app.config["db"]
-    return render_template("player.html", players = myDB.get_clubs(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id))
+    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id))
 
 def update_player(player_id):
     if (player_id == "Close"):
         myDB = current_app.config["db"]
-        return render_template("player.html", players = myDB.get_players, admin = session.get("admin"), update_form_player = False, current_player = None)
+        return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
     
     if (request.method == "GET"):
         myDB = current_app.config["db"]
-        myDB.update(Player((request.args)['player_id'], (request.args)['club_id'], (request.args)['club_pretty_name'], 
+
+        myDB.update(Player((request.args)['player_id'], (request.args)['pretty_name'], (request.args)['club_id'], (request.args)['club_pretty_name'], 
                          (request.args)['current_club_id'], (request.args)['country_of_citizenship'], (request.args)['date_of_birth'], 
                          (request.args)['position'], (request.args)['foot'], (request.args)['height_in_cm'], 
-                         (request.args)['national_team_players'], (request.args)['stadium_name'], (request.args)['stadium_seats'], 
-                         (request.args)['market_value_in_gbp'], (request.args)['highest_market_value_in_gbp']))
+                         (request.args)['market_value_in_gbp'], (request.args)['highest_market_value_in_gbp']), player_id)
         return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
-
-
-        # player_id,pretty_name,club_id,club_pretty_name,current_club_id,country_of_citizenship, date_of_birth = None,
-        # position = None,foot = None,height_in_cm = None,market_value_in_gbp = None,highest_market_value_in_gbp = None
