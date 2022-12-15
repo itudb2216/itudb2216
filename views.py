@@ -171,33 +171,34 @@ def update_competition(competition_id):
                          (request.args)['name'], (request.args)['confederation']))
         return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
 
+#Appearances
+
+def delete_appearance(appearance_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_appearance(appearance_id))
+    return render_template("appearance.html", appearances = myDB.get_appearances(), admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
+
 def update_form_appearance(appearance_id):
     myDB = current_app.config["db"]
     appearances = myDB.get_appearances()
     current_appearance = myDB.get_appearance(appearance_id)
-    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = True, current_appearance = current_appearance)
-
-#Appearances
+    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = True, current_appearance = current_appearance)
 
 def update_appearance(appearance_id):
     if(appearance_id == "Close"):
         myDB = current_app.config["db"]
         appearances = myDB.get_appearances()
-        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
+        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
 
     if(request.method == "GET"):
         myDB = current_app.config["db"]
-
-        new_appearance_id = (request.args)['appearance_id']
-        game_id = (request.args)['game_id']
-        player_id = (request.args)['player_id']
-        player_club_id = (request.args)['player_club_id']
-        date = (request.args)['date']
-        
-        myDB.update_appearance(appearance_id, new_appearance_id, game_id, player_id, player_club_id, date)
+        myDB.update(Appearance((request.args)['appearance_id'], (request.args)['game_id'], (request.args)['player_id'],
+                         (request.args)['player_club_id'], (request.args)['date'], (request.args)['player_pretty_name'], 
+                         (request.args)['competition_id'], (request.args)['yellow_cards'], (request.args)['red_cards'], 
+                         (request.args)['goals'], (request.args)['assists'], (request.args)['minutes_played']))
 
         appearances = myDB.get_appearances()
-        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
+        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
 
 
 # Players 
