@@ -31,23 +31,31 @@ def create_app():
     app.add_url_rule("/admins", view_func=views.admin_page)
     app.add_url_rule("/admin", view_func=views.admin_check)
     app.add_url_rule("/log-out", view_func=views.log_out)
+
     app.add_url_rule("/delete_player_valuation/<player_valuation_id>", view_func=views.delete_player_valuation)
     app.add_url_rule("/update_form_player_valuation/<player_valuation_id>", view_func=views.update_form)
-    app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation)
+    app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation, methods=["GET", "POST", "PUT"])
+
     app.add_url_rule("/delete_club/<club_id>", view_func = views.delete_club)
     app.add_url_rule("/update_form_club/<club_id>", view_func=views.update_form_club)
     app.add_url_rule("/updated_clubs/<club_id>", view_func=views.update_club)
+
     app.add_url_rule("/delete_competition/<competition_id>", view_func = views.delete_competition)
     app.add_url_rule("/update_form_competition/<competition_id>", view_func=views.update_form_competition)
     app.add_url_rule("/updated_competitions/<competition_id>", view_func=views.update_competition)    
-    app.add_url_rule("/delete_appearance/<appearance_id>", view_func=views.delete_appearance)
+
+    # app.add_url_rule("/delete_appearance/<appearance_id>", view_func=views.delete_appearance)
     app.add_url_rule("/update_form_appearance/<appearance_id>", view_func=views.update_form_appearance)
     app.add_url_rule("/updated_appearance/<appearance_id>", view_func=views.update_appearance)
+
+    app.add_url_rule("/delete_player/<player_id>", view_func=views.delete_player)
+    app.add_url_rule("/update_form_player/<player_id>", view_func=views.update_form_player)
+    app.add_url_rule("/update_player/<player_id>", view_func=views.update_player)
 
 
 
     if not os.path.exists('./transfermarkt.db'):
-        con = dbapi2.connect("transfermarkt.db")
+        con = dbapi2.connect("transfermarkt.db", timeout=2000000) # timeout is added, because we are handling with much data, and because of that we get database is blocked, that is why we increaed timeout up to 2000 seconds
         con.execute(
             "CREATE TABLE COMPETITIONS (COMPETITION_ID TEXT PRIMARY KEY, PRETTY_NAME TEXT NOT NULL, TYPE_ TEXT NOT NULL, SUB_TYPE TEXT NOT NULL, COUNTRY_ID INTEGER DEFAULT -1, COUNTRY_NAME TEXT, COUNTRY_LATITUDE REAL, COUNTRY_LONGITUDE REAL, DOMESTIC_LEAGUE_CODE TEXT, NAME TEXT, CONFEDERATION TEXT)"
         )
@@ -80,11 +88,11 @@ def create_app():
             position TEXT,foot TEXT,height_in_cm INTEGER,market_value_in_gbp REAL,highest_market_value_in_gbp REAL,\
             FOREIGN KEY(club_id) REFERENCES CLUBS(CLUB_ID),\
             FOREIGN KEY(current_club_id) REFERENCES CLUBS(CLUB_ID))")
-        con.execute( #date Date?
+        con.execute( 
             "CREATE TABLE APPEARANCES (appearance_id TEXT PRIMARY KEY, game_id INTEGER, player_id INTEGER, player_club_id INTEGER, date TEXT, player_pretty_name TEXT, competition_id TEXT, yellow_cards INTEGER, red_cards INTEGER, goals INTEGER, assists INTEGER, minutes_played INTEGER, FOREIGN KEY(game_id) REFERENCES GAMES(game_id), FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id))"
         )
         con.execute(
-            "CREATE TABLE PLAYERVALUATIONS (player_valuation_id INTEGER PRIMARY KEY AUTOINCREMENT, datetime TEXT NOT NULL, dateweek TEXT NOT NULL, player_id INTEGER NOT NULL, current_club_id INTEGER NOT NULL, market_value INTEGER NOT NULL, player_club_domestic_competition_id TEXT NOT NULL, FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id), FOREIGN KEY(current_club_id) REFERENCES CLUBS(club_id), FOREIGN KEY(player_club_domestic_competition_id) REFERENCES COMPETITIONS(competition_id))"
+            "CREATE TABLE PLAYERVALUATIONS (player_valuation_id INTEGER PRIMARY KEY AUTOINCREMENT, datetime TEXT NOT NULL, dateweek TEXT NOT NULL, player_id INTEGER NOT NULL, current_club_id INTEGER NOT NULL, market_value INTEGER NOT NULL, player_club_domestic_competition_id TEXT NOT NULL, FOREIGN KEY(player_id) REFERENCES PLAYERS(player_id) ON UPDATE CASCADE, FOREIGN KEY(current_club_id) REFERENCES CLUBS(club_id) ON UPDATE CASCADE, FOREIGN KEY(player_club_domestic_competition_id) REFERENCES COMPETITIONS(competition_id) ON UPDATE CASCADE)"
         )
 
         con.execute(
@@ -115,7 +123,7 @@ def create_app():
 
     # db.add(Appearance("1001", 2, 101, 12, "24/02/04", "player-pretty-name", "8", 17, 0, 3, 5, 90))
 
-    # db.add(PlayerValuation("24.02.04", "1.2.3", 101, 3, 100, "NA2"))
+    # db.add(PlayerValuation("24.02.04", "1.2.3", 101, 3, 100, "2"))
     
     # db.add(PlayerValuation("24.02.04", "1.2.3", 2, 3, 100, "NA2"))
     # db.add(Competition("CompetitionIDA", "World cup", "WC", "WC GROUP A", 18, "SPAIN", 120.53, -54.32, "POOR", "WORLD CUP", "CONF", "abv.com"))

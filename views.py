@@ -2,6 +2,7 @@ from flask import current_app, render_template, request, session
 from tables.club import Club
 from tables.competition import Competition
 from tables.appearance import Appearance
+from tables.player import Player
 def navigation_page():
     # return render_template("navigation.html", admin = admin)
     return render_template("navigation.html", admin = session.get("admin"))
@@ -47,7 +48,9 @@ def club_page():
 
 def competition_page():
     myDB = current_app.config["db"]
+    print("HERE")
     competitions = myDB.get_competitions()
+    print("COMPETITION: ", competitions[1])
     return render_template("competition.html", competitions = competitions, admin = session.get("admin"))
 
 def game_page():
@@ -81,6 +84,8 @@ def update_form(player_valuation_id):
     myDB = current_app.config["db"]
     player_valuations = myDB.get_player_valuations()
     current_player_valuation = myDB.get_player_valuation(player_valuation_id)
+
+    print("CURRENT PLAYER VALUATION: ", current_player_valuation)
     return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = True, current_player_valuation = current_player_valuation)
 
 def update_player_valuation(player_valuation_id):
@@ -91,12 +96,26 @@ def update_player_valuation(player_valuation_id):
 
     if(request.method == "GET"):
         myDB = current_app.config["db"]
-        new_player_valuation_id = (request.args)['player_valuation_id']
+        
+        # print("REQUEST: ", request.form['player_valuation_id'])
+
+        # date_time = (request.form)['date_time']
+        # market_value = (request.form)['market_value']
+        # date_week = (request.form)['date_week']
+        # player_id = (request.form)['player_id']
+        # current_club_id = (request.form)['current_club_id']
+        # player_club_domestic_competition_id = (request.form)['player_club_domestic_competition_id']
+        # new_player_valuation_id = (request.form)['player_valuation_id']
+
         date_time = (request.args)['date_time']
         market_value = (request.args)['market_value']
         date_week = (request.args)['date_week']
-        
-        myDB.update_player_valuation(new_player_valuation_id, player_valuation_id, date_time, market_value, date_week)
+        player_id = (request.args)['player_id']
+        current_club_id = (request.args)['current_club_id']
+        player_club_domestic_competition_id = (request.args)['player_club_domestic_competition_id']
+        new_player_valuation_id = (request.args)['player_valuation_id']
+
+        myDB.update_player_valuation(new_player_valuation_id, player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id)
 
         player_valuations = myDB.get_player_valuations()
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
@@ -117,7 +136,7 @@ def update_form_club(club_id):
 def update_club(club_id):
     if (club_id == "Close"):
         myDB = current_app.config["db"]
-        return render_template("club.html", clubs = myDB.get_clubs, admin = session.get("admin"), update_form_club = False, current_club = None)
+        return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
     
     if (request.method == "GET"):
         myDB = current_app.config["db"]
@@ -151,6 +170,7 @@ def update_competition(competition_id):
                          (request.args)['country_latitude'], (request.args)['country_longitude'], (request.args)['domestic_league_code'], 
                          (request.args)['name'], (request.args)['confederation']))
         return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
+
 def update_form_appearance(appearance_id):
     myDB = current_app.config["db"]
     appearances = myDB.get_appearances()
@@ -178,3 +198,32 @@ def update_appearance(appearance_id):
 
         appearances = myDB.get_appearances()
         return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form = False, current_appearance = None)
+
+
+# Players 
+def delete_player(player_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_player(player_id))
+    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_club = False, current_player = None)
+    
+def update_form_player(player_id):
+    myDB =  current_app.config["db"]
+    return render_template("player.html", players = myDB.get_clubs(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id))
+
+def update_player(player_id):
+    if (player_id == "Close"):
+        myDB = current_app.config["db"]
+        return render_template("player.html", players = myDB.get_players, admin = session.get("admin"), update_form_player = False, current_player = None)
+    
+    if (request.method == "GET"):
+        myDB = current_app.config["db"]
+        myDB.update(Player((request.args)['player_id'], (request.args)['club_id'], (request.args)['club_pretty_name'], 
+                         (request.args)['current_club_id'], (request.args)['country_of_citizenship'], (request.args)['date_of_birth'], 
+                         (request.args)['position'], (request.args)['foot'], (request.args)['height_in_cm'], 
+                         (request.args)['national_team_players'], (request.args)['stadium_name'], (request.args)['stadium_seats'], 
+                         (request.args)['market_value_in_gbp'], (request.args)['highest_market_value_in_gbp']))
+        return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
+
+
+        # player_id,pretty_name,club_id,club_pretty_name,current_club_id,country_of_citizenship, date_of_birth = None,
+        # position = None,foot = None,height_in_cm = None,market_value_in_gbp = None,highest_market_value_in_gbp = None

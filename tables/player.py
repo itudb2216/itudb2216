@@ -27,6 +27,6 @@ class Player:
         return query, v
     
     def delete(self):
-        query = "DELETE FROM PLAYERS WHERE (players_id = ?)"
+        query = "DELETE FROM PLAYERS WHERE (player_id = ?)"
         return query, (self.player_id,)
     

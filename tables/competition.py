@@ -1,5 +1,5 @@
 class Competition:
-	def __init__(self, competition_id, pretty_name, type_, sub_type, country_id = -1, country_name = None, country_latitude = None, country_longitude = None, domestic_league_code = None, name = None, confederation = None):
+	def __init__(self, competition_id, pretty_name, type_, sub_type, url, country_id = -1, country_name = None, country_latitude = None, country_longitude = None, domestic_league_code = None, name = None, confederation = None):
 		self.competition_id = competition_id
 		self.pretty_name = pretty_name
 		self.type_ = type_
@@ -11,6 +11,7 @@ class Competition:
 		self.domestic_league_code = domestic_league_code
 		self.name = name
 		self.confederation = confederation
+		self.url = url
 
 	def add(self):
 		query = "INSERT INTO COMPETITIONS (COMPETITION_ID, PRETTY_NAME, TYPE_, SUB_TYPE, COUNTRY_ID, COUNTRY_NAME, COUNTRY_LATITUDE, COUNTRY_LONGITUDE, DOMESTIC_LEAGUE_CODE, NAME, CONFEDERATION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"

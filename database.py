@@ -32,6 +32,7 @@ class Database:
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
             query = string
+            cursor.execute("PRAGMA foreign_keys=ON;")
             cursor.execute(query, tupel)
             connection.commit()
 
@@ -73,7 +74,7 @@ class Database:
     def get_player(self, player_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYERS WHERE (players_id = ?)"
+            query = "SELECT * FROM PLAYERS WHERE (player_id = ?)"
             cursor.execute(query, (player_id,))
             attributes = list(cursor.fetchone())
         player_ = Player(*attributes)
@@ -171,8 +172,8 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT * FROM COMPETITIONS ORDER BY COMPETITION_ID"
             cursor.execute(query)
-            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
-                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
+            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
+                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, url, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
         return competitions
 
     def get_admins(self):
@@ -192,12 +193,17 @@ class Database:
             cursor.execute(query, (player_valuation_id,))
             connection.commit()
 
-    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week):
+    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id):
+        # player_id, current_club_id, player_club_domestic_competition_id
          with dbapi2.connect(self.dbfile) as connection:
             try:
                 cursor = connection.cursor()
-                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?  WHERE (PLAYER_VALUATION_ID = ?)"
-                cursor.execute(query, (new_player_valuation_id,date_time, market_value, date_week, player_valuation_id))
+                cursor.execute("PRAGMA foreign_keys=ON;")
+                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?, PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ? WHERE (PLAYER_VALUATION_ID = ?)"
+                # PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ?
+                print("FOREIGN KEYS: ", player_id, current_club_id, player_club_domestic_competition_id, )
+                cursor.execute(query, (new_player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id, player_valuation_id))
+                # player_id, current_club_id, player_club_domestic_competition_id
                 connection.commit()
             except:
                 connection.rollback()

@@ -1,6 +1,21 @@
 {% extends "navigation.html" %} {% block title %}PLAYERS{% endblock%} {% block
-content %}
+content %} {% if not update_form_player %}
 <table class="PLAYERS">
+  <tr>
+    <th>Player ID</th>
+    <th>Pretty Name</th>
+    <th>Club Pretty Name</th>
+    <th>Country of Citizenship</th>
+    <th>Date of Birth</th>
+    <th>Position</th>
+    <th>Foot</th>
+    <th>Height (in cm)</th>
+    <th>Market Value (in gbp)</th>
+    <th>Highest Market Value (in gbp)</th>
+    {% if admin%}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
   {% for player in players %}
   <tr>
     <td>{{player.player_id}}</td>
@@ -13,7 +28,187 @@ content %}
     <td>{{player.height_in_cm}}</td>
     <td>{{player.market_value_in_gbp}}</td>
     <td>{{player.highest_market_value_in_gbp}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a href="{{ url_for('delete_player', player_id = player.player_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_player',  player_id = player.player_id , cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
-{%endblock%}
+
+{% endif %} {% if update_form_player %}
+<form
+  action="{{ url_for('update_player', player_id = current_player.player_id) }}"
+  class="update_form"
+  method="GET"
+>
+  <div>
+    <label for="player_id"><p>Player ID</p></label>
+    <input
+      type="number"
+      name="player_id"
+      required
+      placeholder="Enter the Player ID"
+      value="{{current_player.player_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="pretty_name"><p>Pretty Name</p></label>
+    <input
+      type="text"
+      name="pretty_name"
+      placeholder="Enter the Pretty Name"
+      value="{{current_player.pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="club_pretty_name"><p>Club Pretty Name</p></label>
+    <input
+      type="text"
+      name="club_pretty_name"
+      placeholder="Enter the Club Pretty Name"
+      value="{{current_player.club_pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="country_of_citizenship"><p>Country of Citizenship</p></label>
+    <input
+      type="text"
+      name="country_of_citizenship"
+      placeholder="Enter the Country of Citizenship"
+      value="{{current_player.country_of_citizenship}}"
+    />
+  </div>
+
+  <div>
+    <label for="date_of_birth"><p>Date of Birth</p></label>
+    <input
+      type="number"
+      name="date_of_birth"
+      placeholder="Enter the Date of Birth"
+      value="{{current_player.date_of_birth}}"
+    />
+  </div>
+
+  <div>
+    <label for="position"><p>Position</p></label>
+    <input
+      type="number"
+      name="position"
+      placeholder="Enter the Position"
+      value="{{current_player.position}}"
+    />
+  </div>
+
+  <div>
+    <label for="foot"><p>Foot</p></label>
+    <input
+      type="number"
+      name="foot"
+      placeholder="Enter the Foot"
+      value="{{current_player.foot}}"
+    />
+  </div>
+
+  <div>
+    <label for="height_in_cm"><p>Height (in cm)</p></label>
+    <input
+      type="number"
+      name="height_in_cm"
+      placeholder="Enter the Height (in cm)"
+      value="{{current_player.height_in_cm}}"
+    />
+  </div>
+
+  <div>
+    <label for="market_value_in_gbp"><p>Market Value (in gbp)</p></label>
+    <input
+      type="number"
+      name="market_value_in_gbp"
+      placeholder="Enter the Market Value (in gbp)"
+      value="{{current_player.market_value_in_gbp}}"
+    />
+  </div>
+
+  <div>
+    <label for="highest_market_value_in_gbp"
+      ><p>Highest Market Value (in gbp)</p></label
+    >
+    <input
+      type="number"
+      name="highest_market_value_in_gbp"
+      placeholder="Enter the Highest Market Value (in gbp)"
+      value="{{current_player.highest_market_value_in_gbp}}"
+    />
+  </div>
+
+  <div>
+    <label for="club_id"><p>Club ID</p></label>
+    <input
+      type="number"
+      name="club_id"
+      placeholder="Enter the Club ID"
+      value="{{current_player.club_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="highest_market_value_in_gbp"
+      ><p>Highest Market Value (in gbp)</p></label
+    >
+    <input
+      type="number"
+      name="highest_market_value_in_gbp"
+      placeholder="Enter the Highest Market Value (in gbp)"
+      value="{{current_player.highest_market_value_in_gbp}}"
+    />
+  </div>
+
+  <div>
+    <label for="highest_market_value_in_gbp"
+      ><p>Highest Market Value (in gbp)</p></label
+    >
+    <input
+      type="number"
+      name="highest_market_value_in_gbp"
+      placeholder="Enter the Highest Market Value (in gbp)"
+      value="{{current_player.highest_market_value_in_gbp}}"
+    />
+  </div>
+
+  <div>
+    <label for="highest_market_value_in_gbp"
+      ><p>Highest Market Value (in gbp)</p></label
+    >
+    <input
+      type="number"
+      name="highest_market_value_in_gbp"
+      placeholder="Enter the Highest Market Value (in gbp)"
+      value="{{current_player.highest_market_value_in_gbp}}"
+    />
+  </div>
+
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+<button class="button_cancel">
+  <a href="{{ url_for('update_player', club_id = 'Close') }}">
+    <p>CANCEL</p>
+  </a>
+</button>
+{% endif %} {%endblock%}
