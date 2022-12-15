@@ -25,13 +25,13 @@ class Game:
         return query, vars
     
     
-    def update(self):
-        query = "UPDATE GAMES SET COMPETITION_ID = ?, COMPETITION_TYPE = ?, SEASON = ?, ROUND = ?, DATE = ?,\
+    def update(self, old_game_id):
+        query = "UPDATE GAMES SET GAME_ID = ?, COMPETITION_ID = ?, COMPETITION_TYPE = ?, SEASON = ?, ROUND = ?, DATE = ?,\
             HOME_CLUB_ID = ?, AWAY_CLUB_ID = ?, HOME_CLUB_GOALS = ?, AWAY_CLUB_GOALS = ?, CLUB_HOME_PRETTY_NAME = ?,\
             CLUB_AWAY_PRETTY_NAME = ?, STADIUM = ? WHERE (GAME_ID = ?)"
-        vars = (self.competition_id, self.competition_type, self.season, self.round, self.date, self.home_club_id,
+        vars = (self.game_id, self.competition_id, self.competition_type, self.season, self.round, self.date, self.home_club_id,
             self.away_club_id, self.home_club_goals, self.away_club_goals, self.club_home_pretty_name,
-            self.club_away_pretty_name, self.stadium, self.game_id)
+            self.club_away_pretty_name, self.stadium, old_game_id)
         return query, vars
     
 

@@ -36,3 +36,6 @@ Some tiny Problems in creating tables and .py file of some tables have been fixe
 Form for update button in admin level table element, has been added for player_valuation table, and tested. It works.
 Styling has been updated. Some additions and modifications.
 Foreign key configuration special to sqlite has been added (cursor.execute("PRAGMA foreign_keys=ON;"))
+
+15.12.2022
+playervaluation.html, player.py, and player.html have been modified and some changes have been added to views.py and server.py 

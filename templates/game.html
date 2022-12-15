@@ -1,19 +1,204 @@
-{% extends "navigation.html" %} {% block title %} Games {% endblock %} {% block
-content %}
+{% extends "navigation.html" %} {% block title %} Games {% endblock %} 
+{% block content %} {% if not update_form_game %}
 <table class="games">
+  <tr>
+    <th>ID</th>
+    <th>Competition ID</th>
+    <th>Competition Type</th>
+    <th>Season</th>
+    <th>Round</th>
+    <th>Date</th>
+    <th>Home Club ID</th>
+    <th>Away Club ID</th>
+    <th>Home Club Goals</th>
+    <th>Away Club Goals</th>
+    <th>Home Club Pretty Name </th>
+    <th>Away Club Pretty Name</th>
+    <th>Stadium</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
   {% for game in games %}
   <tr>
+    <td>{{game.game_id}}</td>
     <td>{{game.competition_id}}</td>
     <td>{{game.competition_type}}</td>
     <td>{{game.season}}</td>
     <td>{{game.round}}</td>
     <td>{{game.date}}</td>
+    <td>{{game.home_club_id}}</td>
+    <td>{{game.away_club_id}}</td>
     <td>{{game.home_club_goals}}</td>
     <td>{{game.away_club_goals}}</td>
     <td>{{game.club_home_pretty_name}}</td>
     <td>{{game.club_away_pretty_name}}</td>
     <td>{{game.stadium}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_game', game_id = game.game_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_game',  game_id = game.game_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
-{% endblock %}
+{% endif %} {% if update_form_game %}
+<form
+  action="{{ url_for('update_game', game_id = current_game.game_id) }}"
+  class="update_form"
+  method="GET"
+>
+  <div>
+    <label for="game_id"><p>Game ID</p></label>
+    <input
+      type="number"
+      name="game_id"
+      required
+      placeholder="Enter the Game ID"
+      value="{{current_game.game_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="competition_id"><p>Competition ID</p></label>
+    <input
+      type="text"
+      name="competition_id"
+      placeholder="Enter the Competition ID"
+      value="{{current_game.competition_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="competition_type"><p>Competition Type</p></label>
+    <input
+      type="text"
+      name="competition_type"
+      placeholder="Enter the Competition Type"
+      value="{{current_game.competition_type}}"
+    />
+  </div>
+
+  <div>
+    <label for="season"><p>Season</p></label>
+    <input
+      type="number"
+      name="season"
+      placeholder="Enter the Season"
+      value="{{current_game.season}}"
+    />
+  </div>
+
+  <div>
+    <label for="round"><p>Round</p></label>
+    <input
+      type="text"
+      name="round"
+      placeholder="Enter the Round"
+      value="{{current_game.round}}"
+    />
+  </div>
+
+  <div>
+    <label for="date"><p>Date</p></label>
+    <input
+      type="date"
+      name="date"
+      placeholder="Enter the Date"
+      value="{{current_game.date}}"
+    />
+  </div>
+
+  <div>
+    <label for="home_club_id"><p>Home Club ID</p></label>
+    <input
+      type="number"
+      name="home_club_id"
+      placeholder="Enter the Home Club ID"
+      value="{{current_game.home_club_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="away_club_id"><p>Away Club ID</p></label>
+    <input
+      type="number"
+      name="away_club_id"
+      placeholder="Enter the Away Club ID"
+      value="{{current_game.away_club_id}}"
+    />
+  </div>
+
+  <div>
+    <label for="home_club_goals"><p>Home Club Goals</p></label>
+    <input
+      type="number"
+      name="home_club_goals"
+      placeholder="Enter the Home Club Goals"
+      value="{{current_game.home_club_goals}}"
+    />
+  </div>
+
+  <div>
+    <label for="away_club_goals"><p>Away Club Goals</p></label>
+    <input
+      type="number"
+      name="away_club_goals"
+      placeholder="Enter the Away Club Goals"
+      value="{{current_game.away_club_goals}}"
+    />
+  </div>
+
+  <div>
+    <label for="club_home_pretty_name"><p>Home Club Pretty Name</p></label>
+    <input
+      type="text"
+      name="club_home_pretty_name"
+      placeholder="Enter the Home Club Pretty Name"
+      value="{{current_game.club_home_pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="club_away_pretty_name"><p>Away Club Pretty Name</p></label>
+    <input
+      type="text"
+      name="club_away_pretty_name"
+      placeholder="Enter the Away Club Pretty Name"
+      value="{{current_game.club_away_pretty_name}}"
+    />
+  </div>
+
+  <div>
+    <label for="stadium"><p>Stadium</p></label>
+    <input
+      type="text"
+      name="stadium"
+      placeholder="Enter the Stadium"
+      value="{{current_game.stadium}}"
+    />
+  </div>
+
+  <button type="submit">
+    <p>UPDATE</p>
+  </button>
+</form>
+<button class="button_cancel">
+  <a
+    href="{{ url_for('update_game', game_id = 'Close') }}"
+  >
+    <p>CANCEL</p>
+  </a>
+</button>
+{% endif %} {% endblock %}

@@ -19,9 +19,9 @@ class Appearance:
         tupel = (self.appearance_id, self.game_id, self.player_id, self.player_club_id, self.date, self.player_pretty_name, self.competition_id, self.yellow_cards, self.red_cards, self.goals, self.assists, self.minutes_played)
         return query, tupel
 
-    def update(self):
-        query = "UPDATE APPEARANCES SET game_id = ?, player_id = ?, player_club_id = ?, date = ?, player_pretty_name = ?, competition_id = ?, yellow_cards = ?, red_cards = ?, goals = ?, assists = ?, minutes_played = ? WHERE (apperance_id = ?)"
-        tupel = (query, (self.game_id, self.player_id, self.player_club_id, self.date, self.player_pretty_name, self.competition_id, self.yellow_cards, self.red_cards, self.goals, self.assists, self.appearance_id))
+    def update(self, old_appearance_id):
+        query = "UPDATE APPEARANCES SET appearance_id = ?, game_id = ?, player_id = ?, player_club_id = ?, date = ?, player_pretty_name = ?, competition_id = ?, yellow_cards = ?, red_cards = ?, goals = ?, assists = ?, minutes_played = ? WHERE (apperance_id = ?)"
+        tupel = (self.appearance_id, self.game_id, self.player_id, self.player_club_id, self.date, self.player_pretty_name, self.competition_id, self.yellow_cards, self.red_cards, self.goals, self.assists, old_appearance_id)
         return query, tupel
 
     def delete(self):

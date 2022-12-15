@@ -47,6 +47,7 @@ class Database:
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
             query = string 
+            cursor.execute("PRAGMA foreign_keys=ON;")
             cursor.execute(query, object_id)
             connection.commit()
 
@@ -138,8 +139,8 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT * FROM GAMES ORDER BY GAME_ID"
             cursor.execute(query)
-            for game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, aggregate, home_club_position, away_club_position, club_home_pretty_name, club_away_pretty_name, home_club_manager_name, away_club_manager_name, stadium, attendance, referee, url in cursor:
-                games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, aggregate, home_club_position, away_club_position, club_home_pretty_name, club_away_pretty_name, home_club_manager_name, away_club_manager_name, stadium, attendance, referee, url))
+            for game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium in cursor:
+                games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium))
         return games
     
     def get_appearances(self):
@@ -178,8 +179,8 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT * FROM COMPETITIONS ORDER BY COMPETITION_ID"
             cursor.execute(query)
-            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation, url in cursor:
-                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, url, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
+            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
+                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
         return competitions
 
     def get_admins(self):

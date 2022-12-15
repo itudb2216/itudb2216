@@ -9,3 +9,6 @@ Added "CREATE TABLE CLUBS" and "CREATE TABLE COMPETITIONS" to server.py and chan
 
 14.12.2022
 Added club.html and competition.html, added according functions to view.py
+
+15.12.2022
+Modified club.py, club.html, competition.py, competition.html, game.py, game.html, and according functions on other files 

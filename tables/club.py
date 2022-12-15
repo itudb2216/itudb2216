@@ -20,9 +20,9 @@ class Club:
 		tupel = (self.club_id, self.name, self.pretty_name, self.domestic_competition_id, self.total_market_value, self.squad_size, self.average_age, self.foreigners_number, self.foreigners_percentage, self.national_team_players, self.stadium_name, self.stadium_seats, self.net_transfer_record, self.coach_name)
 		return query, tupel
 	
-	def update(self):
+	def update(self, old_club_id):
 		query = "UPDATE CLUBS SET CLUB_ID = ?, NAME = ?, PRETTY_NAME = ?, DOMESTIC_COMPETITION_ID = ?, TOTAL_MARKET_VALUE = ?, SQUAD_SIZE = ?, AVERAGE_AGE = ?, FOREIGNERS_NUMBER = ?, FOREIGNERS_PERCENTAGE = ?, NATIONAL_TEAM_PLAYERS = ?, STADIUM_NAME = ?, STADIUM_SEATS = ?, NET_TRANSFER_RECORD = ?, COACH_NAME = ? WHERE (CLUB_ID = ?)"
-		tupel = (self.club_id, self.name, self.pretty_name, self.domestic_competition_id, self.total_market_value, self.squad_size, self.average_age, self.foreigners_number, self.foreigners_percentage, self.national_team_players, self.stadium_name, self.stadium_seats, self.net_transfer_record, self.coach_name, self.club_id)
+		tupel = (self.club_id, self.name, self.pretty_name, self.domestic_competition_id, self.total_market_value, self.squad_size, self.average_age, self.foreigners_number, self.foreigners_percentage, self.national_team_players, self.stadium_name, self.stadium_seats, self.net_transfer_record, self.coach_name, old_club_id)
 		return query, tupel
 	
 	def delete(self):

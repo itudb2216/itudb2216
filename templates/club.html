@@ -105,7 +105,8 @@
   <div>
     <label for="total_market_value"><p>Total Market Value</p></label>
     <input
-      type="number"
+      type="number" 
+      step="0.01"
       name="total_market_value"
       placeholder="Enter the Total Market Value"
       value="{{current_club.total_market_value}}"
@@ -126,6 +127,7 @@
     <label for="average_age"><p>Average Age</p></label>
     <input
       type="number"
+      step="0.1"
       name="average_age"
       placeholder="Enter the Average Age"
       value="{{current_club.average_age}}"
@@ -146,6 +148,7 @@
     <label for="foreigners_percentage"><p>Percentage of Foreign Players</p></label>
     <input
       type="number"
+      step="0.1"
       name="foreigners_percentage"
       placeholder="Enter the Percentage of Foreign Players"
       value="{{current_club.foreigners_percentage}}"

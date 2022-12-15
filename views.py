@@ -3,6 +3,7 @@ from tables.club import Club
 from tables.competition import Competition
 from tables.appearance import Appearance
 from tables.player import Player
+from tables.game import Game
 def navigation_page():
     # return render_template("navigation.html", admin = admin)
     return render_template("navigation.html", admin = session.get("admin"))
@@ -144,7 +145,7 @@ def update_club(club_id):
                          (request.args)['domestic_competition_id'], (request.args)['total_market_value'], (request.args)['squad_size'], 
                          (request.args)['average_age'], (request.args)['foreigners_number'], (request.args)['foreigners_percentage'], 
                          (request.args)['national_team_players'], (request.args)['stadium_name'], (request.args)['stadium_seats'], 
-                         (request.args)['net_transfer_record'], (request.args)['coach_name']))
+                         (request.args)['net_transfer_record'], (request.args)['coach_name']), club_id)
         return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
     
 #COMPETITIONS
@@ -168,7 +169,7 @@ def update_competition(competition_id):
         myDB.update(Competition((request.args)['competition_id'], (request.args)['pretty_name'], (request.args)['type_'],
                          (request.args)['sub_type'], (request.args)['country_id'], (request.args)['country_name'], 
                          (request.args)['country_latitude'], (request.args)['country_longitude'], (request.args)['domestic_league_code'], 
-                         (request.args)['name'], (request.args)['confederation']))
+                         (request.args)['name'], (request.args)['confederation']), competition_id)
         return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
 
 #Appearances
@@ -224,3 +225,29 @@ def update_player(player_id):
                          (request.args)['position'], (request.args)['foot'], (request.args)['height_in_cm'], 
                          (request.args)['market_value_in_gbp'], (request.args)['highest_market_value_in_gbp']), player_id)
         return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
+
+        
+#Games
+
+def delete_game(game_id):
+    myDB = current_app.config["db"]
+    myDB.delete(myDB.get_game(game_id))
+    return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)
+    
+def update_form_game(game_id):
+    myDB =  current_app.config["db"]
+    return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = True, current_game = myDB.get_game(game_id))
+
+def update_game(game_id):
+    if (game_id == "Close"):
+        myDB = current_app.config["db"]
+        return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)
+    
+    if (request.method == "GET"):
+        myDB = current_app.config["db"]
+        myDB.update(Game((request.args)['game_id'], (request.args)['competition_id'], (request.args)['competition_type'], 
+                         (request.args)['season'], (request.args)['round'], (request.args)['date'], 
+                         (request.args)['home_club_id'], (request.args)['away_club_id'], (request.args)['home_club_goals'], 
+                         (request.args)['away_club_goals'], (request.args)['club_home_pretty_name'], (request.args)['club_away_pretty_name'], 
+                         (request.args)['stadium']), game_id)
+        return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)

@@ -17,7 +17,7 @@ print(competitions.keys())
 #competitions.drop(columns=[],inplace=True)
 print(competitions.keys())
 for A in competitions.head(100).values:
-    competition = Competition(A[0],A[1],A[2],A[3],A[4],A[5],A[6],A[7],A[8],A[9],A[10],A[11])
+    competition = Competition(A[0],A[1],A[2],A[3],A[4],A[5],A[6],A[7],A[8],A[9],A[10])
     myDB.add(competition)
 
 
