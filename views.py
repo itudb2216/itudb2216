@@ -196,7 +196,7 @@ def update_appearance(appearance_id):
         myDB.update(Appearance((request.args)['appearance_id'], (request.args)['game_id'], (request.args)['player_id'],
                          (request.args)['player_club_id'], (request.args)['date'], (request.args)['player_pretty_name'], 
                          (request.args)['competition_id'], (request.args)['yellow_cards'], (request.args)['red_cards'], 
-                         (request.args)['goals'], (request.args)['assists'], (request.args)['minutes_played']))
+                         (request.args)['goals'], (request.args)['assists'], (request.args)['minutes_played']), appearance_id)
 
         appearances = myDB.get_appearances()
         return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
