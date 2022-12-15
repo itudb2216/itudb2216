@@ -1,5 +1,5 @@
-{% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
-block content %} {% if not update_form %}
+{% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} 
+{% block content %} {% if not update_form_appearance %}
 <table class="appearance">
   <tr>
     <th>Appearance ID</th>
@@ -34,6 +34,12 @@ block content %} {% if not update_form %}
     <td>{{appearance.minutes_played}}</td>
     {% if admin %}
     <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_appearance', appearance_id = appearance.appearance_id) }}"
+          >Delete</a
+        >
+      </button>
       <button class="button_update">
         <a
           href="{{ url_for('update_form_appearance',  appearance_id = appearance.appearance_id, cancel = False) }}"
@@ -46,7 +52,7 @@ block content %} {% if not update_form %}
   {% endfor %}
 </table>
 
-{% endif %} {% if update_form %}
+{% endif %} {% if update_form_appearance %}
 <form
   action="{{ url_for('update_appearance', appearance_id = current_appearance.appearance_id) }}"
   class="update_form"
@@ -55,12 +61,13 @@ block content %} {% if not update_form %}
   <div>
     <label for="appearance_id"><p>Appearance ID</p></label>
     <input
-      type="number"
+      type="text"
       name="appearance_id"
       placeholder="Enter the Appearance ID"
       value="{{current_appearance.appearance_id}}"
-    />
-  </div>
+  />
+  </div>  
+
   <div>
     <label for="game_id"><p>Game ID</p></label>
     <input
@@ -114,7 +121,7 @@ block content %} {% if not update_form %}
   <div>
     <label for="competition_id"><p>Competition ID</p></label>
     <input
-      type="number"
+      type="text"
       name="competition_id"
       placeholder="Enter the Competition ID"
       value="{{current_appearance.competition_id}}"
@@ -170,13 +177,17 @@ block content %} {% if not update_form %}
       value="{{current_appearance.minutes_played}}"
     />
   </div>
+
   <button type="submit">
     <p>UPDATE</p>
   </button>
 </form>
 <button class="button_cancel">
-  <a href="{{ url_for('update_appearance', appearance_id = 'Close') }}">
+  <a
+    href="{{ url_for('update_appearance', appearance_id = 'Close') }}"
+  >
     <p>CANCEL</p>
   </a>
 </button>
-{% endif %} {%endblock%}
+{% endif %} 
+{%endblock%}
