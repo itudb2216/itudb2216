@@ -9,3 +9,7 @@ Added html files for each table
 Added to create APPEARANCES table in server.py
 Updated appearance.html to show attributes of appearance
 Created appearance_page to link html file
+
+14.12.2022
+Added update and delete functions for appearance in views.py
+Added columns for appearance table
