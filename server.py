@@ -38,7 +38,7 @@ def create_app():
 
     app.add_url_rule("/delete_player_valuation/<player_valuation_id>", view_func=views.delete_player_valuation)
     app.add_url_rule("/update_form_player_valuation/<player_valuation_id>", view_func=views.update_form)
-    app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation, methods=["GET", "POST", "PUT"])
+    app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation)
 
     app.add_url_rule("/delete_club/<club_id>", view_func = views.delete_club)
     app.add_url_rule("/update_form_club/<club_id>", view_func=views.update_form_club)
@@ -63,7 +63,7 @@ def create_app():
 
 
     if not os.path.exists('./transfermarkt.db'):
-        con = dbapi2.connect("transfermarkt.db", timeout=2000000) # timeout is added, because we are handling with much data, and because of that we get database is blocked, that is why we increaed timeout up to 2000 seconds
+        con = dbapi2.connect("transfermarkt.db")
         con.execute(
             "CREATE TABLE COMPETITIONS (COMPETITION_ID TEXT PRIMARY KEY, PRETTY_NAME TEXT NOT NULL, TYPE_ TEXT NOT NULL, SUB_TYPE TEXT NOT NULL, COUNTRY_ID INTEGER DEFAULT -1, COUNTRY_NAME TEXT, COUNTRY_LATITUDE REAL, COUNTRY_LONGITUDE REAL, DOMESTIC_LEAGUE_CODE TEXT, NAME TEXT, CONFEDERATION TEXT)"
         )
@@ -131,13 +131,21 @@ def create_app():
 
     # db.add(Appearance("1001", 2, 101, 12, "24/02/04", "player-pretty-name", "8", 17, 0, 3, 5, 90))
 
-    # db.add(PlayerValuation("24.02.04", "1.2.3", 101, 3, 100, "2"))
+    # db.add(PlayerValuation("24.02.04", "1.2.3", 101, 3, 100, "NA2"))
     
     # db.add(PlayerValuation("24.02.04", "1.2.3", 2, 3, 100, "NA2"))
     # db.add(Competition("CompetitionIDA", "World cup", "WC", "WC GROUP A", 18, "SPAIN", 120.53, -54.32, "POOR", "WORLD CUP", "CONF", "abv.com"))
     # db.add(Club(12, "FCB", "Barcelona", "CompetitionId", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI", "asdf.com"))
     
     # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+    
+    # db.add(Admin("150190085", "Leminur Çelik", "celikl19@itu.edu.tr", "nur123"))
+
+    # db.add(Admin("150190089", "Bilal İhsan Tuncer", "tuncerb19@itu.edu.tr", "bilal123"))
+
+    # db.add(Admin("150200915", "Adil Mahmudlu", "mahmudlu20@itu.edu.tr", "adil123"))
+
+    # db.add(Admin("150210729", "Buse Orak", "orakb21@itu.edu.tr", "buse123"))
     
     app.config["db"] = db
 
