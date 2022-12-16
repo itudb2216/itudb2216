@@ -32,6 +32,10 @@ def create_app():
     app.add_url_rule("/admin", view_func=views.admin_check)
     app.add_url_rule("/log-out", view_func=views.log_out)
 
+    app.add_url_rule("/search-bar", view_func=views.search_bar)
+    app.add_url_rule("/search-element", view_func=views.search_element)
+
+
     app.add_url_rule("/delete_player_valuation/<player_valuation_id>", view_func=views.delete_player_valuation)
     app.add_url_rule("/update_form_player_valuation/<player_valuation_id>", view_func=views.update_form)
     app.add_url_rule("/updated/<player_valuation_id>", view_func=views.update_player_valuation, methods=["GET", "POST", "PUT"])

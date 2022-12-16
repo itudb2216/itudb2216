@@ -62,7 +62,7 @@
     text-align: center;
   }
 
-  form > *{
+  .update_form > *, #login-form > *{
     text-align: center;
     outline: none;
     border: 1px solid #fd7d4c;
@@ -209,3 +209,47 @@
     background-color: green;
   }
 
+  .search_bar_form{
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    align-items: center;
+  }
+
+  .search_bar_form form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .check_boxes{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search_bar_form form input{
+    margin-left: 20px;
+  }
+
+  #primary_key{
+    margin: 0 50px;
+    width: 250px;
+    height: 25px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid green;
+  }
+
+  .search_bar_form button{
+    background-color: orange;
+    color: white;
+    width: 150px;
+    border-radius: 10px;
+    height: 30px;
+  }
+
+    .search_message{
+      text-align: center;
+      font-size: 20px;
+      color: orange;
+    }

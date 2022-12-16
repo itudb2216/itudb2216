@@ -11,6 +11,9 @@
     <div class="navigation">
       <ul class="navigation__sections">
         <li id="navigation__table">
+          <a href="{{ url_for('home_page') }}">Home</a>
+        </li>
+        <li id="navigation__table">
           <a href="{{ url_for('appearance_page') }}">Appearances</a>
         </li>
         <li id="navigation__table">
@@ -29,7 +32,7 @@
           <a href="{{ url_for('player_page') }}">Players</a>
         </li>
         <li id="navigation__table">
-          <a href="{{ url_for('home_page') }}">Home</a>
+          <a href="{{ url_for('search_bar') }}">Search Bar</a>
         </li>
       </ul>
       {% if admin %}

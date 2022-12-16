@@ -1,0 +1,356 @@
+{% extends "navigation.html" %} {% block title %}SEARCH BAR{% endblock%} {%
+block content %}
+
+<h4 class="search_message">Choose the Table you want to search in:</h4>
+
+<div class="search_bar_form">
+  <form action="{{ url_for('search_element') }}" method="GET">
+    <div class="check_boxes">
+      <input
+        type="radio"
+        id="search_appearances"
+        name="search_bar"
+        value="APPEARANCES"
+      />
+      <label for="search_appearances">Appearances</label>
+
+      <input type="radio" id="search_games" name="search_bar" value="GAMES" />
+      <label for="search_games">Games</label><br />
+
+      <input type="radio" id="search_clubs" name="search_bar" value="CLUBS" />
+      <label for="search_clubs">Clubs</label>
+
+      <input
+        type="radio"
+        id="search_competitions"
+        name="search_bar"
+        value="COMPETITIONS"
+      />
+      <label for="search_competitions">Competitions</label>
+
+      <input
+        type="radio"
+        id="search_player_valuations"
+        name="search_bar"
+        value="PLAYERVALUATIONS"
+      />
+      <label for="search_player_valuations">Player Valuations</label>
+
+      <input
+        type="radio"
+        id="search_players"
+        name="search_bar"
+        value="PLAYERS"
+        checked="checked"
+      />
+      <label for="search_players">Players</label>
+    </div>
+
+    <div class="search_submit">
+      <input
+        type="text"
+        name="primary_key"
+        id="primary_key"
+        placeholder="Enter the Primary KEY of the table"
+      />
+      <label for="primary_key"></label>
+
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>
+
+{% if element %} {% if table_name == 'APPEARANCES' %}
+<table class="appearance">
+  <tr>
+    <th>Appearance ID</th>
+    <th>Game ID</th>
+    <th>Player ID</th>
+    <th>Player Club ID</th>
+    <th>Date</th>
+    <th>Player Pretty Name</th>
+    <th>Competition ID</th>
+    <th>Yellow Cards</th>
+    <th>Red Cards</th>
+    <th>Goals</th>
+    <th>Assists</th>
+    <th>Minutes Played</th>
+    {% if admin%}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element.appearance_id}}</td>
+    <td>{{element.game_id}}</td>
+    <td>{{element.player_id}}</td>
+    <td>{{element.player_club_id}}</td>
+    <td>{{element.date}}</td>
+    <td>{{element.player_pretty_name}}</td>
+    <td>{{element.competition_id}}</td>
+    <td>{{element.yellow_cards}}</td>
+    <td>{{element.red_cards}}</td>
+    <td>{{element.goals}}</td>
+    <td>{{element.assists}}</td>
+    <td>{{element.minutes_played}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_appearance', appearance_id = element.appearance_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_appearance',  appearance_id = element.appearance_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+{% endif %} {% if table_name == 'GAMES' %}
+<table class="games">
+  <tr>
+    <th>ID</th>
+    <th>Competition ID</th>
+    <th>Competition Type</th>
+    <th>Season</th>
+    <th>Round</th>
+    <th>Date</th>
+    <th>Home Club ID</th>
+    <th>Away Club ID</th>
+    <th>Home Club Goals</th>
+    <th>Away Club Goals</th>
+    <th>Home Club Pretty Name</th>
+    <th>Away Club Pretty Name</th>
+    <th>Stadium</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element.game_id}}</td>
+    <td>{{element.competition_id}}</td>
+    <td>{{element.competition_type}}</td>
+    <td>{{element.season}}</td>
+    <td>{{element.round}}</td>
+    <td>{{element.date}}</td>
+    <td>{{element.home_club_id}}</td>
+    <td>{{element.away_club_id}}</td>
+    <td>{{element.home_club_goals}}</td>
+    <td>{{element.away_club_goals}}</td>
+    <td>{{element.club_home_pretty_name}}</td>
+    <td>{{element.club_away_pretty_name}}</td>
+    <td>{{element.stadium}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a href="{{ url_for('delete_game', game_id = element.game_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_game',  game_id = element.game_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+
+{% endif %} {% if table_name == 'CLUBS' %}
+<table class="club">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Pretty Name</th>
+    <th>Domestic Competition ID</th>
+    <th>Total Market Value</th>
+    <th>Squad Size</th>
+    <th>Average Age</th>
+    <th>Number of Foreign Players</th>
+    <th>Percentage of Foreign Players</th>
+    <th>Number of National Team Players</th>
+    <th>Stadium Name</th>
+    <th>Stadium Seats</th>
+    <th>Net Transfer Record</th>
+    <th>Coach Name</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element.club_id}}</td>
+    <td>{{element.name}}</td>
+    <td>{{element.pretty_name}}</td>
+    <td>{{element.domestic_competition_id}}</td>
+    <td>{{element.total_market_value}}</td>
+    <td>{{element.squad_size}}</td>
+    <td>{{element.average_age}}</td>
+    <td>{{element.foreigners_number}}</td>
+    <td>{{element.foreigners_percentage}}</td>
+    <td>{{element.national_team_players}}</td>
+    <td>{{element.stadium_name}}</td>
+    <td>{{element.stadium_seats}}</td>
+    <td>{{element.net_transfer_record}}</td>
+    <td>{{element.coach_name}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a href="{{ url_for('delete_club', club_id = element.club_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_club',  club_id = element.club_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+
+{% endif %} {% if table_name == 'COMPETITIONS' %}
+<table class="competition">
+  <tr>
+    <th>ID</th>
+    <th>Pretty Name</th>
+    <th>Type</th>
+    <th>Subtype</th>
+    <th>Country ID</th>
+    <th>Country Name</th>
+    <th>Country Latitude</th>
+    <th>Country Longitude</th>
+    <th>Domestic League Code</th>
+    <th>Name</th>
+    <th>Confederation</th>
+    {% if admin %}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element.competition_id}}</td>
+    <td>{{element.pretty_name}}</td>
+    <td>{{element.type_}}</td>
+    <td>{{element.sub_type}}</td>
+    <td>{{element.country_id}}</td>
+    <td>{{element.country_name}}</td>
+    <td>{{element.country_latitude}}</td>
+    <td>{{element.country_longitude}}</td>
+    <td>{{element.domestic_league_code}}</td>
+    <td>{{element.name}}</td>
+    <td>{{element.confederation}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_competition', competition_id = element.competition_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_competition',  competition_id = element.competition_id, cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+{% endif %} {% if table_name == 'PLAYERVALUATIONS' %}
+<table class="player_valuation">
+  <tr>
+    <th>ID</th>
+    <th>Date Time</th>
+    <th>Market Value</th>
+    <th>Date Week</th>
+    <th>Player ID</th>
+    <th>Current Club ID</th>
+    <th>Player Club Domestic Competition ID</th>
+    {% if admin%}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element[0]}}</td>
+    <td>{{element[1]}}</td>
+    <td>{{element[5]}}</td>
+    <td>{{element[2]}}</td>
+    <td>{{element[3]}}</td>
+    <td>{{element[4]}}</td>
+    <td>{{element[6]}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a
+          href="{{ url_for('delete_player_valuation', player_valuation_id = element[0]) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form',  player_valuation_id = element[0], cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+{% endif%} {% if table_name == 'PLAYERS' %}
+<table class="PLAYERS">
+  <tr>
+    <th>Player ID</th>
+    <th>Pretty Name</th>
+    <th>Club Pretty Name</th>
+    <th>Club ID</th>
+    <th>Country of Citizenship</th>
+    <th>Current Club ID</th>
+    <th>Date of Birth</th>
+    <th>Position</th>
+    <th>Foot</th>
+    <th>Height (in cm)</th>
+    <th>Market Value (in gbp)</th>
+    <th>Highest Market Value (in gbp)</th>
+    {% if admin%}
+    <th>Operations</th>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>{{element.player_id}}</td>
+    <td>{{element.pretty_name}}</td>
+    <td>{{element.club_pretty_name}}</td>
+    <td>{{element.club_id}}</td>
+    <td>{{element.country_of_citizenship}}</td>
+    <td>{{element.current_club_id}}</td>
+    <td>{{element.date_of_birth}}</td>
+    <td>{{element.position}}</td>
+    <td>{{element.foot}}</td>
+    <td>{{element.height_in_cm}}</td>
+    <td>{{element.market_value_in_gbp}}</td>
+    <td>{{element.highest_market_value_in_gbp}}</td>
+    {% if admin %}
+    <td class="operations">
+      <button class="button_delete">
+        <a href="{{ url_for('delete_player', player_id = element.player_id) }}"
+          >Delete</a
+        >
+      </button>
+      <button class="button_update">
+        <a
+          href="{{ url_for('update_form_player',  player_id = element.player_id , cancel = False) }}"
+          >Update</a
+        >
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+</table>
+{% endif %} {% endif %} {%endblock%}

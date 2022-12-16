@@ -74,6 +74,48 @@ def appearance_page():
     appearances = myDB.get_appearances()
     return render_template("appearance.html", appearances = appearances, admin = session.get("admin"))
 
+def search_bar():
+    return render_template("search.html", element = None, table_name = None, admin = session.get("admin")) # element = None
+
+def search_element():
+    if(request.method == "GET"):
+
+        table_name = (request.args)['search_bar']
+        primary_key = (request.args)['primary_key']
+        myDB = current_app.config["db"]
+
+        if(table_name == 'APPEARANCES'):
+            element = myDB.get_appearance(primary_key)
+            # primary_key_name = 'appearance_id'
+
+        elif(table_name == 'GAMES'):
+            element = myDB.get_game(primary_key)
+            # primary_key_name = 'game_id'
+
+        elif(table_name == 'CLUBS'):
+            element = myDB.get_club(primary_key)
+            # primary_key_name = 'club_id'
+
+        elif(table_name == 'COMPETITIONS'):
+            element = myDB.get_competition(primary_key)
+            # primary_key_name = 'competition_id'
+
+        elif(table_name == 'PLAYERVALUATIONS'):
+            
+            element = myDB.get_player_valuation(primary_key)
+            # primary_key_name = 'player_valuation_id'
+
+        elif(table_name == 'PLAYERS'):
+            element = myDB.get_player(primary_key)
+            print("ELEMENT: ", element)
+            # primary_key_name = 'player_id'
+
+        # print("ELEMENT: ", element)
+
+        # element = myDB.search_result(table_name, primary_key, primary_key_name)
+        return render_template("search.html", element = element, table_name = table_name, admin = session.get("admin"))
+
+
 #PLAYER VALUATIONS
 def delete_player_valuation(player_valuation_id):
     myDB = current_app.config["db"]
