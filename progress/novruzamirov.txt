@@ -44,3 +44,4 @@ playervaluation.html, player.py, and player.html have been modified and some cha
 Search Bar for searching one tuple by giving the primary key and the name of the table has been added (search.html)
 Some styling changes on navigation.css
 According changes for search bar both on server.py and views.py has been added
+Sorting according to the column of the table in both ascending and descending order has been added
