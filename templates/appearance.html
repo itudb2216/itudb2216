@@ -1,19 +1,338 @@
-{% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} 
-{% block content %} {% if not update_form_appearance %}
+{% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
+block content %} {% if not update_form_appearance %}
 <table class="appearance">
   <tr>
-    <th>Appearance ID</th>
-    <th>Game ID</th>
-    <th>Player ID</th>
-    <th>Player Club ID</th>
-    <th>Date</th>
-    <th>Player Pretty Name</th>
-    <th>Competition ID</th>
-    <th>Yellow Cards</th>
-    <th>Red Cards</th>
-    <th>Goals</th>
-    <th>Assists</th>
-    <th>Minutes Played</th>
+    <th>
+      <p>Appearance ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="appearance_id"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Game ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="game_id"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Player ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="player_id"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Player Club ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="player_club_id"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Date</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input type="text" value="date" name="sort_key" style="display: none" />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Player Pretty Name</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="player_pretty_name"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Competition ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="competition_id"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Yellow Cards</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="yellow_cards"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Red Cards</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="red_cards"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Goals</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="goals"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Assists</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="assists"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Minutes Played</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="APPEARANCES"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="minutes_played"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
     {% if admin%}
     <th>Operations</th>
     {% endif %}
@@ -65,8 +384,8 @@
       name="appearance_id"
       placeholder="Enter the Appearance ID"
       value="{{current_appearance.appearance_id}}"
-  />
-  </div>  
+    />
+  </div>
 
   <div>
     <label for="game_id"><p>Game ID</p></label>
@@ -183,11 +502,8 @@
   </button>
 </form>
 <button class="button_cancel">
-  <a
-    href="{{ url_for('update_appearance', appearance_id = 'Close') }}"
-  >
+  <a href="{{ url_for('update_appearance', appearance_id = 'Close') }}">
     <p>CANCEL</p>
   </a>
 </button>
-{% endif %} 
-{%endblock%}
+{% endif %} {%endblock%}

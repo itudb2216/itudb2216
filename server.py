@@ -32,6 +32,7 @@ def create_app():
     app.add_url_rule("/admin", view_func=views.admin_check)
     app.add_url_rule("/log-out", view_func=views.log_out)
 
+
     app.add_url_rule("/search-bar", view_func=views.search_bar)
     app.add_url_rule("/search-element", view_func=views.search_element)
 
@@ -59,9 +60,10 @@ def create_app():
     app.add_url_rule("/delete_game/<game_id>", view_func=views.delete_game)
     app.add_url_rule("/update_form_game/<game_id>", view_func=views.update_form_game)
     app.add_url_rule("/update_gama/<game_id>", view_func=views.update_game)
+
+
+    app.add_url_rule("/sorted-table", view_func=views.sorted_tab)
     
-
-
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")
         con.execute(

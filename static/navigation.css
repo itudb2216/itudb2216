@@ -143,6 +143,7 @@
   .operations{
     display: flex;
     justify-content: space-between;
+    height: 40px;
   }
 
   .input_label p{
@@ -257,4 +258,19 @@
       text-align: center;
       font-size: 20px;
       color: orange;
+    }
+
+
+
+    .button_sort{
+      background-color: green;
+      cursor: pointer;
+      color: white;
+      width: 60%;
+      border-radius: 10px;
+      margin-left: 20%;
+    }
+
+    .button_sort:hover{
+      background-color: blue;
     }

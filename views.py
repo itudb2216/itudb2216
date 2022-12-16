@@ -86,33 +86,23 @@ def search_element():
 
         if(table_name == 'APPEARANCES'):
             element = myDB.get_appearance(primary_key)
-            # primary_key_name = 'appearance_id'
 
         elif(table_name == 'GAMES'):
             element = myDB.get_game(primary_key)
-            # primary_key_name = 'game_id'
 
         elif(table_name == 'CLUBS'):
             element = myDB.get_club(primary_key)
-            # primary_key_name = 'club_id'
 
         elif(table_name == 'COMPETITIONS'):
             element = myDB.get_competition(primary_key)
-            # primary_key_name = 'competition_id'
 
         elif(table_name == 'PLAYERVALUATIONS'):
             
             element = myDB.get_player_valuation(primary_key)
-            # primary_key_name = 'player_valuation_id'
 
         elif(table_name == 'PLAYERS'):
             element = myDB.get_player(primary_key)
-            print("ELEMENT: ", element)
-            # primary_key_name = 'player_id'
 
-        # print("ELEMENT: ", element)
-
-        # element = myDB.search_result(table_name, primary_key, primary_key_name)
         return render_template("search.html", element = element, table_name = table_name, admin = session.get("admin"))
 
 
@@ -293,3 +283,51 @@ def update_game(game_id):
                          (request.args)['away_club_goals'], (request.args)['club_home_pretty_name'], (request.args)['club_away_pretty_name'], 
                          (request.args)['stadium']), game_id)
         return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)
+
+def sorted_tab():
+    
+    if (request.method == "GET"):
+        myDB = current_app.config["db"]
+        sort_table = (request.args)['sort_table']
+        sort_key = (request.args)['sort_key']
+        sort_order = (request.args)['asc_desc']
+
+        if(sort_table == "PLAYERVALUATIONS"):
+            playerValuations = myDB.sorted_get_player_valuations(sort_table, sort_key, sort_order)
+            return render_template("player_valuation.html", valuations = playerValuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
+
+        elif(sort_table == "CLUBS"):
+            clubs = myDB.sorted_get_clubs(sort_table, sort_key, sort_order)
+            return render_template("club.html", clubs = clubs, admin = session.get("admin"))
+
+        elif(sort_table == "COMPETITIONS"):
+            competitions = myDB.sorted_get_competitions(sort_table, sort_key, sort_order)
+            return render_template("competition.html", competitions = competitions, admin = session.get("admin"), update_form_competition = False, current_competition = None)
+
+        elif(sort_table == "GAMES"):
+            games = myDB.sorted_get_games(sort_table, sort_key, sort_order)
+            return render_template("game.html", games=games, admin = session.get("admin"))
+
+        elif(sort_table == "PLAYERS"):
+            players = myDB.sorted_get_players(sort_table, sort_key, sort_order)
+            return render_template("player.html", players = players, admin = session.get("admin"))
+
+        elif(sort_table == "APPEARANCES"):
+            appearances = myDB.sorted_get_appearances(sort_table, sort_key, sort_order)
+            return render_template("appearance.html", appearances = appearances, admin = session.get("admin"))
+
+        
+            
+
+
+        
+
+    # myDB = current_app.config["db"]
+    # playerValuations = myDB.sorted_get_player_valuations(sorting_key, sorting_table, sorting_order)
+    
+
+    # if(sorting_table == 'PLAYERVALUATIONS'):
+    #     print("HERE")
+    #     playerValuations = myDB.sorted_get_player_valuations(sorting_order, sorting_key)
+    # return render_template("player_valuation.html", valuations = playerValuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
+    

@@ -1,21 +1,394 @@
-{% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} 
-{% block content %} {% if not update_form_club %}
+{% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} {% block
+content %} {% if not update_form_club %}
 <table class="club">
   <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Pretty Name</th>
-    <th>Domestic Competition ID</th>
-    <th>Total Market Value</th>
-    <th>Squad Size</th>
-    <th>Average Age</th>
-    <th>Number of Foreign Players</th>
-    <th>Percentage of Foreign Players</th>
-    <th>Number of National Team Players</th>
-    <th>Stadium Name</th>
-    <th>Stadium Seats</th>
-    <th>Net Transfer Record</th>
-    <th>Coach Name</th>
+    <th>
+      <p>ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="CLUB_ID"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Name</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input type="text" value="NAME" name="sort_key" style="display: none" />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Pretty Name</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="PRETTY_NAME"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Domestic Competition ID</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="DOMESTIC_COMPETITION_ID"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Total Market Value</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="TOTAL_MARKET_VALUE"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Squad Size</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="SQUAD_SIZE"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Average Age</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="AVERAGE_AGE"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Number of Foreign Players</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="FOREIGNERS_NUMBER"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Percentage of Foreign Players</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="FOREIGNERS_PERCENTAGE"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Number of National Team Players</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="NATIONAL_TEAM_PLAYERS"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Stadium Name</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="STADIUM_NAME"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Stadium Seats</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="STADIUM_SEATS"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Net Transfer Record</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="NET_TRANSFER_RECORD"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
+    <th>
+      <p>Coach Name</p>
+      <form action="{{ url_for('sorted_tab') }}">
+        <input
+          type="radio"
+          id="asc"
+          name="asc_desc"
+          checked="checked"
+          value="ASC"
+        />
+        <label for="asc">Asc</label>
+        <input type="radio" id="asc" name="asc_desc" value="DESC" />
+        <label for="asc">Desc</label>
+        <input
+          type="text"
+          value="CLUBS"
+          name="sort_table"
+          style="display: none"
+        />
+        <input
+          type="text"
+          value="COACH_NAME"
+          name="sort_key"
+          style="display: none"
+        />
+        <button class="button_sort" type="submit">Sort</button>
+      </form>
+    </th>
     {% if admin %}
     <th>Operations</th>
     {% endif %}
@@ -39,8 +412,7 @@
     {% if admin %}
     <td class="operations">
       <button class="button_delete">
-        <a
-          href="{{ url_for('delete_club', club_id = club.club_id) }}"
+        <a href="{{ url_for('delete_club', club_id = club.club_id) }}"
           >Delete</a
         >
       </button>
@@ -105,7 +477,7 @@
   <div>
     <label for="total_market_value"><p>Total Market Value</p></label>
     <input
-      type="number" 
+      type="number"
       step="0.01"
       name="total_market_value"
       placeholder="Enter the Total Market Value"
@@ -145,7 +517,9 @@
   </div>
 
   <div>
-    <label for="foreigners_percentage"><p>Percentage of Foreign Players</p></label>
+    <label for="foreigners_percentage"
+      ><p>Percentage of Foreign Players</p></label
+    >
     <input
       type="number"
       step="0.1"
@@ -156,7 +530,9 @@
   </div>
 
   <div>
-    <label for="national_team_players"><p>Number of National Team Players</p></label>
+    <label for="national_team_players"
+      ><p>Number of National Team Players</p></label
+    >
     <input
       type="number"
       name="national_team_players"
@@ -210,9 +586,7 @@
   </button>
 </form>
 <button class="button_cancel">
-  <a
-    href="{{ url_for('update_club', club_id = 'Close') }}"
-  >
+  <a href="{{ url_for('update_club', club_id = 'Close') }}">
     <p>CANCEL</p>
   </a>
 </button>
