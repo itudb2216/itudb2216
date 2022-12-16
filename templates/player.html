@@ -91,7 +91,7 @@ content %} {% if not update_form_player %}
   <div>
     <label for="club_id"><p>Club ID</p></label>
     <input
-      type="text"
+      type="number"
       name="club_id"
       placeholder="Enter the Club ID"
       value="{{current_player.club_id}}"
@@ -111,7 +111,7 @@ content %} {% if not update_form_player %}
   <div>
     <label for="current_club_id"><p>Current Club ID</p></label>
     <input
-      type="text"
+      type="number"
       name="current_club_id"
       placeholder="Enter the Current Club ID"
       value="{{current_player.current_club_id}}"
@@ -121,7 +121,7 @@ content %} {% if not update_form_player %}
   <div>
     <label for="date_of_birth"><p>Date of Birth</p></label>
     <input
-      type="text"
+      type="date"
       name="date_of_birth"
       placeholder="Enter the Date of Birth"
       value="{{current_player.date_of_birth}}"
@@ -175,6 +175,7 @@ content %} {% if not update_form_player %}
     >
     <input
       type="number"
+      step="0.01"
       name="highest_market_value_in_gbp"
       placeholder="Enter the Highest Market Value (in gbp)"
       value="{{current_player.highest_market_value_in_gbp}}"
