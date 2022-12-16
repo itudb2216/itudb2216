@@ -81,7 +81,7 @@ class Database:
     def get_player(self, player_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYERS WHERE (players_id = ?)"
+            query = "SELECT * FROM PLAYERS WHERE (player_id = ?)"
             cursor.execute(query, (player_id,))
             attributes = list(cursor.fetchone())
         player_ = Player(*attributes)
