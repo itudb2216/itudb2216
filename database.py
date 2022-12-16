@@ -81,7 +81,7 @@ class Database:
     def get_player(self, player_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM PLAYERS WHERE (player_id = ?)"
+            query = "SELECT * FROM PLAYERS WHERE (players_id = ?)"
             cursor.execute(query, (player_id,))
             attributes = list(cursor.fetchone())
         player_ = Player(*attributes)
@@ -200,32 +200,15 @@ class Database:
             cursor.execute(query, (player_valuation_id,))
             connection.commit()
 
-    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id):
-        # player_id, current_club_id, player_club_domestic_competition_id
+    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week):
          with dbapi2.connect(self.dbfile) as connection:
             try:
                 cursor = connection.cursor()
-                cursor.execute("PRAGMA foreign_keys=ON;")
-                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?, PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ? WHERE (PLAYER_VALUATION_ID = ?)"
-                # PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ?
-                print("FOREIGN KEYS: ", player_id, current_club_id, player_club_domestic_competition_id, )
-                cursor.execute(query, (new_player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id, player_valuation_id))
-                # player_id, current_club_id, player_club_domestic_competition_id
+                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?  WHERE (PLAYER_VALUATION_ID = ?)"
+                cursor.execute(query, (new_player_valuation_id,date_time, market_value, date_week, player_valuation_id))
                 connection.commit()
             except:
                 connection.rollback()
             finally:
                 cursor.close()
 
-
-    def update_appearance(self, appearance_id, new_appearance_id, game_id, player_id, player_club_id, date):
-         with dbapi2.connect(self.dbfile) as connection:
-            try:
-                cursor = connection.cursor()
-                query = "UPDATE APPEARANCES SET appearance_id = ?, game_id = ?, player_id = ?, player_club_id = ?, date = ?  WHERE (appearance_id = ?)"
-                cursor.execute(query, (new_appearance_id,game_id, player_id, player_club_id, date, appearance_id))
-                connection.commit()
-            except:
-                connection.rollback()
-            finally:
-                cursor.close()
