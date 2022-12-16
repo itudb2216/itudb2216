@@ -16,3 +16,6 @@ Added columns for appearance table
 
 15.12.2022
 Changed appearance.html, appearance.py, and views.py files
+
+16.12.2022
+Made changes to make the navigation panel and button look better
