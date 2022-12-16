@@ -1,10 +1,11 @@
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 50px;
-  background-color: #fff7f4;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.096);
-}
+   .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: #fff7f4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.096);
+    margin: 0;
+  }
   
   .navigation ul {
     display: flex;
@@ -18,6 +19,7 @@
   }
   .navigation ul li:hover {
     color: rgba(0, 0, 0, 0.733);
+    background-color: antiquewhite;
   }
 
   a{
@@ -179,6 +181,9 @@
     cursor: pointer;
     background-color: blue;
     border-radius: 20px;
+    margin-left: 25%;
+    width: 50%;
+    height: 40px;
   }
   
   .update_form button:hover{
