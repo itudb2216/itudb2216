@@ -45,3 +45,7 @@ Search Bar for searching one tuple by giving the primary key and the name of the
 Some styling changes on navigation.css
 According changes for search bar both on server.py and views.py has been added
 Sorting according to the column of the table in both ascending and descending order has been added
+
+18.12.2022
+Dividing Tables into 100 or 1000 tuples (according to table sizes) so we do not need to show all database in web at once
+Storing page numbers for each table in session, so page number will not set to 0 after sorting or leaving the table page
