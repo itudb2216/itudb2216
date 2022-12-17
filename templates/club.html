@@ -1,5 +1,6 @@
 {% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} {% block
 content %} {% if not update_form_club %}
+<div style="height: 600px; overflow: scroll;">
 <table class="club">
   <tr>
     <th>
@@ -525,6 +526,7 @@ content %} {% if not update_form_club %}
   </tr>
   {% endfor %}
 </table>
+</div>
 {% endif %} {% if update_form_club %}
 <form
   action="{{ url_for('update_club', club_id = current_club.club_id) }}"

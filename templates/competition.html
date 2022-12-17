@@ -1,5 +1,6 @@
 {% extends "navigation.html" %} {% block title %} COMPETITIONS {% endblock %} {%
 block content %} {% if not update_form_competition %}
+<div style="height: 600px; overflow: scroll;">
 <table class="competition">
   <tr>
     <th>
@@ -418,6 +419,7 @@ block content %} {% if not update_form_competition %}
   </tr>
   {% endfor %}
 </table>
+</div>
 {% endif %} {% if update_form_competition %}
 <form
   action="{{ url_for('update_competition', competition_id = current_competition.competition_id) }}"

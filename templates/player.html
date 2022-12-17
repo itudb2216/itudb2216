@@ -1,5 +1,6 @@
 {% extends "navigation.html" %} {% block title %}PLAYERS{% endblock%} {% block
 content %} {% if not update_form_player %}
+<div style="height: 600px; overflow: scroll;">
 <table class="PLAYERS">
   <tr>
     <th>
@@ -421,7 +422,8 @@ content %} {% if not update_form_player %}
     <th>Operations</th>
     {% endif %}
   </tr>
-  {% for player in players %}
+  {% set show_count = 0 %}
+  {% for player in players[show_count:show_count+10] %}
   <tr>
     <td>{{player.player_id}}</td>
     <td>{{player.pretty_name}}</td>
@@ -453,7 +455,7 @@ content %} {% if not update_form_player %}
   </tr>
   {% endfor %}
 </table>
-
+</div>
 {% endif %} {% if update_form_player %}
 <form
   action="{{ url_for('update_player', player_id = current_player.player_id) }}"

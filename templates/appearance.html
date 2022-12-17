@@ -1,5 +1,6 @@
 {% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
 block content %} {% if not update_form_appearance %}
+<div style="height: 600px; overflow: scroll;">
 <table class="appearance">
   <tr>
     <th>
@@ -454,7 +455,7 @@ block content %} {% if not update_form_appearance %}
   </tr>
   {% endfor %}
 </table>
-
+</div>
 {% endif %} {% if update_form_appearance %}
 <form
   action="{{ url_for('update_appearance', appearance_id = current_appearance.appearance_id) }}"

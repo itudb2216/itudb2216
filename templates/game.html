@@ -1,5 +1,6 @@
 {% extends "navigation.html" %} {% block title %} Games {% endblock %} {% block
 content %} {% if not update_form_game %}
+<div style="height: 600px; overflow: scroll;">
 <table class="games">
   <tr>
     <th>
@@ -489,6 +490,7 @@ content %} {% if not update_form_game %}
   </tr>
   {% endfor %}
 </table>
+</div>
 {% endif %} {% if update_form_game %}
 <form
   action="{{ url_for('update_game', game_id = current_game.game_id) }}"
