@@ -114,39 +114,11 @@ def create_app():
 
     dir = os.getcwd()
     db = Database(os.path.join(dir, "transfermarkt.db"))
-
-    # db.add(Competition("1", "comp-pretty", "type", "sub-type", 10, "turkey", 100, 100, "tr", "name", "confederation"))
-    # db.add(Competition("2", "comp-pretty", "type", "sub-type", 10, "turkey", 100, 100, "tr", "name", "confederation"))
-    # db.add(Competition("3", "comp-pretty", "type", "sub-type", 10, "turkey", 100, 100, "tr", "name", "confederation"))
-    # db.add(Competition("4", "comp-pretty", "type", "sub-type", 10, "turkey", 100, 100, "tr", "name", "confederation"))
-
-
-    # db.add(Club(16, "FCB", "Barcelona", "4", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI"))
-    # db.add(Club(17, "FCB", "Barcelona", "2", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI"))
-    # db.add(Club(18, "FCB", "Barcelona", "2", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI"))
-
-    # db.add(Game(2, "3", "comp-type", 3, "round", "12/01/2009", 16, 18, 100, 200, "aggregate", 8, 12, "home-pretty", "away-pretty", "home-manager", "away-manager", "stad", 9000, "ref", "url"))
-    # it will be better if home and away club id is shown in the table written in game.html file, because they are foreign key
-
-    # db.add(Player(100, "pretty-name", 16, "club-pretty-name", 17, "azerbaijan", "24/02/04", "postition", "foot", 181, 110, 150))
-    # db.add(Player(101, "pretty-name", 17, "club-pretty-name", 18, "azerbaijan", "24/02/04", "postition", "foot", 181, 110, 150))
-
-    # db.add(Appearance("1001", 2, 101, 12, "24/02/04", "player-pretty-name", "8", 17, 0, 3, 5, 90))
-
-    # db.add(PlayerValuation("24.02.04", "1.2.3", 101, 3, 100, "NA2"))
-    
-    # db.add(PlayerValuation("24.02.04", "1.2.3", 2, 3, 100, "NA2"))
-    # db.add(Competition("CompetitionIDA", "World cup", "WC", "WC GROUP A", 18, "SPAIN", 120.53, -54.32, "POOR", "WORLD CUP", "CONF", "abv.com"))
-    # db.add(Club(12, "FCB", "Barcelona", "CompetitionId", 12.5, 22, 26.9, 5, 25.4, 4, "BARCA", 30000, "NONE AT ALL", "XAVI", "asdf.com"))
-    
+        
     # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
-    
     # db.add(Admin("150190085", "Leminur Çelik", "celikl19@itu.edu.tr", "nur123"))
-
     # db.add(Admin("150190089", "Bilal İhsan Tuncer", "tuncerb19@itu.edu.tr", "bilal123"))
-
     # db.add(Admin("150200915", "Adil Mahmudlu", "mahmudlu20@itu.edu.tr", "adil123"))
-
     # db.add(Admin("150210729", "Buse Orak", "orakb21@itu.edu.tr", "buse123"))
     
     app.config["db"] = db

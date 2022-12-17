@@ -4,8 +4,8 @@ from tables.competition import Competition
 from tables.appearance import Appearance
 from tables.player import Player
 from tables.game import Game
+
 def navigation_page():
-    # return render_template("navigation.html", admin = admin)
     return render_template("navigation.html", admin = session.get("admin"))
     
 def home_page():
@@ -84,42 +84,52 @@ def search_element():
         primary_key = (request.args)['primary_key']
         myDB = current_app.config["db"]
 
-        if(table_name == 'APPEARANCES'):
-            element = myDB.get_appearance(primary_key)
+        try:
+            if(table_name == 'APPEARANCES'):
+                element = myDB.get_appearance(primary_key)
 
-        elif(table_name == 'GAMES'):
-            element = myDB.get_game(primary_key)
+            elif(table_name == 'GAMES'):
+                element = myDB.get_game(primary_key)
 
-        elif(table_name == 'CLUBS'):
-            element = myDB.get_club(primary_key)
+            elif(table_name == 'CLUBS'):
+                element = myDB.get_club(primary_key)
 
-        elif(table_name == 'COMPETITIONS'):
-            element = myDB.get_competition(primary_key)
+            elif(table_name == 'COMPETITIONS'):
+                element = myDB.get_competition(primary_key)
 
-        elif(table_name == 'PLAYERVALUATIONS'):
-            
-            element = myDB.get_player_valuation(primary_key)
+            elif(table_name == 'PLAYERVALUATIONS'):
+                
+                element = myDB.get_player_valuation(primary_key)
 
-        elif(table_name == 'PLAYERS'):
-            element = myDB.get_player(primary_key)
+            elif(table_name == 'PLAYERS'):
+                element = myDB.get_player(primary_key)
 
-        return render_template("search.html", element = element, table_name = table_name, admin = session.get("admin"))
-
+            return render_template("search.html", element = element, table_name = table_name, admin = session.get("admin"))
+        
+        except:
+            return render_template("error.html", errorMessage = "search_bar_error")
 
 #PLAYER VALUATIONS
 def delete_player_valuation(player_valuation_id):
-    myDB = current_app.config["db"]
-    myDB.delete_player_valuation(player_valuation_id)
-    player_valuations = myDB.get_player_valuations()
-    return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
+
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete_player_valuation(player_valuation_id)
+        player_valuations = myDB.get_player_valuations()
+        return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
+        
 
 def update_form(player_valuation_id):
-    myDB = current_app.config["db"]
-    player_valuations = myDB.get_player_valuations()
-    current_player_valuation = myDB.get_player_valuation(player_valuation_id)
+    try:
+        myDB = current_app.config["db"]
+        player_valuations = myDB.get_player_valuations()
+        current_player_valuation = myDB.get_player_valuation(player_valuation_id)
+        return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = True, current_player_valuation = current_player_valuation)
 
-    print("CURRENT PLAYER VALUATION: ", current_player_valuation)
-    return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = True, current_player_valuation = current_player_valuation)
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_player_valuation(player_valuation_id):
     if(player_valuation_id == "Close"):
@@ -129,17 +139,6 @@ def update_player_valuation(player_valuation_id):
 
     if(request.method == "GET"):
         myDB = current_app.config["db"]
-        
-        # print("REQUEST: ", request.form['player_valuation_id'])
-
-        # date_time = (request.form)['date_time']
-        # market_value = (request.form)['market_value']
-        # date_week = (request.form)['date_week']
-        # player_id = (request.form)['player_id']
-        # current_club_id = (request.form)['current_club_id']
-        # player_club_domestic_competition_id = (request.form)['player_club_domestic_competition_id']
-        # new_player_valuation_id = (request.form)['player_valuation_id']
-
         date_time = (request.args)['date_time']
         market_value = (request.args)['market_value']
         date_week = (request.args)['date_week']
@@ -153,18 +152,25 @@ def update_player_valuation(player_valuation_id):
         player_valuations = myDB.get_player_valuations()
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
 
-# We need to add try, except, and finally for each function we use cursor !!!
-
 #CLUBS
 
 def delete_club(club_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_club(club_id))
-    return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete(myDB.get_club(club_id))
+        return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None)
+
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
+
 
 def update_form_club(club_id):
-    myDB =  current_app.config["db"]
-    return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = True, current_club = myDB.get_club(club_id))
+    try:
+        myDB =  current_app.config["db"]
+        return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = True, current_club = myDB.get_club(club_id))
+
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_club(club_id):
     if (club_id == "Close"):
@@ -183,13 +189,20 @@ def update_club(club_id):
 #COMPETITIONS
     
 def delete_competition(competition_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_competition(competition_id))
-    return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete(myDB.get_competition(competition_id))
+        return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None)
+
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
 
 def update_form_competition(competition_id):
-    myDB =  current_app.config["db"]
-    return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = True, current_competition = myDB.get_competition(competition_id))
+    try:
+        myDB =  current_app.config["db"]
+        return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = True, current_competition = myDB.get_competition(competition_id))
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_competition(competition_id):
     if (competition_id == "Close"):
@@ -207,15 +220,23 @@ def update_competition(competition_id):
 #Appearances
 
 def delete_appearance(appearance_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_appearance(appearance_id))
-    return render_template("appearance.html", appearances = myDB.get_appearances(), admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete(myDB.get_appearance(appearance_id))
+        return render_template("appearance.html", appearances = myDB.get_appearances(), admin = session.get("admin"), update_form_appearance = False, current_appearance = None)
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
+
 
 def update_form_appearance(appearance_id):
-    myDB = current_app.config["db"]
-    appearances = myDB.get_appearances()
-    current_appearance = myDB.get_appearance(appearance_id)
-    return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = True, current_appearance = current_appearance)
+    try:
+        myDB = current_app.config["db"]
+        appearances = myDB.get_appearances()
+        current_appearance = myDB.get_appearance(appearance_id)
+        return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = True, current_appearance = current_appearance)
+    
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_appearance(appearance_id):
     if(appearance_id == "Close"):
@@ -236,13 +257,21 @@ def update_appearance(appearance_id):
 
 # Players 
 def delete_player(player_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_player(player_id))
-    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete(myDB.get_player(player_id))
+        return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None)
     
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
+
 def update_form_player(player_id):
-    myDB =  current_app.config["db"]
-    return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id))
+    try:
+        myDB =  current_app.config["db"]
+        return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id))
+    
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_player(player_id):
     if (player_id == "Close"):
@@ -262,13 +291,21 @@ def update_player(player_id):
 #Games
 
 def delete_game(game_id):
-    myDB = current_app.config["db"]
-    myDB.delete(myDB.get_game(game_id))
-    return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)
+    try:
+        myDB = current_app.config["db"]
+        myDB.delete(myDB.get_game(game_id))
+        return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None)
+
+    except:
+        return render_template("error.html", errorMessage = "delete_tuple")
     
 def update_form_game(game_id):
-    myDB =  current_app.config["db"]
-    return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = True, current_game = myDB.get_game(game_id))
+    try:
+        myDB =  current_app.config["db"]
+        return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = True, current_game = myDB.get_game(game_id))
+    
+    except:
+        return render_template("error.html", errorMessage = "update_tuple")
 
 def update_game(game_id):
     if (game_id == "Close"):
@@ -315,19 +352,3 @@ def sorted_tab():
         elif(sort_table == "APPEARANCES"):
             appearances = myDB.sorted_get_appearances(sort_table, sort_key, sort_order)
             return render_template("appearance.html", appearances = appearances, admin = session.get("admin"))
-
-        
-            
-
-
-        
-
-    # myDB = current_app.config["db"]
-    # playerValuations = myDB.sorted_get_player_valuations(sorting_key, sorting_table, sorting_order)
-    
-
-    # if(sorting_table == 'PLAYERVALUATIONS'):
-    #     print("HERE")
-    #     playerValuations = myDB.sorted_get_player_valuations(sorting_order, sorting_key)
-    # return render_template("player_valuation.html", valuations = playerValuations, admin = session.get("admin"), update_form = False, current_player_valuation = None)
-    

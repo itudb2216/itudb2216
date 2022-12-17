@@ -254,6 +254,13 @@
     height: 30px;
   }
 
+  .search_bar_form button:hover{
+    cursor: pointer;
+    background-color: green;
+  }
+
+
+
     .search_message{
       text-align: center;
       font-size: 20px;
@@ -273,4 +280,42 @@
 
     .button_sort:hover{
       background-color: blue;
+    }
+
+
+    .error_div{
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .error_message{
+      color: red;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .error_paragraph{
+      text-align: center;
+      color: orange;
+      font-size: 20px;
+    }
+
+    .error_message_button{
+      border: 3px solid red;
+      border-radius: 10px;
+      background-color: red;
+      height: 40px;
+      width: 150px;
+      margin: 0 auto;
+    }
+
+    .error_message_button:hover{
+      background-color: green;
+      cursor: pointer;
+    }
+
+    .error_message_button a{
+      color: white;
     }

@@ -13,12 +13,3 @@ class PlayerValuation:
         query = "INSERT INTO PLAYERVALUATIONS (DATETIME, DATEWEEK, PLAYER_ID, CURRENT_CLUB_ID, MARKET_VALUE, PLAYER_CLUB_DOMESTIC_COMPETITION_ID) VALUES (?, ?, ?, ?, ?, ?)"
         tup = (self.datetime, self.dateweek, self.player_id, self.current_club_id, self.market_value, self.player_club_domestic_competition_id)
         return query, tup
-
-    def update(self):
-        query = "UPDATE PLAYERVALUATIONS SET DATETIME = ?, DATEWEEK = ?, PLAYER_ID = ?, CURRENT_CLUB_ID = ?, MARKET_VALUE = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ? WHERE(PLAYER_VALUATION_ID = ?)"
-        tup = (self.datetime, self.dateweek, self.player_id, self.current_club_id, self.market_value, self.player_club_domestic_competition_id, self.player_valuation_id)
-        return query, tup
-
-    def delete(self):
-        query = "DELETE FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
-        return query, (self.player_valuation_id,)

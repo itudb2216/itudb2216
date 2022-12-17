@@ -1,0 +1,34 @@
+{% extends "navigation.html" %} {% block title %}ERROR{% endblock %} {% block
+content %} {% if errorMessage == 'search_bar_error' %}
+<div class="error_div">
+  <h2 class="error_message">Requested Tuple was not Found in Database</h2>
+  <button class="error_message_button">
+    <a href="{{ url_for('search_bar') }}"> Back to Search</a>
+  </button>
+</div>
+
+{%endif%} {% if errorMessage == 'delete_tuple' %}
+<div class="error_div">
+  <h2 class="error_message">Failed to Delete</h2>
+  <p class="error_paragraph">
+    warning: probably, this tuple had already been deleted by one of the other
+    admins
+  </p>
+  <button class="error_message_button">
+    <a href="{{  url_for('home_page')  }}"> Back to Home</a>
+  </button>
+</div>
+
+{%endif%} {% if errorMessage == 'update_tuple' %}
+<div class="error_div">
+  <h2 class="error_message">Failed to Update</h2>
+  <p class="error_paragraph">
+    warning: probably, this tuple had been deleted or changed the primary key by
+    one of the other admins
+  </p>
+  <button class="error_message_button">
+    <a href="{{  url_for('home_page')  }}"> Back to Home</a>
+  </button>
+</div>
+
+{%endif%} {%endblock%}
