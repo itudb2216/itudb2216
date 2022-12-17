@@ -267,15 +267,23 @@
       color: orange;
     }
 
+  .button_sort{
+    background-color: green;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+  }
 
 
-    .button_sort{
-      background-color: green;
-      cursor: pointer;
-      color: white;
-      width: 60%;
-      border-radius: 10px;
-      margin-left: 20%;
+  .button_sort{
+    background-color: green;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
     }
 
     .button_sort:hover{
@@ -319,3 +327,9 @@
     .error_message_button a{
       color: white;
     }
+  .button_sort:hover{
+    background-color: blue;
+  }
+  form label{
+    display: flex;
+  }
