@@ -319,3 +319,27 @@
   select{
     border-radius: 10px;
   }
+
+  .change_table_number{
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid red;
+  }
+
+
+  .change_table_number button{
+    width: 100px;
+    background-color: orange;
+    border-radius: 10px;
+  }
+
+  .change_table_number a{
+    color: white;
+  }
+
+  .change_table_number button:hover{
+    cursor: pointer;
+    background-color: black;
+  }
+
+ 

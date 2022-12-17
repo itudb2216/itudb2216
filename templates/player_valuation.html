@@ -1,26 +1,33 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
 {% block content %} {% if not update_form %}
+<div class="change_table_number">
+  <button>
+    <a
+      href="{{url_for('decrease_number_player_valuation', page_number = page_number)}}"
+      >Previous</a
+    >
+  </button>
+  <h2>{{page_number}}</h2>
+  <button>
+    <a
+      href="{{url_for('increase_number_player_valuation', page_number = page_number)}}"
+      >Next</a
+    >
+  </button>
+</div>
+
 <table class="player_valuation">
   <tr>
     <th>
       <p>ID</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -40,22 +47,13 @@
     <th>
       <p>Date Time</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -75,22 +73,13 @@
     <th>
       <p>Market Value</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -110,22 +99,13 @@
     <th>
       <p>Date Week</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -145,22 +125,13 @@
     <th>
       <p>Player ID</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -180,22 +151,13 @@
     <th>
       <p>Current Club ID</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -215,22 +177,13 @@
     <th>
       <p>Player Club Domestic Competition ID</p>
       <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
-          <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
-          />
+        <label for="asc"
+          >Asc
+          <input type="radio" id="asc" name="asc_desc" value="ASC" />
         </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
+        <label for="asc"
+          >Desc
+          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
         </label>
         <input
           type="text"
@@ -251,7 +204,8 @@
     <th>Operations</th>
     {% endif %}
   </tr>
-  {% for player_valuation_id, player_valuation in valuations %}
+  {% for player_valuation_id, player_valuation in
+  valuations[from_number:to_number] %}
   <tr>
     <td>{{player_valuation_id}}</td>
     <td>{{player_valuation.datetime}}</td>

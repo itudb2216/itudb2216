@@ -1,424 +1,411 @@
 {% extends "navigation.html" %} {% block title %} COMPETITIONS {% endblock %} {%
 block content %} {% if not update_form_competition %}
-<div style="height: 600px; overflow: scroll;">
-<table class="competition">
-  <tr>
-    <th>
-      <p>ID</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+<div class="change_table_number">
+  <button>
+    <a
+      href="{{url_for('decrease_number_competition', page_number = page_number)}}"
+      >Previous</a
+    >
+  </button>
+  <h2>{{page_number}}</h2>
+  <button>
+    <a
+      href="{{url_for('increase_number_competition', page_number = page_number)}}"
+      >Next</a
+    >
+  </button>
+</div>
+<div style="height: 600px; overflow: scroll">
+  <table class="competition">
+    <tr>
+      <th>
+        <p>ID</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="COMPETITION_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Pretty Name</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITION_ID"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="PRETTY_NAME"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Type</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Pretty Name</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="TYPE_"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Subtype</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="PRETTY_NAME"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="SUB_TYPE"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Country ID</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Type</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="COUNTRY_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Country Name</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="TYPE_"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="COUNTRY_NAME"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Country Latitude</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Subtype</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="COUNTRY_LATITUDE"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Country Longitude</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="SUB_TYPE"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="COUNTRY_LONGITUDE"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Domestic League Code</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Country ID</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="DOMESTIC_LEAGUE_CODE"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Name</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COUNTRY_ID"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
-          />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input type="text" value="NAME" name="sort_key" style="display: none" />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <p>Confederation</p>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc">Asc
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Country Name</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
           <input
-          type="radio"
-          id="asc"
-          name="asc_desc"
-          checked="checked"
-          value="ASC"
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
           />
-        </label>
-        <label for="asc">Desc
-          <input 
-          type="radio" 
-          id="asc" 
-          name="asc_desc" 
-          value="DESC" 
+          <input
+            type="text"
+            value="COUNTRY_NAME"
+            name="sort_key"
+            style="display: none"
           />
-        </label>
-        <input
-          type="text"
-          value="COMPETITIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="CONFEDERATION"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    {% if admin %}
-    <th>Operations</th>
-    {% endif %}
-  </tr>
-  {% for competition in competitions %}
-  <tr>
-    <td>{{competition.competition_id}}</td>
-    <td>{{competition.pretty_name}}</td>
-    <td>{{competition.type_}}</td>
-    <td>{{competition.sub_type}}</td>
-    <td>{{competition.country_id}}</td>
-    <td>{{competition.country_name}}</td>
-    <td>{{competition.country_latitude}}</td>
-    <td>{{competition.country_longitude}}</td>
-    <td>{{competition.domestic_league_code}}</td>
-    <td>{{competition.name}}</td>
-    <td>{{competition.confederation}}</td>
-    {% if admin %}
-    <td class="operations">
-      <button class="button_delete">
-        <a
-          href="{{ url_for('delete_competition', competition_id = competition.competition_id) }}"
-          >Delete</a
-        >
-      </button>
-      <button class="button_update">
-        <a
-          href="{{ url_for('update_form_competition',  competition_id = competition.competition_id, cancel = False) }}"
-          >Update</a
-        >
-      </button>
-    </td>
-    {% endif %}
-  </tr>
-  {% endfor %}
-</table>
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Country Latitude</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="COUNTRY_LATITUDE"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Country Longitude</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="COUNTRY_LONGITUDE"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Domestic League Code</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="DOMESTIC_LEAGUE_CODE"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Name</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="NAME"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <p>Confederation</p>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="COMPETITIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="CONFEDERATION"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      {% if admin %}
+      <th>Operations</th>
+      {% endif %}
+    </tr>
+    {% for competition in competitions[from_number:to_number] %}
+    <tr>
+      <td>{{competition.competition_id}}</td>
+      <td>{{competition.pretty_name}}</td>
+      <td>{{competition.type_}}</td>
+      <td>{{competition.sub_type}}</td>
+      <td>{{competition.country_id}}</td>
+      <td>{{competition.country_name}}</td>
+      <td>{{competition.country_latitude}}</td>
+      <td>{{competition.country_longitude}}</td>
+      <td>{{competition.domestic_league_code}}</td>
+      <td>{{competition.name}}</td>
+      <td>{{competition.confederation}}</td>
+      {% if admin %}
+      <td class="operations">
+        <button class="button_delete">
+          <a
+            href="{{ url_for('delete_competition', competition_id = competition.competition_id) }}"
+            >Delete</a
+          >
+        </button>
+        <button class="button_update">
+          <a
+            href="{{ url_for('update_form_competition',  competition_id = competition.competition_id, cancel = False) }}"
+            >Update</a
+          >
+        </button>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
 </div>
 {% endif %} {% if update_form_competition %}
 <form

@@ -61,8 +61,26 @@ def create_app():
     app.add_url_rule("/update_form_game/<game_id>", view_func=views.update_form_game)
     app.add_url_rule("/update_gama/<game_id>", view_func=views.update_game)
 
-
     app.add_url_rule("/sorted-table", view_func=views.sorted_tab)
+
+    app.add_url_rule("/increase_number_player_valuation/<page_number>", view_func=views.increase_number_player_valuation)
+    app.add_url_rule("/decrease_number_player_valuation/<page_number>", view_func=views.decrease_number_player_valuation)
+
+    app.add_url_rule("/increase_number_game/<page_number>", view_func=views.increase_number_game)
+    app.add_url_rule("/decrease_number_game/<page_number>", view_func=views.decrease_number_game)
+    
+    app.add_url_rule("/increase_number_club/<page_number>", view_func=views.increase_number_club)
+    app.add_url_rule("/decrease_number_club/<page_number>", view_func=views.decrease_number_club)
+
+    app.add_url_rule("/increase_number_competition/<page_number>", view_func=views.increase_number_competition)
+    app.add_url_rule("/decrease_number_competition/<page_number>", view_func=views.decrease_number_competition)
+
+    app.add_url_rule("/increase_number_appearance/<page_number>", view_func=views.increase_number_appearance)
+    app.add_url_rule("/decrease_number_appearance/<page_number>", view_func=views.decrease_number_appearance)
+
+    app.add_url_rule("/increase_number_player/<page_number>", view_func=views.increase_number_player)
+    app.add_url_rule("/decrease_number_player/<page_number>", view_func=views.decrease_number_player)
+
     
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")

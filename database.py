@@ -129,7 +129,7 @@ class Database:
             cursor.execute(query)
             for club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name in cursor:
                 clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name))
-        return clubs[0:100]
+        return clubs
 
     def get_games(self):
         games = []
@@ -139,7 +139,7 @@ class Database:
             cursor.execute(query)
             for game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium in cursor:
                 games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium))
-        return games[0:100]
+        return games
     
     def get_appearances(self):
         appearances = []
@@ -149,7 +149,7 @@ class Database:
             cursor.execute(query)
             for appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played in cursor:
                 appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
-        return appearances[0:100]
+        return appearances
     
     def get_players(self):
         players = []
@@ -159,7 +159,7 @@ class Database:
             cursor.execute(query)
             for player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp in cursor:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
-        return players[0:100]
+        return players
     
     def get_player_valuations(self):
         player_valuations = []
@@ -169,7 +169,7 @@ class Database:
             cursor.execute(query)
             for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
                 player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
-        return player_valuations[0:100] # to display only first 100 for now
+        return player_valuations 
 
     def get_competitions(self):
         competitions = []
@@ -179,7 +179,7 @@ class Database:
             cursor.execute(query)
             for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
                 competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
-        return competitions[0:100]
+        return competitions
 
     def get_admins(self):
         admins = []
@@ -220,7 +220,7 @@ class Database:
 
             for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
                 player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
-        return player_valuations[0:100]
+        return player_valuations
 
     def sorted_get_clubs(self, sort_table, sort_key, sort_order):
         clubs = []
@@ -230,7 +230,7 @@ class Database:
             cursor.execute(query)
             for club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name in cursor:
                 clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name))
-        return clubs[0:100]
+        return clubs
 
     def sorted_get_competitions(self, sort_table, sort_key, sort_order):
         competitions = []
@@ -240,7 +240,7 @@ class Database:
             cursor.execute(query)
             for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
                 competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
-        return competitions[0:100]
+        return competitions
 
     def sorted_get_games(self, sort_table, sort_key, sort_order):
         games = []
@@ -250,7 +250,7 @@ class Database:
             cursor.execute(query)
             for game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium in cursor:
                 games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium))
-        return games[0:100]
+        return games
 
     def sorted_get_players(self, sort_table, sort_key, sort_order):
         players = []
@@ -260,7 +260,7 @@ class Database:
             cursor.execute(query)
             for player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp in cursor:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
-        return players[0:100]
+        return players
 
     def sorted_get_appearances(self, sort_table, sort_key, sort_order):
         appearances = []
@@ -270,4 +270,4 @@ class Database:
             cursor.execute(query)
             for appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played in cursor:
                 appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
-        return appearances[0:100]
+        return appearances
