@@ -6,46 +6,15 @@ block content %}
 <div class="search_bar_form">
   <form action="{{ url_for('search_element') }}" method="GET">
     <div class="check_boxes">
-      <input
-        type="radio"
-        id="search_appearances"
-        name="search_bar"
-        value="APPEARANCES"
-      />
-      <label for="search_appearances">Appearances</label>
-
-      <input type="radio" id="search_games" name="search_bar" value="GAMES" />
-      <label for="search_games">Games</label><br />
-
-      <input type="radio" id="search_clubs" name="search_bar" value="CLUBS" />
-      <label for="search_clubs">Clubs</label>
-
-      <input
-        type="radio"
-        id="search_competitions"
-        name="search_bar"
-        value="COMPETITIONS"
-      />
-      <label for="search_competitions">Competitions</label>
-
-      <input
-        type="radio"
-        id="search_player_valuations"
-        name="search_bar"
-        value="PLAYERVALUATIONS"
-      />
-      <label for="search_player_valuations">Player Valuations</label>
-
-      <input
-        type="radio"
-        id="search_players"
-        name="search_bar"
-        value="PLAYERS"
-        checked="checked"
-      />
-      <label for="search_players">Players</label>
-    </div>
-
+      <select name="search_bar" id="search">
+        <option disabled selected value>Select a table</option>
+        <option value="APPEARANCES">Appearances</option>
+        <option value="GAMES">Games</option>
+        <option value="CLUBS">Clubs</option>
+        <option value="COMPETITIONS">Competitions</option>
+        <option value="PLAYERVALUATIONS">Player Valuations</option>
+        <option value="PLAYERS">Players</option>
+      </select>
     <div class="search_submit">
       <input
         type="text"
