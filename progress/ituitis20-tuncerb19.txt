@@ -13,3 +13,8 @@ Player table linked to the player page.
 Csv files for tables are downloaded from kaggle.
 Created a reader file to insert all data to database file.
 Dataset except the incorrect elements(does not fit to foreignkey design) inserted to transfermarkt.db file.
+
+[Dec 17, 2022]
+Table html files updated.
+Tables added to scrobble widget to keep the navigation bar stable.
+A feature to show partial data on screen initialized.
