@@ -60,7 +60,11 @@ block content %} {% if not update_form_appearance %}
 
     <div>
       <label for="date"><p>Date</p></label>
-      <input type="text" name="date" placeholder="Enter the Date" />
+      <input 
+        type="date" 
+        name="date" 
+        placeholder="Enter the Date" 
+      />
     </div>
 
     <div>
@@ -93,17 +97,29 @@ block content %} {% if not update_form_appearance %}
 
     <div>
       <label for="red_cards"><p>Red Cards</p></label>
-      <input type="number" name="red_cards" placeholder="Enter the Red Cards" />
+      <input 
+        type="number" 
+        name="red_cards" 
+        placeholder="Enter the Red Cards" 
+      />
     </div>
 
     <div>
       <label for="goals"><p>Goals</p></label>
-      <input type="number" name="goals" placeholder="Enter the Goals" />
+      <input 
+        type="number" 
+        name="goals" 
+        placeholder="Enter the Goals" 
+      />
     </div>
 
     <div>
       <label for="assists"><p>Assists</p></label>
-      <input type="number" name="assists" placeholder="Enter the Assists" />
+      <input 
+        type="number" 
+        name="assists" 
+        placeholder="Enter the Assists" 
+      />
     </div>
 
     <div>
@@ -119,6 +135,7 @@ block content %} {% if not update_form_appearance %}
       <p>ADD</p>
     </button>
   </form>
+
   <button class="button_cancel">
     <a href="{{ url_for('add_appearance', todo = 'Close') }}">
       <p>CANCEL</p>
@@ -615,7 +632,7 @@ block content %} {% if not update_form_appearance %}
   <div>
     <label for="date"><p>Date</p></label>
     <input
-      type="text"
+      type="date"
       name="date"
       placeholder="Enter the Date"
       value="{{current_appearance.date}}"
