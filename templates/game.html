@@ -1,23 +1,25 @@
 {% extends "navigation.html" %} {% block title %} Games {% endblock %} {% block
 content %} {% if not update_form_game %}
-<div class="change_table_number">
-  <button>
-    <a href="{{url_for('decrease_number_game', page_number = page_number)}}"
-      >Previous</a
-    >
-  </button>
-  <h2>{{page_number}}</h2>
-  <button>
-    <a href="{{url_for('increase_number_game', page_number = page_number)}}"
-      >Next</a
-    >
-  </button>
-</div>
-<div style="height: 600px; overflow: scroll">
+
+<div style="height: 77vh; overflow: scroll">
   <table class="games">
     <tr>
+      <th>ID</th>
+      <th>Competition ID</th>
+      <th>Competition Type</th>
+      <th>Season</th>
+      <th>Round</th>
+      <th>Date</th>
+      <th>Home Club ID</th>
+      <th>Away Club ID</th>
+      <th>Home Club Goals</th>
+      <th>Away Club Goals</th>
+      <th>Home Club Pretty Name</th>
+      <th>Away Club Pretty Name</th>
+      <th>Stadium</th>
+    </tr>
+    <tr>
       <th>
-        <p>ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -49,7 +51,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Competition ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -81,7 +82,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Competition Type</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -113,7 +113,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Season</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -145,7 +144,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Round</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -177,7 +175,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Date</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -209,7 +206,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Home Club ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -241,7 +237,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Away Club ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -273,7 +268,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Home Club Goals</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -305,7 +299,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Away Club Goals</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -337,7 +330,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Home Club Pretty Name</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -369,7 +361,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Away Club Pretty Name</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -401,7 +392,6 @@ content %} {% if not update_form_game %}
         </form>
       </th>
       <th>
-        <p>Stadium</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -469,6 +459,19 @@ content %} {% if not update_form_game %}
     </tr>
     {% endfor %}
   </table>
+</div>
+<div class="change_table_number">
+  <button>
+    <a href="{{url_for('decrease_number_game', page_number = page_number)}}"
+      >Previous</a
+    >
+  </button>
+  <h2>{{page_number}}</h2>
+  <button>
+    <a href="{{url_for('increase_number_game', page_number = page_number)}}"
+      >Next</a
+    >
+  </button>
 </div>
 {% endif %} {% if update_form_game %}
 <form

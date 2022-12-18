@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %}Home{% endblock %} {% block
 content %} {% if login == "First" %}
-<h1 class="welcome_heading">Welcome to our Project WebSite, guys :)</h1>
-<p class="welcome_paragraph">Have a nice day!</p>
+<h1 class="welcome_heading">Welcome to our Project WebSite :)</h1>
+<p class="welcome_paragraph">The data we use is related to the <b>Football Data from Transfermarkt.</b> The dataset is composed of multiple CSV files with information on <b>appearances, games, clubs, competitions, player valuations and players.</b> This database project was created by <b>Leminur Çelik, Novruz Amirov, Bilal İhsan Tuncer, Adil Mahmudlu and Buse Orak.</b></p>
 {% endif %} {% if login == "True" %}
 <h2 class="access_granted">ACCESS GRANTED!</h2>
 {% endif %} {% if login == "False" %}

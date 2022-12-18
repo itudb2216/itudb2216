@@ -47,7 +47,6 @@
   font-weight: bold;
   color: green;
   }
-
   #login-button p{
     margin: 0 auto;
   }
@@ -323,7 +322,8 @@
   .change_table_number{
     display: flex;
     justify-content: space-around;
-    border: 2px solid red;
+    border: none;
+    height: 50px;
   }
 
 
@@ -341,5 +341,7 @@
     cursor: pointer;
     background-color: black;
   }
-
+  h2{
+    margin: auto;
+  }
  
