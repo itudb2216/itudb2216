@@ -15,6 +15,9 @@ block content %} {% if not update_form_competition %}
       <th>Domestic League Code</th>
       <th>Name</th>
       <th>Confederation</th>
+      {% if admin %}
+      <th rowspan="2">Operations</th>
+      {% endif %}
     </tr>
     <tr>
       <th>
@@ -358,9 +361,6 @@ block content %} {% if not update_form_competition %}
           <button class="button_sort" type="submit">Sort</button>
         </form>
       </th>
-      {% if admin %}
-      <th>Operations</th>
-      {% endif %}
     </tr>
     {% for competition in competitions[from_number:to_number] %}
     <tr>

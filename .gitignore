@@ -1,2 +1,4 @@
 __pycache__
 tables/__pycache__
+flask_session
+transfermarkt.db
