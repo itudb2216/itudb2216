@@ -31,6 +31,7 @@ def admin_page():
     admins = myDB.get_admins()
     return render_template("admins.html", admins = admins, admin = session.get("admin"))
 
+# Checks access for admin
 def admin_check():
     if(request.method == "GET"):
         myDB = current_app.config["db"]
@@ -48,8 +49,9 @@ def admin_check():
         else: # if the user id is correctly given, but the password is false, then access denied
             admin = None
             return render_template("home.html", logout = False, login = "False", admin = admin)
-        
-def log_out(): # this method will be called, when user logs out from "Admin" to normal user
+
+# This method will be called, when user logs out from "Admin" to normal user
+def log_out():
     session["admin"] = None
     admin = None
     return render_template("home.html", logout = True, admin = admin)
@@ -89,6 +91,7 @@ def appearance_page():
 def search_bar():
     return render_template("search.html", element = None, table_name = None, admin = session.get("admin")) # element = None
 
+# Calls the associated getter for the element whose id (primary key) is searched in a specific table
 def search_element():
     if(request.method == "GET"):
 
@@ -121,9 +124,14 @@ def search_element():
         except:
             return render_template("error.html", errorMessage = "search_bar_error")
 
-#PLAYER VALUATIONS
-def delete_player_valuation(player_valuation_id):
+# Necessary functions for delete and update operations in PLAYERVALUATIONS
+# delete_*: Calls the necessary delete function from database.py using the id passed parameter and re-generates output
+# update_form_*: Method for the page that user is directed to to get into the program the updated versions of the fields
+# update_*: Creates new Club, Game, ... object and calls the necessary update function from database.py using the old id passed as parameter and re-generates output
 
+# For PLAYERVALUATIONS
+
+def delete_player_valuation(player_valuation_id):
     try:
         myDB = current_app.config["db"]
         myDB.delete_player_valuation(player_valuation_id)
@@ -132,14 +140,12 @@ def delete_player_valuation(player_valuation_id):
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
         
-
 def update_form(player_valuation_id):
     try:
         myDB = current_app.config["db"]
         player_valuations = myDB.get_player_valuations()
         current_player_valuation = myDB.get_player_valuation(player_valuation_id)
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = True, current_player_valuation = current_player_valuation, from_number = session.get("page_number_player_valuation") * 1000, to_number = session.get("page_number_player_valuation") * 1000 + 1000, page_number = session.get("page_number_player_valuation"))
-
     except:
         return render_template("error.html", errorMessage = "update_tuple")
 
@@ -164,23 +170,20 @@ def update_player_valuation(player_valuation_id):
         player_valuations = myDB.get_player_valuations()
         return render_template("player_valuation.html", valuations = player_valuations, admin = session.get("admin"), update_form = False, current_player_valuation = None, from_number = session.get("page_number_player_valuation") * 1000, to_number = session.get("page_number_player_valuation") * 1000 + 1000, page_number = session.get("page_number_player_valuation"))
 
-#CLUBS
+# For CLUBS
 
 def delete_club(club_id):
     try:
         myDB = current_app.config["db"]
         myDB.delete(myDB.get_club(club_id))
         return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None, from_number = session.get("page_number_club") * 100, to_number = session.get("page_number_club") * 100 + 100, page_number = session.get("page_number_club"))
-
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
-
 
 def update_form_club(club_id):
     try:
         myDB =  current_app.config["db"]
         return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = True, current_club = myDB.get_club(club_id), from_number = session.get("page_number_club") * 100, to_number = session.get("page_number_club") * 100 + 100, page_number = session.get("page_number_club"))
-
     except:
         return render_template("error.html", errorMessage = "update_tuple")
 
@@ -198,14 +201,13 @@ def update_club(club_id):
                          (request.args)['net_transfer_record'], (request.args)['coach_name']), club_id)
         return render_template("club.html", clubs = myDB.get_clubs(), admin = session.get("admin"), update_form_club = False, current_club = None, from_number = session.get("page_number_club") * 100, to_number = session.get("page_number_club") * 100 + 100, page_number = session.get("page_number_club"))
     
-#COMPETITIONS
+# For COMPETITIONS
     
 def delete_competition(competition_id):
     try:
         myDB = current_app.config["db"]
         myDB.delete(myDB.get_competition(competition_id))
         return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None,  from_number = session.get("page_number_competition") * 1000, to_number = session.get("page_number_competition") * 1000 + 1000, page_number = session.get("page_number_competition"))
-
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
 
@@ -229,7 +231,7 @@ def update_competition(competition_id):
                          (request.args)['name'], (request.args)['confederation']), competition_id)
         return render_template("competition.html", competitions = myDB.get_competitions(), admin = session.get("admin"), update_form_competition = False, current_competition = None,  from_number = session.get("page_number_competition") * 1000, to_number = session.get("page_number_competition") * 1000 + 1000, page_number = session.get("page_number_competition"))
 
-#Appearances
+# For APPEARANCES
 
 def delete_appearance(appearance_id):
     try:
@@ -239,14 +241,12 @@ def delete_appearance(appearance_id):
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
 
-
 def update_form_appearance(appearance_id):
     try:
         myDB = current_app.config["db"]
         appearances = myDB.get_appearances()
         current_appearance = myDB.get_appearance(appearance_id)
         return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = True, current_appearance = current_appearance, from_number = session.get("page_number_appearance"), to_number = session.get("page_number_appearance") + 100, page_number = session.get("page_number_appearance"))
-    
     except:
         return render_template("error.html", errorMessage = "update_tuple")
 
@@ -266,14 +266,12 @@ def update_appearance(appearance_id):
         appearances = myDB.get_appearances()
         return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), update_form_appearance = False, current_appearance = None, from_number = session.get("page_number_appearance"), to_number = session.get("page_number_appearance") + 100, page_number = session.get("page_number_appearance"))
 
-
-# Players 
+# For PLAYERS 
 def delete_player(player_id):
     try:
         myDB = current_app.config["db"]
         myDB.delete(myDB.get_player(player_id))
         return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None, from_number = session.get("page_number_player") * 1000, to_number = session.get("page_number_player") * 1000 + 1000, page_number = session.get("page_number_player"))
-    
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
 
@@ -281,7 +279,6 @@ def update_form_player(player_id):
     try:
         myDB =  current_app.config["db"]
         return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = True, current_player = myDB.get_player(player_id), from_number = session.get("page_number_player") * 1000, to_number = session.get("page_number_player") * 1000 + 1000, page_number = session.get("page_number_player"))
-    
     except:
         return render_template("error.html", errorMessage = "update_tuple")
 
@@ -299,15 +296,13 @@ def update_player(player_id):
                          (request.args)['market_value_in_gbp'], (request.args)['highest_market_value_in_gbp']), player_id)
         return render_template("player.html", players = myDB.get_players(), admin = session.get("admin"), update_form_player = False, current_player = None, from_number = session.get("page_number_player") * 1000, to_number = session.get("page_number_player") * 1000 + 1000, page_number = session.get("page_number_player"))
 
-        
-#Games
+# For GAMES
 
 def delete_game(game_id):
     try:
         myDB = current_app.config["db"]
         myDB.delete(myDB.get_game(game_id))
         return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None, from_number = session.get("page_number_game") * 1000, to_number = session.get("page_number_game") * 1000 + 1000, page_number = session.get("page_number_game"))
-
     except:
         return render_template("error.html", errorMessage = "delete_tuple")
     
@@ -315,7 +310,6 @@ def update_form_game(game_id):
     try:
         myDB =  current_app.config["db"]
         return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = True, current_game = myDB.get_game(game_id), from_number = session.get("page_number_game") * 1000, to_number = session.get("page_number_game") * 1000 + 1000, page_number = session.get("page_number_game"))
-    
     except:
         return render_template("error.html", errorMessage = "update_tuple")
 
@@ -333,8 +327,8 @@ def update_game(game_id):
                          (request.args)['stadium']), game_id)
         return render_template("game.html", games = myDB.get_games(), admin = session.get("admin"), update_form_game = False, current_game = None, from_number = session.get("page_number_game") * 1000, to_number = session.get("page_number_game") * 1000 + 1000, page_number = session.get("page_number_game"))
 
+# Method to call the relevant sorted_get_* method and re-generate output
 def sorted_tab():
-    
     if (request.method == "GET"):
         myDB = current_app.config["db"]
         sort_table = (request.args)['sort_table']
@@ -368,6 +362,8 @@ def sorted_tab():
         elif(sort_table == "APPEARANCES"):
             appearances = myDB.sorted_get_appearances(sort_table, sort_key, sort_order)
             return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), from_number = session.get("page_number_appearance"), to_number = session.get("page_number_appearance") + 100, page_number = session.get("page_number_appearance"))
+
+# Methods to increase/decrease the number of tuples shown
 
 def increase_number_player_valuation(page_number):
     number = int(page_number)
@@ -638,7 +634,6 @@ def decrease_number_appearance(page_number):
 
     return render_template("appearance.html", appearances = appearances, admin = session.get("admin"), from_number = from_number, to_number = to_number, page_number = number)
     
-
 def increase_number_player(page_number):
     number = int(page_number)
     myDB = current_app.config["db"]
@@ -666,7 +661,6 @@ def increase_number_player(page_number):
     session['page_number_player'] = number
 
     return render_template("player.html", players = players, admin = session.get("admin"), from_number = from_number, to_number = to_number, page_number = number)
-
 
 def decrease_number_player(page_number):
     number = int(page_number)
