@@ -2,9 +2,20 @@
 - The file club.py is added that contains the Club class including the necessary functions to 
   add to, update, and delete from the CLUBS table.
 - The get_game function is added to the database.py file to get the game tuple whose id is passed in.
+
 30.11.2022
 - The file club.py is updated by adding the fields present in the newly-chosen version of the dataset.
+
 07.12.2022
 - The file server.py is updated by adding the necessary query for the creation of the clubs table.
 - The file game.html is updated to show the needed fields of the games table.
 - The file views.py is updated by writing the game_page function.
+
+14.12.2022
+- The file server.py is updated by adding URLs for delete, update and updated pages.
+- The file game.py is updated by decreasing the amount of fields.
+
+18.12.2022
+- All Python files are revised and made more readable by changing writing styles and adding comments
+- The file error.html and views.py are updated so that no error occurs when table is not selected during tuple search.
+- The file server.py is updated so that admins will be added to the table only once, when none is present.
