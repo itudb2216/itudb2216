@@ -1,21 +1,7 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
 {% block content %} {% if not update_form %}
-<div class="change_table_number">
-  <button>
-    <a
-      href="{{url_for('decrease_number_player_valuation', page_number = page_number)}}"
-      >Previous</a
-    >
-  </button>
-  <h2>{{page_number}}</h2>
-  <button>
-    <a
-      href="{{url_for('increase_number_player_valuation', page_number = page_number)}}"
-      >Next</a
-    >
-  </button>
-</div>
 
+<div style="height: 600px; overflow: scroll">
 <table class="player_valuation">
   <tr>
     <th>
@@ -233,7 +219,22 @@
   </tr>
   {% endfor %}
 </table>
-
+</div>
+<div class="change_table_number">
+  <button>
+    <a
+      href="{{url_for('decrease_number_player_valuation', page_number = page_number)}}"
+      >Previous</a
+    >
+  </button>
+  <h2>{{page_number}}</h2>
+  <button>
+    <a
+      href="{{url_for('increase_number_player_valuation', page_number = page_number)}}"
+      >Next</a
+    >
+  </button>
+</div>
 {% endif %} {% if update_form %}
 <form
   action="{{ url_for('update_player_valuation', player_valuation_id = current_player_valuation[0]) }}"
