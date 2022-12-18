@@ -11,12 +11,13 @@
     display: flex;
     color: #fd7d4c;
   }
+
   .navigation ul li{
     list-style: none;
     margin-right: 20px;
     cursor: pointer;
-
   }
+
   .navigation ul li:hover {
     color: rgba(0, 0, 0, 0.733);
     background-color: antiquewhite;
@@ -38,15 +39,16 @@
   }
 
   table tr, table td, table th{
-  border: 1px solid black;
-  text-align: left;
-  padding: 5px 10px;
+    border: 1px solid black;
+    text-align: left;
+    padding: 5px 10px;
   }
 
   table th {
-  font-weight: bold;
-  color: green;
+    font-weight: bold;
+    color: green;
   }
+
   #login-button p{
     margin: 0 auto;
   }
@@ -217,16 +219,14 @@
     justify-content: space-between; 
     height: 30px;
     align-items: center;
-    width: 100%;
   }
 
   .search_bar_form form{
-    width: 100%;
     display: flex;
     align-items: center;
   }
 
-  .check_boxes{
+  .selections{
     display: flex;
     justify-content: space-between;
   }
@@ -327,7 +327,6 @@
     height: 7vh;
   }
 
-
   .change_table_number button{
     width: 100px;
     background-color: orange;
@@ -342,9 +341,11 @@
     cursor: pointer;
     background-color: black;
   }
+
   h2{
     margin: auto;
   }
+
   .screen{
     height: 78vh; 
     overflow: scroll;
