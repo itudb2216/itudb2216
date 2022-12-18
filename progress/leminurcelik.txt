@@ -19,3 +19,11 @@ Changed appearance.html, appearance.py, and views.py files
 
 16.12.2022
 Made changes to make the navigation panel and button look better
+
+17.12.2022
+Updated search bar using selection property to choose a table
+Modified ascending and descending radio buttons and sort buttons 
+
+18.12.2022
+Adjusted screen size using css overflow and height properties
+Added text to home page
