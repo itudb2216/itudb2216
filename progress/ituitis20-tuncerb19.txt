@@ -18,3 +18,8 @@ Dataset except the incorrect elements(does not fit to foreignkey design) inserte
 Table html files updated.
 Tables added to scrobble widget to keep the navigation bar stable.
 A feature to show partial data on screen initialized.
+
+[Dec 18, 2022]
+The HTML files have been rearranged. 
+Tables and buttons have been properly positioned.
+Final tests and touch-ups have been completed.
