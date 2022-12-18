@@ -2,6 +2,163 @@
 content %} {% if not update_form_club %}
 
 <div class="screen">
+  {% if admin and not add_form%}
+  <div class="add_button">
+    <button>
+      <a href="{{ url_for('add_form_club') }}">+</a>
+    </button>
+  </div>
+  {%endif%} {% if add_form %}
+  <h4 class="add_warning">
+    IF YOU CAN NOT FIND IT AFTER ADDING, THEN THERE IS FOREIGN KEY PROBLEM IN
+    TUPLE THAT YOU WANTED TO ADD
+  </h4>
+  <form
+    action="{{ url_for('add_club', todo = 'Add') }}"
+    class="update_form"
+    method="GET"
+  >
+    <div>
+      <label for="club_id"><p>Club ID</p></label>
+      <input
+        type="number"
+        name="club_id"
+        required
+        placeholder="Enter the Club ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="name"><p>Name</p></label>
+      <input type="text" name="name" placeholder="Enter the Name" required />
+    </div>
+
+    <div>
+      <label for="pretty_name"><p>Pretty Name</p></label>
+      <input
+        type="text"
+        name="pretty_name"
+        placeholder="Enter the Pretty Name"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="domestic_competition_id"
+        ><p>Domestic Competition ID</p></label
+      >
+      <input
+        type="text"
+        name="domestic_competition_id"
+        placeholder="Enter the Domestic Competition ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="total_market_value"><p>Total Market Value</p></label>
+      <input
+        type="number"
+        step="0.01"
+        name="total_market_value"
+        placeholder="Enter the Total Market Value"
+      />
+    </div>
+
+    <div>
+      <label for="squad_size"><p>Squad Size</p></label>
+      <input
+        type="number"
+        name="squad_size"
+        placeholder="Enter the Squad Size"
+      />
+    </div>
+
+    <div>
+      <label for="average_age"><p>Average Age</p></label>
+      <input
+        type="number"
+        step="0.1"
+        name="average_age"
+        placeholder="Enter the Average Age"
+      />
+    </div>
+
+    <div>
+      <label for="foreigners_number"><p>Number of Foreign Players</p></label>
+      <input
+        type="number"
+        name="foreigners_number"
+        placeholder="Enter the Number of Foreign Players"
+      />
+    </div>
+
+    <div>
+      <label for="foreigners_percentage"
+        ><p>Percentage of Foreign Players</p></label
+      >
+      <input
+        type="number"
+        step="0.1"
+        name="foreigners_percentage"
+        placeholder="Enter the Percentage of Foreign Players"
+      />
+    </div>
+
+    <div>
+      <label for="national_team_players"
+        ><p>Number of National Team Players</p></label
+      >
+      <input
+        type="number"
+        name="national_team_players"
+        placeholder="Enter the Number of National Team Players"
+      />
+    </div>
+
+    <div>
+      <label for="stadium_name"><p>Stadium Name</p></label>
+      <input
+        type="text"
+        name="stadium_name"
+        placeholder="Enter the Stadium Name"
+      />
+    </div>
+
+    <div>
+      <label for="stadium_seats"><p>Stadium Seats</p></label>
+      <input
+        type="number"
+        name="stadium_seats"
+        placeholder="Enter the Stadium Seats"
+      />
+    </div>
+
+    <div>
+      <label for="net_transfer_record"><p>Net Transfer Record</p></label>
+      <input
+        type="text"
+        name="net_transfer_record"
+        placeholder="Enter the Net Transfer Record"
+      />
+    </div>
+
+    <div>
+      <label for="coach_name"><p>Coach Name</p></label>
+      <input type="text" name="coach_name" placeholder="Enter the Coach Name" />
+    </div>
+
+    <button type="submit">
+      <p>UPDATE</p>
+    </button>
+  </form>
+  <button class="button_cancel">
+    <a href="{{ url_for('add_club', todo = 'Close') }}">
+      <p>CANCEL</p>
+    </a>
+  </button>
+  {% endif %}
   <table class="club">
     <tr>
       <th>ID</th>

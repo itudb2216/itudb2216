@@ -2,6 +2,128 @@
 block content %} {% if not update_form_competition %}
 
 <div style="height: 77vh; overflow: scroll">
+  {% if admin and not add_form%}
+  <div class="add_button">
+    <button>
+      <a href="{{ url_for('add_form_competition') }}">+</a>
+    </button>
+  </div>
+  {%endif%} {% if add_form %}
+  <h4 class="add_warning">
+    IF YOU CAN NOT FIND IT AFTER ADDING, THEN THERE IS FOREIGN KEY PROBLEM IN
+    TUPLE THAT YOU WANTED TO ADD
+  </h4>
+  <form
+    action="{{ url_for('add_competition', todo = 'Add') }}"
+    class="update_form"
+    method="GET"
+  >
+    <div>
+      <label for="competition_id"><p>Competition ID</p></label>
+      <input
+        type="text"
+        name="competition_id"
+        required
+        placeholder="Enter the Competition ID"
+      />
+    </div>
+
+    <div>
+      <label for="pretty_name"><p>Pretty Name</p></label>
+      <input
+        type="text"
+        name="pretty_name"
+        placeholder="Enter the Pretty Name"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="type_"><p>Type</p></label>
+      <input type="text" name="type_" placeholder="Enter the Type" required />
+    </div>
+
+    <div>
+      <label for="sub_type"><p>Subtype</p></label>
+      <input
+        type="text"
+        name="sub_type"
+        placeholder="Enter the Subtype"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="country_id"><p>Country ID</p></label>
+      <input
+        type="number"
+        name="country_id"
+        placeholder="Enter the Country ID"
+      />
+    </div>
+
+    <div>
+      <label for="country_name"><p>Country Name</p></label>
+      <input
+        type="text"
+        name="country_name"
+        placeholder="Enter the Country Name"
+      />
+    </div>
+
+    <div>
+      <label for="country_latitude"><p>Country Latitude</p></label>
+      <input
+        type="number"
+        step="0.0000001"
+        name="country_latitude"
+        placeholder="Enter the Country Latitude"
+      />
+    </div>
+
+    <div>
+      <label for="country_longitude"><p>Country Longitude</p></label>
+      <input
+        type="number"
+        step="0.0000001"
+        name="country_longitude"
+        placeholder="Enter the country_longitude"
+      />
+    </div>
+
+    <div>
+      <label for="domestic_league_code"><p>Domestic League Code</p></label>
+      <input
+        type="text"
+        name="domestic_league_code"
+        placeholder="Enter the Domestic League Code"
+      />
+    </div>
+
+    <div>
+      <label for="name"><p>Name</p></label>
+      <input type="text" name="name" placeholder="Enter the Name" />
+    </div>
+
+    <div>
+      <label for="confederation"><p>Confederation</p></label>
+      <input
+        type="text"
+        name="confederation"
+        placeholder="Enter the Confederation"
+      />
+    </div>
+
+    <button type="submit">
+      <p>UPDATE</p>
+    </button>
+  </form>
+  <button class="button_cancel">
+    <a href="{{ url_for('add_competition', todo = 'Close') }}">
+      <p>CANCEL</p>
+    </a>
+  </button>
+  {% endif %}
   <table class="competition">
     <tr>
       <th>ID</th>

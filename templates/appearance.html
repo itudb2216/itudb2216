@@ -2,6 +2,129 @@
 block content %} {% if not update_form_appearance %}
 
 <div class="screen">
+  {% if admin and not add_form%}
+  <div class="add_button">
+    <button>
+      <a href="{{ url_for('add_form_appearance') }}">+</a>
+    </button>
+  </div>
+  {%endif%} {% if add_form %}
+  <h4 class="add_warning">
+    IF YOU CAN NOT FIND IT AFTER ADDING, THEN THERE IS FOREIGN KEY PROBLEM IN
+    TUPLE THAT YOU WANTED TO ADD
+  </h4>
+  <form
+    action="{{ url_for('add_appearance', todo = 'Add') }}"
+    class="update_form"
+    method="GET"
+  >
+    <div>
+      <label for="appearance_id"><p>Appearance ID</p></label>
+      <input
+        type="text"
+        name="appearance_id"
+        placeholder="Enter the Appearance ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="game_id"><p>Game ID</p></label>
+      <input
+        type="number"
+        name="game_id"
+        placeholder="Enter the Game ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="player_id"><p>Player ID</p></label>
+      <input
+        type="number"
+        name="player_id"
+        placeholder="Enter the Player ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="player_club_id"><p>Player Club ID</p></label>
+      <input
+        type="number"
+        name="player_club_id"
+        placeholder="Enter the Player Club ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="date"><p>Date</p></label>
+      <input type="text" name="date" placeholder="Enter the Date" />
+    </div>
+
+    <div>
+      <label for="player_pretty_name"><p>Player Pretty Name</p></label>
+      <input
+        type="text"
+        name="player_pretty_name"
+        placeholder="Enter the Player Prettu Name"
+      />
+    </div>
+
+    <div>
+      <label for="competition_id"><p>Competition ID</p></label>
+      <input
+        type="text"
+        name="competition_id"
+        placeholder="Enter the Competition ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="yellow_cards"><p>Yellow Cards</p></label>
+      <input
+        type="number"
+        name="yellow_cards"
+        placeholder="Enter the Yellow Cards"
+      />
+    </div>
+
+    <div>
+      <label for="red_cards"><p>Red Cards</p></label>
+      <input type="number" name="red_cards" placeholder="Enter the Red Cards" />
+    </div>
+
+    <div>
+      <label for="goals"><p>Goals</p></label>
+      <input type="number" name="goals" placeholder="Enter the Goals" />
+    </div>
+
+    <div>
+      <label for="assists"><p>Assists</p></label>
+      <input type="number" name="assists" placeholder="Enter the Assists" />
+    </div>
+
+    <div>
+      <label for="minutes_played"><p>Minutes Played</p></label>
+      <input
+        type="number"
+        name="minutes_played"
+        placeholder="Enter the Minutes Played"
+      />
+    </div>
+
+    <button type="submit">
+      <p>ADD</p>
+    </button>
+  </form>
+  <button class="button_cancel">
+    <a href="{{ url_for('add_appearance', todo = 'Close') }}">
+      <p>CANCEL</p>
+    </a>
+  </button>
+  {%endif%}
   <table class="appearance">
     <tr>
       <th>Appearance ID</th>

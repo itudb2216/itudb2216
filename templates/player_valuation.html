@@ -2,225 +2,363 @@
 {% block content %} {% if not update_form %}
 
 <div class="screen">
-<table class="player_valuation">
-  <tr>
-    <th>ID</th>
-    <th>Date Time</th>
-    <th>Market Value</th>
-    <th>Date Week</th>
-    <th>Player ID</th>
-    <th>Current Club ID</th>
-    <th>Player Club Domestic Competition ID</th>
-    {% if admin%}
-    <th rowspan="2">Operations</th>
-    {% endif %}
-  </tr>
-  <tr>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="PLAYER_VALUATION_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="DATETIME"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="MARKET_VALUE"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="DATEWEEK"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="PLAYER_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="CURRENT_CLUB_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-    <th>
-      <form action="{{ url_for('sorted_tab') }}">
-        <label for="asc"
-          >Asc
-          <input type="radio" id="asc" name="asc_desc" value="ASC" />
-        </label>
-        <label for="asc"
-          >Desc
-          <input type="radio" id="asc" name="asc_desc" value="DESC" required />
-        </label>
-        <input
-          type="text"
-          value="PLAYERVALUATIONS"
-          name="sort_table"
-          style="display: none"
-        />
-        <input
-          type="text"
-          value="PLAYER_CLUB_DOMESTIC_COMPETITION_ID"
-          name="sort_key"
-          style="display: none"
-        />
-        <button class="button_sort" type="submit">Sort</button>
-      </form>
-    </th>
-  </tr>
-  {% for player_valuation_id, player_valuation in
-  valuations[from_number:to_number] %}
-  <tr>
-    <td>{{player_valuation_id}}</td>
-    <td>{{player_valuation.datetime}}</td>
-    <td>{{player_valuation.market_value}}</td>
-    <td>{{player_valuation.dateweek}}</td>
-    <td>{{player_valuation.player_id}}</td>
-    <td>{{player_valuation.current_club_id}}</td>
-    <td>{{player_valuation.player_club_domestic_competition_id}}</td>
-    {% if admin %}
-    <td class="operations">
-      <button class="button_delete">
-        <a
-          href="{{ url_for('delete_player_valuation', player_valuation_id = player_valuation_id) }}"
-          >Delete</a
-        >
-      </button>
-      <button class="button_update">
-        <a
-          href="{{ url_for('update_form',  player_valuation_id = player_valuation_id, cancel = False) }}"
-          >Update</a
-        >
-      </button>
-    </td>
-    {% endif %}
-  </tr>
-  {% endfor %}
-</table>
+  {% if admin and not add_form%}
+  <div class="add_button">
+    <button>
+      <a href="{{ url_for('add_form_player_valuation') }}">+</a>
+    </button>
+  </div>
+
+  {%endif%} {% if add_form %}
+  <h4 class="add_warning">
+    warning: the tuple will be added with the primary key of (last tuple + 1),
+    so if you want to see it you can find the ID of last tuple by using
+    descending order of ID column, ant search it in search bar with the primary
+    key of last one + 1
+  </h4>
+  <h4 class="add_warning">
+    IF YOU CAN NOT FIND IT AFTER ADDING, THEN THERE IS FOREIGN KEY PROBLEM IN
+    TUPLE THAT YOU WANTED TO ADD
+  </h4>
+  <form
+    action="{{ url_for('add_player_valuation', todo = 'Add') }}"
+    class="update_form"
+    method="GET"
+  >
+    <div>
+      <label for="date_time"><p>Date Time</p></label>
+      <input
+        type="date"
+        name="date_time"
+        placeholder="Enter the Date Time"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="market_value"><p>Market Value</p></label>
+      <input
+        type="number"
+        name="market_value"
+        placeholder="Enter the Market Value"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="date_week"><p>Date Week</p></label>
+      <input
+        type="date"
+        name="date_week"
+        placeholder="Enter the Date Week"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="player_id"><p>Player ID</p></label>
+      <input
+        type="number"
+        name="player_id"
+        placeholder="Enter the Player ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="current_club_id"><p>Current Club ID</p></label>
+      <input
+        type="number"
+        name="current_club_id"
+        placeholder="Enter the Current Club ID"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="player_club_domestic_competition_id"
+        ><p>Player Club Domestic Competition ID</p></label
+      >
+      <input
+        type="text"
+        name="player_club_domestic_competition_id"
+        placeholder="Enter the Player Club Domestic Competition ID"
+        required
+      />
+    </div>
+
+    <button type="submit">
+      <p>ADD</p>
+    </button>
+  </form>
+  <button class="button_cancel">
+    <a href="{{ url_for('add_player_valuation', todo = 'Close') }}">
+      <p>CANCEL</p>
+    </a>
+  </button>
+  {% endif %}
+
+  <table class="player_valuation">
+    <tr>
+      <th>ID</th>
+      <th>Date Time</th>
+      <th>Market Value</th>
+      <th>Date Week</th>
+      <th>Player ID</th>
+      <th>Current Club ID</th>
+      <th>Player Club Domestic Competition ID</th>
+      {% if admin%}
+      <th rowspan="2">Operations</th>
+      {% endif %}
+    </tr>
+    <tr>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="PLAYER_VALUATION_ID"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="DATETIME"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="MARKET_VALUE"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="DATEWEEK"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="PLAYER_ID"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="CURRENT_CLUB_ID"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+      <th>
+        <form action="{{ url_for('sorted_tab') }}">
+          <label for="asc"
+            >Asc
+            <input type="radio" id="asc" name="asc_desc" value="ASC" />
+          </label>
+          <label for="asc"
+            >Desc
+            <input
+              type="radio"
+              id="asc"
+              name="asc_desc"
+              value="DESC"
+              required
+            />
+          </label>
+          <input
+            type="text"
+            value="PLAYERVALUATIONS"
+            name="sort_table"
+            style="display: none"
+          />
+          <input
+            type="text"
+            value="PLAYER_CLUB_DOMESTIC_COMPETITION_ID"
+            name="sort_key"
+            style="display: none"
+          />
+          <button class="button_sort" type="submit">Sort</button>
+        </form>
+      </th>
+    </tr>
+    {% for player_valuation_id, player_valuation in
+    valuations[from_number:to_number] %}
+    <tr>
+      <td>{{player_valuation_id}}</td>
+      <td>{{player_valuation.datetime}}</td>
+      <td>{{player_valuation.market_value}}</td>
+      <td>{{player_valuation.dateweek}}</td>
+      <td>{{player_valuation.player_id}}</td>
+      <td>{{player_valuation.current_club_id}}</td>
+      <td>{{player_valuation.player_club_domestic_competition_id}}</td>
+      {% if admin %}
+      <td class="operations">
+        <button class="button_delete">
+          <a
+            href="{{ url_for('delete_player_valuation', player_valuation_id = player_valuation_id) }}"
+            >Delete</a
+          >
+        </button>
+        <button class="button_update">
+          <a
+            href="{{ url_for('update_form',  player_valuation_id = player_valuation_id, cancel = False) }}"
+            >Update</a
+          >
+        </button>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
 </div>
 <div class="change_table_number">
   <button>

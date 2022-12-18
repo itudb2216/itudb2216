@@ -350,3 +350,29 @@
     height: 78vh; 
     overflow: scroll;
   }
+
+  .add_button{
+      text-align: center;
+  }
+
+  .add_button button{
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border-radius: 50%;
+  }
+
+  .add_button button:hover{
+    background-color: black;
+    cursor: pointer;
+  }
+
+  .add_button button a{
+    color: white;
+    font-size: 40px;
+  }
+
+  .add_warning{
+    color: orange;
+    text-align: center;
+  }

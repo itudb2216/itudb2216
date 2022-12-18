@@ -73,6 +73,25 @@ def create_app():
     app.add_url_rule("/increase_number_player/<page_number>", view_func=views.increase_number_player)
     app.add_url_rule("/decrease_number_player/<page_number>", view_func=views.decrease_number_player)
 
+    app.add_url_rule("/add_form_player_valuation", view_func=views.add_form_player_valuation)
+    app.add_url_rule("/add_player_valuation/<todo>", view_func=views.add_player_valuation)
+
+    app.add_url_rule("/add_form_appearance/", view_func=views.add_form_appearance)
+    app.add_url_rule("/add_appearance/<todo>", view_func=views.add_appearance)
+
+    app.add_url_rule("/add_form_club/", view_func=views.add_form_club)
+    app.add_url_rule("/add_club/<todo>", view_func=views.add_club)
+
+    app.add_url_rule("/add_form_competition/", view_func=views.add_form_competition)
+    app.add_url_rule("/add_competition/<todo>", view_func=views.add_competition)
+
+    app.add_url_rule("/add_form_game/", view_func=views.add_form_game)
+    app.add_url_rule("/add_game/<todo>", view_func=views.add_game)
+
+
+    app.add_url_rule("/add_form_player/", view_func=views.add_form_player)
+    app.add_url_rule("/add_player/<todo>", view_func=views.add_player)
+
     # Creates tables if .db file does not already exist in the system
     if not os.path.exists('./transfermarkt.db'):
         con = dbapi2.connect("transfermarkt.db")

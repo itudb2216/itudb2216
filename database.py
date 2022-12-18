@@ -22,8 +22,8 @@ class Database:
                 cursor.execute("PRAGMA foreign_keys=ON;")
                 cursor.execute(query, tupel)
                 connection.commit()
-            except:
-                print("error: ",tupel)
+            except Exception as e:
+                print("error: ",e)
                 connection.rollback()
             finally:
                 cursor.close()
