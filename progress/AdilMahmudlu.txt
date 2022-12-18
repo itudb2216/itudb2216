@@ -1,14 +1,23 @@
 22.11.2022
 Added club.py and database.py
+Added add, update, and delete functions for club table
+Added add, update, and delete general function and get_table functions for individual tables on database.py
 
 30.11.2022
-Added competition.py and get_tables functions in database.py
+Added competition.py 
+Added add, update, and delete functions for competitions table
+Added get_tables functions for individual tables in database.py
 
 07.12.2022
-Added "CREATE TABLE CLUBS" and "CREATE TABLE COMPETITIONS" to server.py and changed some errors in other files
+Added CLUBS and COMPETITIONS sql table creation in server.py
+Fixed some errors in database.py, clubs.py, and competitions.py
 
 14.12.2022
-Added club.html and competition.html, added according functions to view.py
+Added club.html and competition.html
+Added table viewing, tuple updating and deleting to club.html and competitions.html
+Added club and competitoin table viewing, tuple updating and deleting functions on view.py
 
 15.12.2022
-Modified club.py, club.html, competition.py, competition.html, game.py, game.html, and according functions on other files 
+Fixed some errors and made modifications in club.py/.html, competitions.py/.html, game.py/html, and database.py
+Added table viewing, tuple updating and deleting to game.html
+Added game table viewing, tuple updating and deleting functions on views.py
