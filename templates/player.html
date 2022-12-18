@@ -1,11 +1,24 @@
 {% extends "navigation.html" %} {% block title %}PLAYERS{% endblock%} {% block
 content %} {% if not update_form_player %}
 
-<div style="height: 600px; overflow: scroll">
+<div style="height: 77vh; overflow: scroll">
   <table class="PLAYERS">
     <tr>
+      <th>Player ID</th>
+      <th>Pretty Name</th>
+      <th>Club Pretty Name</th>
+      <th>Club ID</th>
+      <th>Country of Citizenship</th>
+      <th>Current Club ID</th>
+      <th>Date of Birth</th>
+      <th>Position</th>
+      <th>Foot</th>
+      <th>Height (in cm)</th>
+      <th>Market Value (in gbp)</th>
+      <th>Highest Market Value (in gbp)</th>
+    </tr>
+    <tr>
       <th>
-        <p>Player ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -37,7 +50,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Pretty Name</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -69,7 +81,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Club Pretty Name</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -101,7 +112,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Club ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -133,7 +143,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Country of Citizenship</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -165,7 +174,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Current Club ID</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -197,7 +205,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Date of Birth</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -229,7 +236,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Position</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -261,7 +267,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Foot</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -293,7 +298,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Height (in cm)</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -325,7 +329,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Market Value (in gbp)</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc
@@ -357,7 +360,6 @@ content %} {% if not update_form_player %}
         </form>
       </th>
       <th>
-        <p>Highest Market Value (in gbp)</p>
         <form action="{{ url_for('sorted_tab') }}">
           <label for="asc"
             >Asc

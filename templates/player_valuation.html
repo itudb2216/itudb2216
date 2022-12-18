@@ -1,11 +1,19 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
 {% block content %} {% if not update_form %}
 
-<div style="height: 600px; overflow: scroll">
+<div style="height: 77vh; overflow: scroll">
 <table class="player_valuation">
   <tr>
+    <th>ID</th>
+    <th>Date Time</th>
+    <th>Market Value</th>
+    <th>Date Week</th>
+    <th>Player ID</th>
+    <th>Current Club ID</th>
+    <th>Player Club Domestic Competition ID</th>
+  </tr>
+  <tr>
     <th>
-      <p>ID</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -31,7 +39,6 @@
       </form>
     </th>
     <th>
-      <p>Date Time</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -57,7 +64,6 @@
       </form>
     </th>
     <th>
-      <p>Market Value</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -83,7 +89,6 @@
       </form>
     </th>
     <th>
-      <p>Date Week</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -109,7 +114,6 @@
       </form>
     </th>
     <th>
-      <p>Player ID</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -135,7 +139,6 @@
       </form>
     </th>
     <th>
-      <p>Current Club ID</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
@@ -161,7 +164,6 @@
       </form>
     </th>
     <th>
-      <p>Player Club Domestic Competition ID</p>
       <form action="{{ url_for('sorted_tab') }}">
         <label for="asc"
           >Asc
