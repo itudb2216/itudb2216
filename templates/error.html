@@ -7,6 +7,14 @@ content %} {% if errorMessage == 'search_bar_error' %}
   </button>
 </div>
 
+{%endif%} {% if errorMessage == 'seach_bar_incomplete_args' %}
+<div class="error_div">
+  <h2 class="error_message">Please fill all fields of the search!</h2>
+  <button class="error_message_button">
+    <a href="{{ url_for('search_bar') }}"> Back to Search</a>
+  </button>
+</div>
+
 {%endif%} {% if errorMessage == 'delete_tuple' %}
 <div class="error_div">
   <h2 class="error_message">Failed to Delete</h2>
