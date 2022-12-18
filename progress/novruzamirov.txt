@@ -49,3 +49,4 @@ Sorting according to the column of the table in both ascending and descending or
 18.12.2022
 Dividing Tables into 100 or 1000 tuples (according to table sizes) so we do not need to show all database in web at once
 Storing page numbers for each table in session, so page number will not set to 0 after sorting or leaving the table page
+Add button to add tuples into each table has been added to web page
