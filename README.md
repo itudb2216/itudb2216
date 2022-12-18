@@ -16,6 +16,7 @@
 Please run the following commands one after the other:
 
 `python3 csv_reader.py`
+
 `python3 server.py`
 
 If it takes too long to run csv_reader.py, you may use the transfermarkt.db file directly by running only the second command.
