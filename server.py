@@ -197,11 +197,12 @@ def create_app():
     dir = os.getcwd()
     db = Database(os.path.join(dir, "transfermarkt.db"))
     
-    # db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
-    # db.add(Admin("150190085", "Leminur Çelik", "celikl19@itu.edu.tr", "nur123"))
-    # db.add(Admin("150190089", "Bilal İhsan Tuncer", "tuncerb19@itu.edu.tr", "bilal123"))
-    # db.add(Admin("150200915", "Adil Mahmudlu", "mahmudlu20@itu.edu.tr", "adil123"))
-    # db.add(Admin("150210729", "Buse Orak", "orakb21@itu.edu.tr", "buse123"))
+    if db.get_admins() == []:
+        db.add(Admin("150200903", "Novruz Amirov", "amirov20@itu.edu.tr", "novruz123"))
+        db.add(Admin("150190085", "Leminur Çelik", "celikl19@itu.edu.tr", "nur123"))
+        db.add(Admin("150190089", "Bilal İhsan Tuncer", "tuncerb19@itu.edu.tr", "bilal123"))
+        db.add(Admin("150200915", "Adil Mahmudlu", "mahmudlu20@itu.edu.tr", "adil123"))
+        db.add(Admin("150210729", "Buse Orak", "orakb21@itu.edu.tr", "buse123"))
     
     app.config["db"] = db
 
