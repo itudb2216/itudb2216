@@ -12,13 +12,14 @@ class Database:
     def __init__(self, dbfile):
         self.dbfile = dbfile  
 
+    # Adds the object passed as parameter to the database
+    # The parameter object is either of type Appearance, Club, Competition, Game, PlayerValuation, Player, or Admin
     def add(self, object):
-        string, tupel = object.add()
+        query, tupel = object.add()
         with dbapi2.connect(self.dbfile) as connection:
             try:
                 cursor = connection.cursor()
                 cursor.execute("PRAGMA foreign_keys=ON;")
-                query = string
                 cursor.execute(query, tupel)
                 connection.commit()
             except:
@@ -27,12 +28,13 @@ class Database:
             finally:
                 cursor.close()
     
+    # Updates information about the object passed as parameter
+    # The parameter object is either of type Appearance, Club, Competition, Game, Player, or Admin
     def update(self, object, old_object_id):
-        string, tupel = object.update(old_object_id)
+        query, tupel = object.update(old_object_id)
         with dbapi2.connect(self.dbfile) as connection:
             try:
                 cursor = connection.cursor()
-                query = string
                 cursor.execute("PRAGMA foreign_keys=ON;")
                 print("QUERY: ", query)
                 cursor.execute(query, tupel)
@@ -42,15 +44,39 @@ class Database:
             finally:
                 cursor.close()
 
+    # Updates information about the PlayerValuation tuple whose id is passed as parameter
+    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id):
+         with dbapi2.connect(self.dbfile) as connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute("PRAGMA foreign_keys=ON;")
+                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?, PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ? WHERE (PLAYER_VALUATION_ID = ?)"
+                cursor.execute(query, (new_player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id, player_valuation_id))
+                connection.commit()
+            except:
+                connection.rollback()
+            finally:
+                cursor.close()
+
+    # Deletes the object passed as parameter
+    # The parameter object is either of type Appearance, Club, Competition, Game, Player, or Admin
     def delete(self, object):
-        string, object_id = object.delete()
+        query, object_id = object.delete()
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
-            query = string 
             cursor.execute("PRAGMA foreign_keys=ON;")
             cursor.execute(query, object_id)
             connection.commit()
 
+    # Deletes the PlayerValuation tuple whose id is passed as parameter
+    def delete_player_valuation(self, player_valuation_id):
+        with dbapi2.connect(self.dbfile) as connection: 
+            cursor = connection.cursor()
+            query = "DELETE FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
+            cursor.execute(query, (player_valuation_id,))
+            connection.commit()
+
+    # Returns the Club object whose id (primary key) is passed as parameter
     def get_club(self, club_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -60,6 +86,7 @@ class Database:
         club_ = Club(*club_values)
         return club_
     
+    # Returns the Game object whose id (primary key) is passed as parameter
     def get_game(self, game_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -69,6 +96,7 @@ class Database:
         game_ = Game(*attributes)
         return game_
 
+    # Returns the Appearance object whose id (primary key) is passed as parameter
     def get_appearance(self, appearance_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -78,6 +106,7 @@ class Database:
         appearance_ = Appearance(*apperance_values)
         return appearance_
     
+    # Returns the Player object whose id (primary key) is passed as parameter
     def get_player(self, player_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -87,6 +116,7 @@ class Database:
         player_ = Player(*attributes)
         return player_
 
+    # Returns the PlayerValuation object whose id (primary key) is passed as parameter
     def get_player_valuation(self, player_valuation_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -96,6 +126,17 @@ class Database:
         print("PLAYER_VAL: ", player_valuation_values)
         return player_valuation_values
 
+    # Returns the Competition object whose id (primary key) is passed as parameter
+    def get_competition(self, competition_id):
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM COMPETITIONS WHERE (COMPETITION_ID = ?)"
+            cursor.execute(query, (competition_id,))
+            competition_values = list(cursor.fetchone())
+        competition_ = Competition(*competition_values)
+        return competition_
+
+    # Returns the Admin object whose id (primary key) is passed as parameter
     def get_admin(self, student_id):
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
@@ -111,16 +152,7 @@ class Database:
         admin_ = Admin(student_id = student_id, name = name, mail = mail, password = password)
         return admin_
 
-
-    def get_competition(self, competition_id):
-        with dbapi2.connect(self.dbfile) as connection:
-            cursor = connection.cursor()
-            query = "SELECT * FROM COMPETITIONS WHERE (COMPETITION_ID = ?)"
-            cursor.execute(query, (competition_id,))
-            competition_values = list(cursor.fetchone())
-        competition_ = Competition(*competition_values)
-        return competition_
-
+    # Returns all tuples in the CLUBS table
     def get_clubs(self):
         clubs = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -131,6 +163,7 @@ class Database:
                 clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name))
         return clubs
 
+    # Returns all tuples in the GAMES table
     def get_games(self):
         games = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -141,6 +174,7 @@ class Database:
                 games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium))
         return games
     
+    # Returns all tuples in the APPEARANCES table
     def get_appearances(self):
         appearances = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -151,6 +185,7 @@ class Database:
                 appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
         return appearances
     
+    # Returns all tuples in the PLAYERS table
     def get_players(self):
         players = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -161,6 +196,7 @@ class Database:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
         return players
     
+    # Returns all tuples in the PLAYERVALUATIONS table
     def get_player_valuations(self):
         player_valuations = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -171,6 +207,7 @@ class Database:
                 player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
         return player_valuations 
 
+    # Returns all tuples in the COMPETITIONS table
     def get_competitions(self):
         competitions = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -181,6 +218,7 @@ class Database:
                 competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
         return competitions
 
+    # Returns all tuples in the ADMINS table
     def get_admins(self):
         admins = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -191,37 +229,7 @@ class Database:
                 admins.append(Admin(student_id, name, mail, password))
         return admins
 
-    def delete_player_valuation(self, player_valuation_id):
-        with dbapi2.connect(self.dbfile) as connection: 
-            cursor = connection.cursor()
-            query = "DELETE FROM PLAYERVALUATIONS WHERE (PLAYER_VALUATION_ID = ?)"
-            cursor.execute(query, (player_valuation_id,))
-            connection.commit()
-
-    def update_player_valuation(self, new_player_valuation_id, player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id):
-         with dbapi2.connect(self.dbfile) as connection:
-            try:
-                cursor = connection.cursor()
-                cursor.execute("PRAGMA foreign_keys=ON;")
-                query = "UPDATE PLAYERVALUATIONS SET PLAYER_VALUATION_ID = ?, DATETIME = ?, MARKET_VALUE = ?, DATEWEEK = ?, PLAYER_ID = ?, CURRENT_CLUB_ID = ?, PLAYER_CLUB_DOMESTIC_COMPETITION_ID = ? WHERE (PLAYER_VALUATION_ID = ?)"
-                cursor.execute(query, (new_player_valuation_id, date_time, market_value, date_week, player_id, current_club_id, player_club_domestic_competition_id, player_valuation_id))
-                connection.commit()
-            except:
-                connection.rollback()
-            finally:
-                cursor.close()
-
-    def sorted_get_player_valuations(self, sort_table, sort_key, sort_order):
-        player_valuations = []
-        with dbapi2.connect(self.dbfile) as connection:
-            cursor = connection.cursor()
-            query = "SELECT * FROM " + sort_table + " ORDER BY " + sort_key + " " + sort_order
-            cursor.execute(query)
-
-            for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
-                player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
-        return player_valuations
-
+    # Returns all tuples in the PLAYERVALUATIONS table sorted in the order passed as parameter
     def sorted_get_clubs(self, sort_table, sort_key, sort_order):
         clubs = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -232,16 +240,7 @@ class Database:
                 clubs.append(Club(club_id, name, pretty_name, domestic_competition_id, total_market_value , squad_size , average_age , foreigners_number , foreigners_percentage , national_team_players , stadium_name , stadium_seats , net_transfer_record , coach_name))
         return clubs
 
-    def sorted_get_competitions(self, sort_table, sort_key, sort_order):
-        competitions = []
-        with dbapi2.connect(self.dbfile) as connection:
-            cursor = connection.cursor()
-            query = "SELECT * FROM " + sort_table + " ORDER BY " + sort_key + " " + sort_order
-            cursor.execute(query)
-            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
-                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
-        return competitions
-
+    # Returns all tuples in the GAMES table sorted in the order passed as parameter
     def sorted_get_games(self, sort_table, sort_key, sort_order):
         games = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -252,6 +251,18 @@ class Database:
                 games.append(Game(game_id, competition_id, competition_type, season, round, date, home_club_id, away_club_id, home_club_goals, away_club_goals, club_home_pretty_name, club_away_pretty_name, stadium))
         return games
 
+    # Returns all tuples in the APPEARANCES table sorted in the order passed as parameter
+    def sorted_get_appearances(self, sort_table, sort_key, sort_order):
+        appearances = []
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM " + sort_table + " ORDER BY " + sort_key + " " + sort_order
+            cursor.execute(query)
+            for appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played in cursor:
+                appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
+        return appearances
+
+    # Returns all tuples in the PLAYERS table sorted in the order passed as parameter
     def sorted_get_players(self, sort_table, sort_key, sort_order):
         players = []
         with dbapi2.connect(self.dbfile) as connection:
@@ -262,12 +273,25 @@ class Database:
                 players.append(Player(player_id, pretty_name, club_id, club_pretty_name, current_club_id, country_of_citizenship, date_of_birth, position, foot, height_in_cm, market_value_in_gbp, highest_market_value_in_gbp))
         return players
 
-    def sorted_get_appearances(self, sort_table, sort_key, sort_order):
-        appearances = []
+    # Returns all tuples in the PLAYERVALUATIONS table sorted in the order passed as parameter
+    def sorted_get_player_valuations(self, sort_table, sort_key, sort_order):
+        player_valuations = []
         with dbapi2.connect(self.dbfile) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM " + sort_table + " ORDER BY " + sort_key + " " + sort_order
             cursor.execute(query)
-            for appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played in cursor:
-                appearances.append(Appearance(appearance_id, game_id, player_id, player_club_id, date, player_pretty_name, competition_id, yellow_cards, red_cards, goals, assists, minutes_played))
-        return appearances
+
+            for player_valuation_id, datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id in cursor:
+                player_valuations.append((player_valuation_id, PlayerValuation(datetime, dateweek, player_id, current_club_id, market_value, player_club_domestic_competition_id)))
+        return player_valuations
+    
+        # Returns all tuples in the COMPETITIONS table sorted in the order passed as parameter
+    def sorted_get_competitions(self, sort_table, sort_key, sort_order):
+        competitions = []
+        with dbapi2.connect(self.dbfile) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM " + sort_table + " ORDER BY " + sort_key + " " + sort_order
+            cursor.execute(query)
+            for competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation in cursor:
+                competitions.append(Competition(competition_id, pretty_name, type_, sub_type, country_id, country_name, country_latitude, country_longitude, domestic_league_code, name, confederation))
+        return competitions
