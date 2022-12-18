@@ -94,12 +94,11 @@ def search_bar():
 # Calls the associated getter for the element whose id (primary key) is searched in a specific table
 def search_element():
     if(request.method == "GET"):
-
-        table_name = (request.args)['search_bar']
-        primary_key = (request.args)['primary_key']
-        myDB = current_app.config["db"]
-
         try:
+            table_name = (request.args)['search_bar']
+            primary_key = (request.args)['primary_key']
+            myDB = current_app.config["db"]
+            
             if(table_name == 'APPEARANCES'):
                 element = myDB.get_appearance(primary_key)
 
@@ -120,7 +119,8 @@ def search_element():
                 element = myDB.get_player(primary_key)
 
             return render_template("search.html", element = element, table_name = table_name, admin = session.get("admin"))
-        
+        except KeyError:
+            return render_template("error.html", errorMessage = "seach_bar_incomplete_args")
         except:
             return render_template("error.html", errorMessage = "search_bar_error")
 
