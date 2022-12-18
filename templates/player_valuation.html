@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %}PLAYER VALUATIONS{% endblock%}
 {% block content %} {% if not update_form %}
 
-<div style="height: 77vh; overflow: scroll">
+<div class="screen">
 <table class="player_valuation">
   <tr>
     <th>ID</th>
@@ -11,6 +11,9 @@
     <th>Player ID</th>
     <th>Current Club ID</th>
     <th>Player Club Domestic Competition ID</th>
+    {% if admin%}
+    <th rowspan="2">Operations</th>
+    {% endif %}
   </tr>
   <tr>
     <th>
@@ -188,9 +191,6 @@
         <button class="button_sort" type="submit">Sort</button>
       </form>
     </th>
-    {% if admin%}
-    <th>Operations</th>
-    {% endif %}
   </tr>
   {% for player_valuation_id, player_valuation in
   valuations[from_number:to_number] %}

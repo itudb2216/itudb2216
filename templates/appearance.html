@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %}APPEARANCES{% endblock%} {%
 block content %} {% if not update_form_appearance %}
 
-<div style="height: 77vh; overflow: scroll">
+<div class="screen">
   <table class="appearance">
     <tr>
       <th>Appearance ID</th>
@@ -16,6 +16,9 @@ block content %} {% if not update_form_appearance %}
       <th>Goals</th>
       <th>Assists</th>
       <th>Minutes Played</th>
+      {% if admin%}
+      <th rowspan="2">Operations</th>
+      {% endif %}
     </tr>
     <tr>
       <th>
@@ -390,9 +393,6 @@ block content %} {% if not update_form_appearance %}
           <button class="button_sort" type="submit">Sort</button>
         </form>
       </th>
-      {% if admin%}
-      <th>Operations</th>
-      {% endif %}
     </tr>
     {% for appearance in appearances[from_number:to_number] %}
     <tr>

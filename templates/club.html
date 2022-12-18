@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %} CLUBS {% endblock %} {% block
 content %} {% if not update_form_club %}
 
-<div style="height: 77vh; overflow: scroll">
+<div class="screen">
   <table class="club">
     <tr>
       <th>ID</th>
@@ -18,6 +18,9 @@ content %} {% if not update_form_club %}
       <th>Stadium Seats</th>
       <th>Net Transfer Record</th>
       <th>Coach Name</th>
+      {% if admin%}
+      <th rowspan="2">Operations</th>
+      {% endif %}
     </tr>
     <tr>
       <th>
@@ -454,9 +457,6 @@ content %} {% if not update_form_club %}
           <button class="button_sort" type="submit">Sort</button>
         </form>
       </th>
-      {% if admin %}
-      <th>Operations</th>
-      {% endif %}
     </tr>
     {% for club in clubs[from_number:to_number] %}
     <tr>

@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %}PLAYERS{% endblock%} {% block
 content %} {% if not update_form_player %}
 
-<div style="height: 77vh; overflow: scroll">
+<div class="screen">
   <table class="PLAYERS">
     <tr>
       <th>Player ID</th>
@@ -16,6 +16,9 @@ content %} {% if not update_form_player %}
       <th>Height (in cm)</th>
       <th>Market Value (in gbp)</th>
       <th>Highest Market Value (in gbp)</th>
+      {% if admin%}
+      <th rowspan="2">Operations</th>
+      {% endif %}
     </tr>
     <tr>
       <th>
@@ -390,9 +393,7 @@ content %} {% if not update_form_player %}
           <button class="button_sort" type="submit">Sort</button>
         </form>
       </th>
-      {% if admin%}
-      <th>Operations</th>
-      {% endif %}
+      
     </tr>
     {% for player in players[from_number:to_number] %}
     <tr>

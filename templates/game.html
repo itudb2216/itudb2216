@@ -1,7 +1,7 @@
 {% extends "navigation.html" %} {% block title %} Games {% endblock %} {% block
 content %} {% if not update_form_game %}
 
-<div style="height: 77vh; overflow: scroll">
+<div class="screen">
   <table class="games">
     <tr>
       <th>ID</th>
@@ -17,6 +17,9 @@ content %} {% if not update_form_game %}
       <th>Home Club Pretty Name</th>
       <th>Away Club Pretty Name</th>
       <th>Stadium</th>
+      {% if admin%}
+      <th rowspan="2">Operations</th>
+      {% endif %}
     </tr>
     <tr>
       <th>
@@ -422,9 +425,6 @@ content %} {% if not update_form_game %}
           <button class="button_sort" type="submit">Sort</button>
         </form>
       </th>
-      {% if admin %}
-      <th>Operations</th>
-      {% endif %}
     </tr>
     {% for game in games[from_number:to_number] %}
     <tr>
